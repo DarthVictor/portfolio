@@ -15,8 +15,9 @@
         "format": "biome format --write .",
         "format:check": "biome format .",
         "test": "pnpm test:unit",
+        "test:output": "node --test tests/output.test.mjs",
         "test:unit": "vitest run",
-        "verify": "pnpm format:check && pnpm lint && pnpm build"
+        "verify": "pnpm format:check && pnpm lint && pnpm test:unit && pnpm build && pnpm test:output"
     },
     "dependencies": {
         "@astrojs/mdx": "^7.0.5",
@@ -26,7 +27,6 @@
     },
     "packageManager": "pnpm@11.0.0",
     "devDependencies": {
-        "@astrojs/check": "^0.9.10",
         "@biomejs/biome": "^2.5.6",
         "typescript": "^7.0.2",
         "vitest": "^4.1.10"

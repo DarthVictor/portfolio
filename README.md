@@ -10,8 +10,15 @@ A static Astro portfolio built with TypeScript, MDX, and optional Preact islands
 ## Commands
 
 ```sh
+pnpm install
 pnpm dev
 pnpm build
+pnpm preview
+pnpm format:check
+pnpm lint
+pnpm test:unit
+pnpm test:output
+pnpm verify
 ```
 
-Run `pnpm dev` to start the local site. Run `pnpm build` before deploying the generated `dist` directory.
+Run `pnpm dev` to start the local site. Run `pnpm verify` before deploying the generated `dist` directory.
