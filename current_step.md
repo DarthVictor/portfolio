@@ -11,8 +11,8 @@ Use Node 24 and pnpm 11. Astro supports current even-numbered Node releases, and
 - Scaffold a minimal Astro project with static output, strict TypeScript, `darthvictor.xyz` as the configured site URL, and no server adapter.
 - Install the official MDX and Preact integrations. Preact will ship only when a component explicitly uses a client directive.
 - Standardize on pnpm with a committed lockfile, Node `24.x`, `.gitignore`, EditorConfig, and documented development commands.
-- Add ESLint with Astro/TypeScript support, Prettier with Astro formatting, Astro Check, Vitest, and Playwright.
-- Provide scripts for development, build, preview, type/content checks, linting, formatting, unit tests, end-to-end tests, and a combined `verify` command.
+- Add linting and pretifieng with Astro/TypeScript support, only use that supprorts TS7
+- Provide minimum scripts for development, build, preview, type/content checks, linting, formatting, unit tests and a combined `verify` command.
 - Add a minimal semantic homepage solely to prove routing and production builds. Visual design, navigation, themes, CV publication, and real content remain deferred.
 
 ## Content interfaces
@@ -37,7 +37,6 @@ Do not add the six placeholder case studies yet; that belongs to delivery step f
 - Confirm a clean install from the committed pnpm lockfile.
 - Run formatting checks, ESLint, Astro/TypeScript checks, unit tests, and a production build through `pnpm verify`.
 - Unit-test draft visibility for development, Vercel preview, and production environments.
-- Use Playwright to confirm the minimal homepage loads, has one descriptive `h1`, and returns no browser errors from a production preview.
 - Ensure generated output remains static and no client-side Preact bundle is emitted before an interactive island is introduced.
 
 ## Assumptions
