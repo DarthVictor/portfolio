@@ -1,5 +1,8 @@
 ## Development
 
+Long-term plans are in PORTFOLIO_PLAN.md, only explicit modification
+Short-term plans are in next_step.md, all plan mode changes should completely rewrite it
+
 ## Shell
 
 Run all project shell commands with Bash, on windows use Git Bash.
