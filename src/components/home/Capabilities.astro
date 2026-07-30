@@ -1,0 +1,115 @@
+---
+import { capabilities } from "../../data/homepage";
+import HomeSection from "./HomeSection.astro";
+---
+
+<HomeSection
+    index="03"
+    headingId="capabilities-heading"
+    title="Capabilities"
+    description="Product judgment and engineering depth from interface to infrastructure."
+>
+    <ul class="capability-list">
+        {
+            capabilities.map((capability) => (
+                <li class:list={{ "capability-featured": capability.featured }}>
+                    <p class="capability-label">{capability.label}</p>
+                    <h3>{capability.title}</h3>
+                    <p>{capability.summary}</p>
+                    <p
+                        class:list={[
+                            "capability-mark",
+                            capability.markClass,
+                        ]}
+                        aria-hidden="true"
+                    >
+                        {capability.mark}
+                    </p>
+                </li>
+            ))
+        }
+    </ul>
+</HomeSection>
+
+<style>
+    .capability-list {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: var(--space-4);
+        list-style: none;
+    }
+
+    .capability-list li {
+        position: relative;
+        min-block-size: 20rem;
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-medium);
+        background: var(--color-surface);
+        padding: clamp(var(--space-5), 4vw, var(--space-7));
+        overflow: hidden;
+    }
+
+    .capability-list .capability-featured {
+        grid-column: 1 / -1;
+        min-block-size: 17rem;
+        background: var(--color-accent-soft);
+    }
+
+    .capability-label {
+        color: var(--color-accent);
+        font-family: var(--font-mono);
+        font-size: var(--font-size-small);
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+    }
+
+    h3 {
+        max-inline-size: 12ch;
+        margin-block-start: var(--space-4);
+        font-size: clamp(1.5rem, 3vw, 2.25rem);
+        font-weight: 680;
+        letter-spacing: -0.045em;
+        line-height: 1.08;
+    }
+
+    li > p:not(.capability-label, .capability-mark) {
+        position: relative;
+        z-index: 1;
+        max-inline-size: 34ch;
+        margin-block-start: var(--space-5);
+        color: var(--color-text-muted);
+    }
+
+    .capability-mark {
+        position: absolute;
+        inset-inline-end: var(--space-5);
+        inset-block-end: calc(var(--space-6) * -1);
+        color: color-mix(in srgb, var(--color-accent) 16%, transparent);
+        font-size: 9rem;
+        font-weight: 800;
+        letter-spacing: -0.1em;
+        line-height: 1;
+        user-select: none;
+    }
+
+    .code-mark {
+        font-family: var(--font-mono);
+        font-size: 6rem;
+    }
+
+    @media (max-width: 48rem) {
+        .capability-list {
+            grid-template-columns: minmax(0, 1fr);
+        }
+
+        .capability-list .capability-featured {
+            grid-column: auto;
+        }
+
+        .capability-list li,
+        .capability-list .capability-featured {
+            min-block-size: 18rem;
+        }
+    }
+</style>

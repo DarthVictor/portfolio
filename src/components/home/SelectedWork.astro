@@ -1,0 +1,31 @@
+---
+import { selectedWork } from "../../data/homepage";
+import WorkCard from "../work/WorkCard.astro";
+import HomeSection from "./HomeSection.astro";
+---
+
+<HomeSection
+    index="01"
+    headingId="selected-work-heading"
+    title="Selected work"
+    description="Product work spanning AI, platform performance, payments, and commerce."
+>
+    <ol class="work-list">
+        {
+            selectedWork.map((work, index) => (
+                <WorkCard
+                    {...work}
+                    number={String(index + 1).padStart(2, "0")}
+                />
+            ))
+        }
+    </ol>
+</HomeSection>
+
+<style>
+    .work-list {
+        display: grid;
+        gap: var(--space-4);
+        list-style: none;
+    }
+</style>

@@ -1,0 +1,30 @@
+<footer>
+    <p>Victor Follet · Senior product engineer</p>
+    <a href="#introduction-heading">Back to top ↑</a>
+</footer>
+
+<style>
+    footer {
+        display: flex;
+        justify-content: space-between;
+        gap: var(--space-4);
+        inline-size: min(100% - 2 * var(--space-5), 76rem);
+        margin-inline: auto;
+        padding-block: var(--space-6);
+        color: var(--color-text-muted);
+        font-family: var(--font-mono);
+        font-size: 0.6875rem;
+    }
+
+    footer a {
+        text-decoration: none;
+    }
+
+    @media (max-width: 48rem) {
+        footer {
+            align-items: flex-start;
+            flex-direction: column;
+            inline-size: min(100% - 2 * var(--space-4), 76rem);
+        }
+    }
+</style>

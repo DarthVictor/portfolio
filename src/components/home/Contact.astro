@@ -1,0 +1,122 @@
+---
+import { contactLinks } from "../../data/homepage";
+---
+
+<section class="contact-section" aria-labelledby="contact-heading">
+    <div>
+        <p class="contact-kicker">Have an interesting product problem?</p>
+        <h2 id="contact-heading">Contact</h2>
+        <p class="contact-lead">Let’s build something dependable.</p>
+    </div>
+    <div class="contact-actions">
+        <a class="contact-email" href="mailto:follet.victor@gmail.com">
+            follet.victor@gmail.com
+            <span aria-hidden="true">↗</span>
+        </a>
+        <ul class="contact-list">
+            {
+                contactLinks.map((link) => (
+                    <li>
+                        <a href={link.href}>
+                            {link.label}{" "}
+                            <span aria-hidden="true">{link.symbol}</span>
+                        </a>
+                    </li>
+                ))
+            }
+        </ul>
+    </div>
+</section>
+
+<style>
+    .contact-section {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(18rem, 0.55fr);
+        gap: var(--space-7);
+        border-radius: var(--radius-large);
+        background: var(--color-text);
+        color: var(--color-text-inverse);
+        padding: clamp(var(--space-6), 7vw, var(--space-9));
+    }
+
+    .contact-kicker {
+        margin-block-end: var(--space-5);
+        color: var(--color-panel-accent);
+        font-family: var(--font-mono);
+        font-size: var(--font-size-small);
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+    }
+
+    h2 {
+        font-size: 1rem;
+        font-weight: 720;
+        letter-spacing: 0;
+        line-height: var(--line-height-heading);
+    }
+
+    .contact-lead {
+        max-inline-size: 10ch;
+        margin-block-start: var(--space-5);
+        font-size: clamp(2.5rem, 6vw, 5rem);
+        font-weight: 680;
+        letter-spacing: -0.065em;
+        line-height: 0.98;
+    }
+
+    .contact-actions {
+        display: grid;
+        align-content: end;
+        gap: var(--space-6);
+        min-inline-size: 0;
+    }
+
+    .contact-email {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: var(--space-4);
+        border-block-end: 1px solid currentColor;
+        padding-block-end: var(--space-3);
+        font-size: clamp(1rem, 2vw, 1.35rem);
+        font-weight: 620;
+        text-decoration: none;
+    }
+
+    .contact-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-2);
+        list-style: none;
+    }
+
+    .contact-list a {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--space-2);
+        border: 1px solid color-mix(in srgb, currentColor 40%, transparent);
+        border-radius: var(--radius-pill);
+        padding: var(--space-2) var(--space-4);
+        font-size: var(--font-size-small);
+        text-decoration: none;
+    }
+
+    .contact-list a:hover {
+        border-color: var(--color-accent);
+        background: var(--color-accent);
+    }
+
+    @media (max-width: 48rem) {
+        .contact-section {
+            grid-template-columns: minmax(0, 1fr);
+            gap: var(--space-8);
+            margin-inline: calc(var(--space-4) * -0.35);
+            border-radius: var(--radius-medium);
+        }
+
+        .contact-email {
+            overflow-wrap: anywhere;
+        }
+    }
+</style>

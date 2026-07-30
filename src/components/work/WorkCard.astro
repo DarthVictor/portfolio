@@ -1,0 +1,93 @@
+---
+import type { SelectedWorkItem } from "../../data/homepage";
+
+type Props = SelectedWorkItem & {
+    number: string;
+};
+
+const { number, meta, title, summary, technologies } = Astro.props;
+---
+
+<li class="work-card">
+    <div class="work-number" aria-hidden="true">{number}</div>
+    <article>
+        <p class="work-meta">{meta}</p>
+        <h3>{title}</h3>
+        <p>{summary}</p>
+        <ul class="tag-list" aria-label="Technologies">
+            {technologies.map((technology) => <li>{technology}</li>)}
+        </ul>
+    </article>
+</li>
+
+<style>
+    .work-card {
+        display: grid;
+        grid-template-columns: 4.5rem minmax(0, 1fr);
+        gap: var(--space-5);
+        min-inline-size: 0;
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-medium);
+        background: var(--color-surface);
+        padding: clamp(var(--space-5), 4vw, var(--space-7));
+        box-shadow: var(--shadow-card);
+    }
+
+    .work-number {
+        color: var(--color-accent);
+        font-family: var(--font-mono);
+        font-size: 1.25rem;
+    }
+
+    .work-meta {
+        color: var(--color-accent);
+        font-family: var(--font-mono);
+        font-size: var(--font-size-small);
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+    }
+
+    h3 {
+        max-inline-size: 21ch;
+        margin-block-start: var(--space-4);
+        font-size: clamp(1.5rem, 3vw, 2.35rem);
+        font-weight: 680;
+        letter-spacing: -0.045em;
+        line-height: 1.08;
+    }
+
+    article > p:not(.work-meta) {
+        max-inline-size: 58ch;
+        margin-block-start: var(--space-5);
+        color: var(--color-text-muted);
+    }
+
+    .tag-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-2);
+        margin-block-start: var(--space-6);
+        list-style: none;
+    }
+
+    .tag-list li {
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-pill);
+        background: var(--color-surface-raised);
+        padding: var(--space-1) var(--space-3);
+        color: var(--color-text-muted);
+        font-family: var(--font-mono);
+        font-size: 0.6875rem;
+    }
+
+    @media (max-width: 48rem) {
+        .work-card {
+            grid-template-columns: minmax(0, 1fr);
+        }
+
+        h3 {
+            max-inline-size: 16ch;
+        }
+    }
+</style>

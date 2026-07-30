@@ -1,0 +1,88 @@
+---
+import { principles } from "../../data/homepage";
+import HomeSection from "./HomeSection.astro";
+---
+
+<HomeSection
+    index="04"
+    headingId="about-heading"
+    title="How I work"
+    class="about-section"
+>
+    <div class="about-copy">
+        <p class="about-lead">
+            Clear interfaces come from clear engineering decisions.
+        </p>
+        <p>
+            I specialize in the product-facing details that make software clear,
+            fast, and maintainable. I am comfortable working across the stack while
+            keeping the user experience and the engineering foundations aligned.
+        </p>
+        <ul class="principles">
+            {
+                principles.map((principle, index) => (
+                    <li>
+                        <span>
+                            {String(index + 1).padStart(2, "0")}
+                        </span>
+                        {principle}
+                    </li>
+                ))
+            }
+        </ul>
+    </div>
+</HomeSection>
+
+<style>
+    .about-copy {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(14rem, 0.65fr);
+        gap: var(--space-7);
+    }
+
+    .about-lead {
+        grid-column: 1 / -1;
+        max-inline-size: 24ch;
+        font-size: clamp(2rem, 4vw, 3.5rem);
+        font-weight: 620;
+        letter-spacing: -0.055em;
+        line-height: 1.08;
+    }
+
+    .about-copy > p:not(.about-lead) {
+        max-inline-size: 52ch;
+        color: var(--color-text-muted);
+    }
+
+    .principles {
+        display: grid;
+        gap: var(--space-3);
+        list-style: none;
+    }
+
+    .principles li {
+        display: grid;
+        grid-template-columns: 2rem minmax(0, 1fr);
+        gap: var(--space-3);
+        border-block-start: 1px solid var(--color-border);
+        padding-block-start: var(--space-3);
+        font-size: 0.875rem;
+        font-weight: 650;
+    }
+
+    .principles span {
+        color: var(--color-accent);
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+    }
+
+    @media (max-width: 48rem) {
+        .about-copy {
+            grid-template-columns: minmax(0, 1fr);
+        }
+
+        .about-lead {
+            grid-column: auto;
+        }
+    }
+</style>
