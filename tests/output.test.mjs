@@ -12,6 +12,10 @@ test("build output is static and loads no client-side JavaScript", () => {
 
     const indexHtml = readFileSync(indexPath, "utf8");
 
+    assert.match(
+        indexHtml,
+        /<link rel="stylesheet" href="\/_astro\/[^"']+\.css"/,
+    );
     assert.doesNotMatch(indexHtml, /_astro\/[^"']+\.js/);
 });
 
