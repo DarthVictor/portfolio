@@ -5,9 +5,10 @@ import test from "node:test";
 
 const distDirectory = join(process.cwd(), "dist");
 const indexPath = join(distDirectory, "index.html");
+const themeBPath = join(distDirectory, "theme-b", "index.html");
 const cvPath = join(distDirectory, "cv.pdf");
 
-test("build output is static and loads no client-side JavaScript", () => {
+test("build output is static and loads no bundled client-side JavaScript", () => {
     assert.equal(existsSync(indexPath), true);
 
     const indexHtml = readFileSync(indexPath, "utf8");
@@ -49,6 +50,44 @@ test("homepage output has the planned semantic structure", () => {
     assert.match(indexHtml, /href="\/cv\.pdf"/);
     assert.equal(existsSync(cvPath), true);
 });
+
+test("alternate palette builds without development-only theme controls", () => {
+    assert.equal(existsSync(themeBPath), true);
+
+    const indexHtml = readFileSync(indexPath, "utf8");
+    const themeBHtml = readFileSync(themeBPath, "utf8");
+
+    assert.match(indexHtml, /data-palette="paper"/);
+    assert.match(themeBHtml, /data-palette="atlantic"/);
+    assert.match(themeBHtml, /<meta name="robots" content="noindex">/);
+    assert.match(indexHtml, /--color-background:#f3f0e9/);
+    assert.doesNotMatch(indexHtml, /#edf3f8|#0d1424|#0b1620/);
+    assert.match(themeBHtml, /--color-background:#edf3f8/);
+    assert.doesNotMatch(themeBHtml, /#f3f0e9|#0d1424|#0b1620/);
+    assert.doesNotMatch(indexHtml, /theme-comparison/);
+    assert.doesNotMatch(themeBHtml, /theme-comparison/);
+    assert.doesNotMatch(indexHtml, /data-mode-option=/);
+    assert.doesNotMatch(themeBHtml, /data-mode-option=/);
+    assert.doesNotMatch(indexHtml, /portfolio-color-mode/);
+    assert.doesNotMatch(themeBHtml, /portfolio-color-mode/);
+    assert.doesNotMatch(
+        readLinkedStylesheets(indexHtml),
+        /theme-comparison|appearance-option|#edf3f8|#0d1424|#0b1620/,
+    );
+    assert.match(
+        themeBHtml,
+        /<link rel="stylesheet" href="\/_astro\/[^"']+\.css"/,
+    );
+    assert.doesNotMatch(themeBHtml, /_astro\/[^"']+\.js/);
+});
+
+function readLinkedStylesheets(html) {
+    return [...html.matchAll(/href="(\/_astro\/[^"']+\.css)"/g)]
+        .map(([, stylesheetPath]) =>
+            readFileSync(join(distDirectory, stylesheetPath), "utf8"),
+        )
+        .join("\n");
+}
 
 function expectHeadings(actual, expected) {
     const primaryHeadings = actual.filter(({ level }) => level < 3);

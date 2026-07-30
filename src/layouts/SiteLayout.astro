@@ -6,22 +6,65 @@ import "../styles/global.css";
 interface Props {
     title: string;
     description: string;
+    theme?: "light-alt";
+    noIndex?: boolean;
 }
 
-const { title, description } = Astro.props;
+const { title, description, theme, noIndex = false } = Astro.props;
+const showThemeControls = import.meta.env.DEV;
+const ThemeComparison = showThemeControls
+    ? (await import("../components/site/ThemeComparison.astro")).default
+    : null;
 ---
 
-<html lang="en">
+<html
+    lang="en"
+    data-palette={theme === "light-alt" ? "atlantic" : "paper"}
+>
     <head>
         <meta charset="utf-8" />
+        {
+            showThemeControls && (
+                <script is:inline>
+                    {`
+                        (() => {
+                            const storageKey = "portfolio-color-mode";
+                            let mode = null;
+
+                            try {
+                                mode = localStorage.getItem(storageKey);
+                            } catch {
+                                mode = null;
+                            }
+
+                            if (mode !== "light" && mode !== "dark") {
+                                mode = matchMedia("(prefers-color-scheme: dark)").matches
+                                    ? "dark"
+                                    : "light";
+                            }
+
+                            document.documentElement.dataset.mode = mode;
+                        })();
+                    `}
+                </script>
+            )
+        }
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <link rel="icon" href="/favicon.ico" />
         <meta name="viewport" content="width=device-width" />
         <meta name="generator" content={Astro.generator} />
         <meta name="description" content={description} />
+        {noIndex && <meta name="robots" content="noindex" />}
         <title>{title}</title>
     </head>
     <body>
+        {
+            ThemeComparison && (
+                <ThemeComparison
+                    active={theme === "light-alt" ? "atlantic" : "paper"}
+                />
+            )
+        }
         <SiteHeader />
         <main>
             <slot />

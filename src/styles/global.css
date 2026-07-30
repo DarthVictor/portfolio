@@ -1,21 +1,4 @@
-:root,
-:root[data-theme="dark"] {
-    color-scheme: dark;
-    --color-background: #0d1424;
-    --color-surface: #141d30;
-    --color-surface-raised: #1b263d;
-    --color-text: #f2f4f8;
-    --color-text-muted: #aab3c4;
-    --color-text-inverse: #17202b;
-    --color-border: #2d3950;
-    --color-accent: #a8b4ff;
-    --color-accent-hover: #c3caff;
-    --color-accent-soft: #202b4d;
-    --color-focus: #75a7ff;
-    --color-status: #a3e635;
-    --color-panel: #f2f4f8;
-    --color-panel-text: #17202b;
-    --color-panel-accent: #3155d8;
+:root {
     --font-sans:
         ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
         sans-serif;
@@ -41,52 +24,9 @@
     --radius-medium: 1.25rem;
     --radius-large: 2rem;
     --radius-pill: 999px;
-    --shadow-card: 0 1.5rem 4rem rgb(0 0 0 / 18%);
     --motion-fast: 150ms;
     --motion-standard: 250ms;
     --easing-standard: cubic-bezier(0.2, 0, 0, 1);
-}
-
-@media (prefers-color-scheme: light) {
-    :root:not([data-theme]) {
-        color-scheme: light;
-        --color-background: #f3f0e9;
-        --color-surface: #faf9f5;
-        --color-surface-raised: #ffffff;
-        --color-text: #17202b;
-        --color-text-muted: #5b6573;
-        --color-text-inverse: #f8f8f5;
-        --color-border: #d8d3c8;
-        --color-accent: #3155d8;
-        --color-accent-hover: #2442b3;
-        --color-accent-soft: #e7eafe;
-        --color-focus: #1d4ed8;
-        --color-status: #4d7c0f;
-        --color-panel: #17202b;
-        --color-panel-text: #f8f8f5;
-        --color-panel-accent: #a8b4ff;
-        --shadow-card: 0 1.5rem 4rem rgb(46 52 61 / 8%);
-    }
-}
-
-:root[data-theme="light"] {
-    color-scheme: light;
-    --color-background: #f3f0e9;
-    --color-surface: #faf9f5;
-    --color-surface-raised: #ffffff;
-    --color-text: #17202b;
-    --color-text-muted: #5b6573;
-    --color-text-inverse: #f8f8f5;
-    --color-border: #d8d3c8;
-    --color-accent: #3155d8;
-    --color-accent-hover: #2442b3;
-    --color-accent-soft: #e7eafe;
-    --color-focus: #1d4ed8;
-    --color-status: #4d7c0f;
-    --color-panel: #17202b;
-    --color-panel-text: #f8f8f5;
-    --color-panel-accent: #a8b4ff;
-    --shadow-card: 0 1.5rem 4rem rgb(46 52 61 / 8%);
 }
 
 @media (prefers-reduced-motion: reduce) {
