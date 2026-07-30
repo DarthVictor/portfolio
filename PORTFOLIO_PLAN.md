@@ -187,12 +187,12 @@ Domain renewal should be the only expected recurring cost.
 ## Delivery sequence
 
 1. Establish Astro, MDX, content schemas, and quality tooling
-2. Define visual tokens and build both themes
-3. Build the homepage and responsive navigation
-4. Build the work archive and reusable case-study template
-5. Add six preview-only draft case studies
-6. Add the portfolio decision log and meta-case study
-7. Add interactions, accessibility, SEO, and analytics
-8. Complete automated and visual QA
-9. Replace drafts with real content
-10. Connect `darthvictor.xyz` and launch
+2. Build the homepage's semantic, responsive markup
+3. Define visual tokens and build both themes
+4. Review the homepage UI in both themes and at mobile, tablet, and desktop sizes
+5. Build the work archive and reusable case-study template
+6. Add six preview-only draft case studies
+7. Add the portfolio decision log and meta-case study
+8. Add interactions, accessibility, SEO, and analytics
+9. Complete automated and visual QA
+10. Replace drafts with real content, connect `darthvictor.xyz`, and launch
