@@ -17,7 +17,8 @@
         "test": "pnpm test:unit",
         "test:output": "node --test tests/output.test.mjs",
         "test:unit": "vitest run",
-        "verify": "pnpm format:check && pnpm lint && pnpm test:unit && pnpm build && pnpm test:output"
+        "verify": "pnpm format:check && pnpm lint && pnpm test:unit && pnpm build && pnpm test:output",
+        "cv:pdf": "node scripts/generate-cv-pdf.mjs"
     },
     "dependencies": {
         "@astrojs/mdx": "^7.0.5",
@@ -28,6 +29,8 @@
     "packageManager": "pnpm@11.0.0",
     "devDependencies": {
         "@biomejs/biome": "^2.5.6",
+        "marked": "^18.0.7",
+        "playwright": "^1.62.1",
         "typescript": "^7.0.2",
         "vitest": "^4.1.10"
     }

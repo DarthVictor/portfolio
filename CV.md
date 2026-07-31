@@ -1,85 +1,71 @@
 # Victor Follet
 
-- follet.victor@gmail.com
-- https://www.linkedin.com/in/victor-follet/
-- https://github.com/DarthVictor
+**Senior Frontend & Full-Stack Engineer**
 
-# Summary
+Tel Aviv-Yafo, Israel | +972-53-708-5958 | [follet.victor@gmail.com](mailto:follet.victor@gmail.com) | [LinkedIn](https://www.linkedin.com/in/victor-follet/) | [GitHub](https://github.com/DarthVictor)
 
-Senior frontend and full-stack developer with 12+ years of experience building SaaS, fintech, e-commerce, and AI-enabled product interfaces. Strong in React, TypeScript, JavaScript, Node.js, and frontend architecture. Experienced in building performant user-facing products, reusable UI systems, API integrations, and cloud-native services. Comfortable working across the stack while specializing in frontend product quality, maintainability, and delivery.
+## Summary
 
-# Technical skills
+Senior frontend and full-stack engineer with 15+ years of experience building AI commerce, fintech, SaaS, and high-traffic e-commerce products. Specialized in React, TypeScript, frontend architecture, design systems, and performance, with hands-on experience across Node.js, APIs, databases, and AWS. Led modernization, platform, payments, and integration initiatives at companies including Tolstoy, Bright Data, Mail.ru Group, and Yandex.
 
-- Frontend: React, Next.js, TypeScript, JavaScript, Redux Toolkit, React Native, Preact, Angular, Design Systems, Frontend Architecture, Webpack Module Federation, Jest
-- Backend & Data: Node.js, Express, REST APIs, API design, PostgreSQL, MongoDB, DynamoDB
-- Cloud & DevOps: AWS, Lambda, Docker, Kubernetes, GitLab CI, Jenkins, Traefik, CI/CD
-- AI & Developer Productivity: AI-agent workflows, AI-assisted development, Claude Code, Codex, integration automation
+## Technical Skills
 
-# Experience
+- **Frontend:** React, Next.js, TypeScript, JavaScript, Redux Toolkit, Preact, React Native
+- **Architecture:** Design systems, microfrontends, Webpack Module Federation, frontend performance, automated testing
+- **Backend & Data:** Node.js, Express, REST APIs, PostgreSQL, MongoDB, DynamoDB
+- **Cloud & Delivery:** AWS, Lambda, Docker, Kubernetes, GitLab CI, CI/CD
+- **AI & Integrations:** AI agent workflows, third-party integrations, integration automation
 
-**Nov 2024 - present, Senior Full Stack Engineer, Tolstoy, Tel Aviv-Yafo, Israel**
+## Experience
 
-- Build frontend and backend product features for gotolstoy.com using React, TypeScript, AWS Lambda, DynamoDB, and PostgreSQL.
-- Develop AI-agent capabilities in Tolstoy AI Studio for creating and maintaining third-party integrations.
-- Build reusable UI components and shared design-system infrastructure for React and TypeScript product workflows.
-- Improve maintainability and consistency across SaaS product surfaces.
+**Nov 2024 - Present | Senior Full Stack Engineer | Tolstoy | Tel Aviv-Yafo, Israel**
 
-**Feb 2024 - Nov 2024, Senior Full Stack Developer, Bright Data, Netanya, Israel**
+- Build full-stack features for Tolstoy's AI commerce platform using React, TypeScript, AWS Lambda, DynamoDB, and PostgreSQL.
+- Design and develop AI Studio infrastructure supporting the creation and maintenance of 40+ third-party integrations.
+- Build reusable design-system components and shared UI foundations for AI-assisted React and TypeScript product workflows.
 
-- Developed Toolip.io, a SaaS proxy-management platform built with React and TypeScript.
-- Improved page-load times by 25% through frontend performance work.
-- Built payments workflows across React and Node.js services using Stripe, PayPal, and BlueSnap.
-- Improved customer-facing product flows, contributing to higher conversion and fewer support requests.
+**Feb 2024 - Nov 2024 | Senior Full Stack Developer | Bright Data | Netanya, Israel**
 
-**July 2022 - Feb 2024, Senior Full Stack Developer, Tenengroup, Tel Aviv-Yafo, Israel**
+- Led development of Toolip.io, a React and TypeScript SaaS platform for managing proxy infrastructure.
+- Reduced page-load time by 25% through frontend performance improvements.
+- Built payment workflows integrating Stripe, PayPal, and BlueSnap across React and Node.js services.
 
-- Built React shopping-cart experiences for Myka and Oak & Luna.
-- Improved checkout workflows and reduced cart abandonment by 20%.
-- Developed a scalable Next.js data-access and API layer for a high-traffic e-commerce platform.
-- Worked with .NET backend teams on integration patterns and end-to-end delivery.
+**Jul 2022 - Feb 2024 | Senior Full Stack Developer | Tenengroup | Tel Aviv-Yafo, Israel**
 
-**Feb 2021 - July 2022, Chief Frontend Developer, Luxoft, Moscow, Russia**
+- Built and optimized React shopping-cart and checkout experiences for the MYKA and Oak & Luna international e-commerce brands, reducing cart abandonment by 20%.
+- Architected a reusable Next.js data-access and API layer for a high-traffic e-commerce platform.
+- Partnered with .NET teams on API contracts, integration patterns, and end-to-end delivery.
 
-- Developed a microfrontend migration using Webpack Module Federation, enabling independent deployments and faster delivery.
-- Built financial reporting interfaces for VTB Bank using React, Redux Toolkit, Redux Saga, and TypeScript.
-- Improved UI consistency and reporting accuracy across the product
+**Feb 2021 - Jul 2022 | Chief Frontend Developer | Luxoft | Moscow, Russia**
 
-**Mar 2019 - Feb 2021, Senior Full Stack Engineer, Mail.ru Group, Moscow, Russia**
+- Led a microfrontend migration using Webpack Module Federation, enabling independent deployment of product modules and faster delivery.
+- Built financial-reporting interfaces for VTB Bank using React, TypeScript, Redux Toolkit, and Redux Saga, improving UI consistency and reporting accuracy.
 
-- Built a frontend CI pipeline with per-branch testing and deployment using GitLab CI, Docker, and Traefik, enabling other departments to review real-time test versions of payment forms.
-- Shortened cross-department feedback cycles by 30% through accessible branch-specific test environments.
+**Mar 2019 - Feb 2021 | Senior Full Stack Engineer | Mail.ru Group (now VK) | Moscow, Russia**
+
+- Built a GitLab CI, Docker, and Traefik pipeline that created branch-specific payment environments, shortening cross-functional feedback cycles by 30%.
 - Developed payment interfaces for My.com and VK Pay using Preact, Redux, and TypeScript.
-- Increased payment-processing speed by 20%, improving the user experience and supporting revenue growth.
+- Improved payment-processing performance by 20%, strengthening responsiveness across customer-facing payment flows.
 
-**Jan 2017 - Mar 2019, Interface Developer, Yandex, Moscow, Russia**
+**Jan 2017 - Mar 2019 | Interface Developer | Yandex | Moscow, Russia**
 
-- Modernized the Yandex.Disk interface and architecture using React, Redux, and ES6.
-- Improved page-load time by 20% and increased engagement through a more intuitive interface.
-- Built a React Native embedding module for the Global Notification Center, improving notification efficiency by 40% and enabling real-time alerts across five platforms.
-- Increased Yandex.Disk test coverage by 15% with Jest, reducing production bugs by 17%.
+- Modernized the Yandex Disk frontend architecture using React, Redux, and ES6, reducing page-load time by 20%.
+- Built a React Native embedding module for the Global Notification Center, enabling real-time alerts across five platforms.
+- Expanded Jest test coverage and reduced production regressions across Yandex Disk.
 
-**Aug 2013 - Jan 2017, Senior Frontend Developer (JavaScript), Idea Platform, Moscow, Russia**
+**Aug 2013 - Jan 2017 | Senior Frontend Developer (JavaScript) | Idea Platform | Moscow, Russia**
 
-- Designed, implemented, and validated the Idea Platform frontend using HTML5, ES6, and AngularJS, helping the company sign three new clients.
-- Built a mobile client for the platform using NativeScript and Angular 2.
-- Developed web-service functionality using Java EE and JAX-RS.
-- Achieved more than 80% automated test coverage with Karma and Protractor.
-- Hired and mentored two developers.
-- Implemented a scheduling model in AnyLogic for the Russian Railways Moscow-Kazan high-speed rail project.
-- Designed and implemented server-side logic for an internal Russian Railways information system.
+- Designed and built the company's AngularJS product frontend, contributing to three new client engagements.
+- Built mobile and backend functionality using NativeScript, Angular, Java EE, and JAX-RS.
+- Hired and mentored two developers while establishing automated frontend testing practices with Karma and Protractor.
 
-**May 2011 - Jul 2013, Development Consultant, Systematica Business Software**
+**Feb 2010 - Jul 2013 | Earlier Financial Technology Experience**
 
-- Implemented Misys Kondor+ integrations for four clients using the Systematica Modular platform.
-- Designed and developed custom reports for three clients using Sybase T-SQL.
-- Designed, implemented, and validated a mathematical library for option-pricing calculations.
+- Development Consultant at Systematica Business Software; Financial Engineer at Allied Testing.
+- Built financial integrations, reporting, option-pricing functionality, and QA workflows for banking and market-data systems, including Renaissance Capital back-office software and Thomson Reuters Eikon.
 
-**Feb 2010 - May 2011, Financial Engineer, Allied Testing, Moscow, Russia**
+## Education
 
-- Performed functional QA for six back-office software releases at Renaissance Capital Bank.
-- Conducted functional testing of the Thomson Reuters Eikon analytics platform.
+**2004 - 2009 | Lomonosov Moscow State University**
 
-# Education
-
-2004 - 2009, Lomonosov Moscow State University, Faculty of Computational Mathematics and Cybernetics, Bachelor's degree
-Specialization: Applied mathematics and computer science
+Faculty of Computational Mathematics and Cybernetics | Degree in Applied Mathematics and Computer Science

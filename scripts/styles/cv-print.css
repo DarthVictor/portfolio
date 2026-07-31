@@ -1,0 +1,100 @@
+@page {
+    size: A4;
+    margin: 9.5mm 12mm;
+}
+
+:root {
+    color-scheme: light;
+    font-family: Inter, "Segoe UI", Arial, sans-serif;
+    font-size: 9.2pt;
+    line-height: 1.29;
+    color: #17202b;
+    background: #ffffff;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+}
+
+.cv {
+    max-width: 100%;
+}
+
+h1,
+h2,
+p,
+ul {
+    margin-block-start: 0;
+}
+
+h1 {
+    margin-block-end: 0.8mm;
+    color: #17202b;
+    font-size: 24pt;
+    line-height: 1;
+    letter-spacing: -0.04em;
+}
+
+h1 + p {
+    margin-block-end: 1mm;
+    color: #a34124;
+    font-size: 10.5pt;
+}
+
+h1 + p + p {
+    margin-block-end: 3.2mm;
+    color: #526070;
+    font-size: 8.3pt;
+}
+
+h2 {
+    margin: 3mm 0 1.4mm;
+    border-block-end: 0.3mm solid #d8d3c8;
+    padding-block-end: 0.6mm;
+    color: #a34124;
+    font-size: 9.5pt;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    break-after: avoid;
+}
+
+p {
+    margin-block-end: 1.2mm;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+ul {
+    margin: 0.5mm 0 1.8mm;
+    padding-inline-start: 4mm;
+}
+
+li {
+    margin-block-end: 0.3mm;
+    padding-inline-start: 0.3mm;
+    break-inside: avoid;
+}
+
+.cv > p:has(> strong:only-child) {
+    margin: 2mm 0 0.6mm;
+    color: #17202b;
+    font-size: 9.2pt;
+    break-after: avoid;
+}
+
+.cv > p:has(> strong:only-child) + ul {
+    break-before: avoid;
+}
+
+strong {
+    font-weight: 700;
+}
