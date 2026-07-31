@@ -44,11 +44,40 @@ Senior frontend and full-stack developer with 12+ years of experience building S
 - Built financial reporting interfaces for VTB Bank using React, Redux Toolkit, Redux Saga, and TypeScript.
 - Improved UI consistency and reporting accuracy across the product
 
-**2010 - 2021, Earlier Engineering Experience, Mail.Ru Group, Yandex, Idea Platform, Systematica, Allied Testing**
+**Mar 2019 - Feb 2021, Senior Full Stack Engineer, Mail.ru Group, Moscow, Russia**
 
-- Built payment interfaces, frontend CI pipelines, and test environments at Mail.Ru Group using Preact, Redux, TypeScript, GitLab CI, Docker, and Traefik; improved payment speed by 20% and shortened feedback cycles by 30%.
-- Modernized Yandex.Disk UI architecture with React, Redux, and ES6; improved load time by 20%, added React Native notification embedding, and increased Jest test coverage by 15%.
-- Delivered full-stack web, mobile, backend, and QA foundations across earlier roles using AngularJS, NativeScript, JavaEE, JAX-RS, and testing practices.
+- Built a frontend CI pipeline with per-branch testing and deployment using GitLab CI, Docker, and Traefik, enabling other departments to review real-time test versions of payment forms.
+- Shortened cross-department feedback cycles by 30% through accessible branch-specific test environments.
+- Developed payment interfaces for My.com and VK Pay using Preact, Redux, and TypeScript.
+- Increased payment-processing speed by 20%, improving the user experience and supporting revenue growth.
+
+**Jan 2017 - Mar 2019, Interface Developer, Yandex, Moscow, Russia**
+
+- Modernized the Yandex.Disk interface and architecture using React, Redux, and ES6.
+- Improved page-load time by 20% and increased engagement through a more intuitive interface.
+- Built a React Native embedding module for the Global Notification Center, improving notification efficiency by 40% and enabling real-time alerts across five platforms.
+- Increased Yandex.Disk test coverage by 15% with Jest, reducing production bugs by 17%.
+
+**Aug 2013 - Jan 2017, Senior Frontend Developer (JavaScript), Idea Platform, Moscow, Russia**
+
+- Designed, implemented, and validated the Idea Platform frontend using HTML5, ES6, and AngularJS, helping the company sign three new clients.
+- Built a mobile client for the platform using NativeScript and Angular 2.
+- Developed web-service functionality using Java EE and JAX-RS.
+- Achieved more than 80% automated test coverage with Karma and Protractor.
+- Hired and mentored two developers.
+- Implemented a scheduling model in AnyLogic for the Russian Railways Moscow-Kazan high-speed rail project.
+- Designed and implemented server-side logic for an internal Russian Railways information system.
+
+**May 2011 - Jul 2013, Development Consultant, Systematica Business Software**
+
+- Implemented Misys Kondor+ integrations for four clients using the Systematica Modular platform.
+- Designed and developed custom reports for three clients using Sybase T-SQL.
+- Designed, implemented, and validated a mathematical library for option-pricing calculations.
+
+**Feb 2010 - May 2011, Financial Engineer, Allied Testing, Moscow, Russia**
+
+- Performed functional QA for six back-office software releases at Renaissance Capital Bank.
+- Conducted functional testing of the Thomson Reuters Eikon analytics platform.
 
 # Education
 

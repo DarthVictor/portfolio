@@ -1,0 +1,104 @@
+---
+import { experience } from "../../data/homepage";
+import HomeSection from "./HomeSection.astro";
+---
+
+<HomeSection
+    index="02"
+    headingId="experience-heading"
+    title="Experience"
+    description="More than a decade building product teams and systems across varied domains."
+>
+    <ol class="experience-list">
+        {
+            experience.map((item) => (
+                <li>
+                    <article>
+                        <div>
+                            <p class="company type-label">{item.company}</p>
+                            <h3>{item.title}</h3>
+                            {item.companyList && (
+                                <p class="company-list">{item.companyList}</p>
+                            )}
+                        </div>
+                        <p class="period">
+                            <time datetime={item.start.datetime}>
+                                {item.start.label}
+                            </time>
+                            {item.end.datetime ? (
+                                <>
+                                    <span>—</span>
+                                    <time datetime={item.end.datetime}>
+                                        {item.end.label}
+                                    </time>
+                                </>
+                            ) : (
+                                <span>— {item.end.label}</span>
+                            )}
+                        </p>
+                    </article>
+                </li>
+            ))
+        }
+    </ol>
+</HomeSection>
+
+<style>
+    .experience-list {
+        border-block-start: 1px solid var(--color-border);
+        list-style: none;
+    }
+
+    .experience-list li {
+        border-block-end: 1px solid var(--color-border);
+    }
+
+    article {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: var(--space-5);
+        align-items: start;
+        padding-block: var(--space-6);
+    }
+
+    .company {
+        color: var(--color-accent);
+    }
+
+    h3 {
+        margin-block-start: var(--space-2);
+        font-size: clamp(1.15rem, 2vw, 1.5rem);
+        font-weight: var(--font-weight-bold);
+        letter-spacing: var(--letter-spacing-heading);
+        line-height: 1.2;
+    }
+
+    .company-list {
+        max-inline-size: 48ch;
+        margin-block-start: var(--space-3);
+        color: var(--color-text-muted);
+        font-size: 0.875rem;
+    }
+
+    .period {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-2);
+        justify-content: flex-end;
+        color: var(--color-text-muted);
+        font-family: var(--font-mono);
+        font-size: var(--font-size-small);
+        white-space: nowrap;
+    }
+
+    @media (max-width: 48rem) {
+        article {
+            grid-template-columns: minmax(0, 1fr);
+            gap: var(--space-3);
+        }
+
+        .period {
+            justify-content: flex-start;
+        }
+    }
+</style>

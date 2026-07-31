@@ -1,0 +1,196 @@
+---
+import { profileLinks } from "../../data/homepage";
+---
+
+<section class="hero" aria-labelledby="introduction-heading">
+    <div class="hero-topline">
+        <p class="eyebrow type-label">Senior frontend + full-stack engineer</p>
+        <p class="current-role type-label">
+            <span aria-hidden="true"></span>
+            Currently at Tolstoy
+        </p>
+    </div>
+
+    <h1 id="introduction-heading">
+        Victor Follet, <span class="role-line">senior product engineer</span>
+    </h1>
+
+    <div class="hero-details">
+        <p class="hero-statement">
+            I build dependable product experiences across frontend and full-stack
+            systems.
+        </p>
+        <div class="hero-summary">
+            <p>
+                For more than 12 years, I have worked on SaaS, fintech, e-commerce,
+                and AI-enabled products, with a focus on frontend quality,
+                maintainable architecture, and delivery.
+            </p>
+            <div class="hero-actions">
+                <a
+                    class="button button-primary"
+                    href={`mailto:${profileLinks.email}`}
+                >
+                    Start a conversation
+                    <span aria-hidden="true">↗</span>
+                </a>
+                <a class="button button-secondary" href={profileLinks.cv}>
+                    Download CV
+                    <span aria-hidden="true">↓</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .hero {
+        min-inline-size: 0;
+        padding-block: clamp(var(--space-7), 8vw, var(--space-9));
+    }
+
+    .hero-topline,
+    .hero-details {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(18rem, 0.55fr);
+        gap: var(--space-7);
+    }
+
+    .hero-topline {
+        align-items: center;
+        margin-block-end: clamp(var(--space-6), 5vw, var(--space-8));
+    }
+
+    .eyebrow {
+        color: var(--color-accent);
+    }
+
+    .current-role {
+        display: flex;
+        align-items: center;
+        justify-self: end;
+        color: var(--color-text-muted);
+    }
+
+    .current-role span {
+        inline-size: 0.55rem;
+        block-size: 0.55rem;
+        margin-inline-end: var(--space-2);
+        border-radius: var(--radius-pill);
+        background: var(--color-status);
+        box-shadow: 0 0 0 0.25rem
+            color-mix(in srgb, var(--color-status) 14%, transparent);
+    }
+
+    h1 {
+        max-inline-size: 11ch;
+        font-size: var(--font-size-display);
+        font-weight: var(--font-weight-extrabold);
+        letter-spacing: var(--letter-spacing-display);
+        line-height: var(--line-height-display);
+    }
+
+    .role-line {
+        display: block;
+        color: var(--color-text-muted);
+        font-weight: var(--font-weight-medium);
+    }
+
+    .hero-details {
+        align-items: start;
+        margin-block-start: clamp(var(--space-7), 7vw, var(--space-9));
+    }
+
+    .hero-statement {
+        max-inline-size: 24ch;
+        font-size: clamp(1.5rem, 2.7vw, 2.5rem);
+        font-weight: var(--font-weight-semibold);
+        letter-spacing: var(--letter-spacing-heading);
+        line-height: 1.12;
+    }
+
+    .hero-summary {
+        display: grid;
+        gap: var(--space-6);
+        color: var(--color-text-muted);
+    }
+
+    .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-3);
+    }
+
+    .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: var(--space-4);
+        min-block-size: 3.25rem;
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-pill);
+        padding: var(--space-3) var(--space-5);
+        font-size: var(--font-size-small);
+        font-weight: var(--font-weight-bold);
+        text-decoration: none;
+        transition:
+            background var(--motion-fast) var(--easing-standard),
+            border-color var(--motion-fast) var(--easing-standard),
+            color var(--motion-fast) var(--easing-standard);
+    }
+
+    .button-primary {
+        border-color: var(--color-text);
+        background: var(--color-panel);
+        color: var(--color-panel-text);
+    }
+
+    .button-primary:hover {
+        border-color: var(--color-accent);
+        background: var(--color-accent);
+        color: var(--color-text-inverse);
+    }
+
+    .button-secondary:hover {
+        border-color: var(--color-text);
+        background: var(--color-surface);
+    }
+
+    @media (max-width: 48rem) {
+        .hero-topline,
+        .hero-details {
+            grid-template-columns: minmax(0, 1fr);
+        }
+
+        .hero {
+            padding-block: var(--space-7) var(--space-8);
+        }
+
+        .hero-topline {
+            gap: var(--space-3);
+            margin-block-end: var(--space-7);
+        }
+
+        .current-role {
+            justify-self: start;
+        }
+
+        h1 {
+            max-inline-size: 10ch;
+        }
+
+        .hero-details {
+            gap: var(--space-6);
+            margin-block-start: var(--space-8);
+        }
+
+        .hero-statement {
+            max-inline-size: 18ch;
+        }
+
+        .hero-actions {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr);
+        }
+    }
+</style>

@@ -1,0 +1,78 @@
+<header class="site-header">
+    <div class="header-inner site-container">
+        <a class="brand" href="#introduction-heading" aria-label="Back to top">
+            VF<span class="brand-dot" aria-hidden="true">.</span>
+        </a>
+        <nav aria-label="Primary navigation">
+            <a href="#selected-work-heading">Work</a>
+            <a href="#experience-heading">Experience</a>
+            <a class="nav-about" href="#about-heading">About</a>
+            <a class="nav-contact" href="#contact-heading">Contact</a>
+        </nav>
+    </div>
+</header>
+
+<style>
+    .site-header {
+        position: relative;
+        z-index: 10;
+        border-block-end: 1px solid var(--color-border);
+    }
+
+    .header-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        min-block-size: 5rem;
+    }
+
+    .brand {
+        font-size: 1.35rem;
+        font-weight: var(--font-weight-extrabold);
+        letter-spacing: var(--letter-spacing-display);
+        text-decoration: none;
+    }
+
+    .brand-dot {
+        color: var(--color-accent);
+    }
+
+    nav {
+        display: flex;
+        align-items: center;
+        gap: clamp(var(--space-4), 3vw, var(--space-6));
+    }
+
+    nav a {
+        color: var(--color-text-muted);
+        font-size: var(--font-size-small);
+        font-weight: var(--font-weight-semibold);
+        text-decoration: none;
+    }
+
+    nav a:hover {
+        color: var(--color-text);
+    }
+
+    .nav-contact {
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-pill);
+        color: var(--color-text);
+        padding: var(--space-2) var(--space-4);
+    }
+
+    @media (max-width: 48rem) {
+        .header-inner {
+            min-block-size: 4.25rem;
+        }
+
+        nav {
+            gap: var(--space-4);
+        }
+
+        .nav-about,
+        nav a[href="#experience-heading"] {
+            display: none;
+        }
+    }
+</style>
