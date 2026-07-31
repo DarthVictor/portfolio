@@ -6,21 +6,28 @@ import "../styles/global.css";
 interface Props {
     title: string;
     description: string;
-    theme?: "light-alt";
+    palette?:
+        | "paper"
+        | "atlantic"
+        | "linen"
+        | "lilac"
+        | "paper-terracotta";
     noIndex?: boolean;
 }
 
-const { title, description, theme, noIndex = false } = Astro.props;
+const {
+    title,
+    description,
+    palette = "paper-terracotta",
+    noIndex = false,
+} = Astro.props;
 const showThemeControls = import.meta.env.DEV;
 const ThemeComparison = showThemeControls
     ? (await import("../components/site/ThemeComparison.astro")).default
     : null;
 ---
 
-<html
-    lang="en"
-    data-palette={theme === "light-alt" ? "atlantic" : "paper"}
->
+<html lang="en" data-palette={palette}>
     <head>
         <meta charset="utf-8" />
         {
@@ -60,9 +67,7 @@ const ThemeComparison = showThemeControls
     <body>
         {
             ThemeComparison && (
-                <ThemeComparison
-                    active={theme === "light-alt" ? "atlantic" : "paper"}
-                />
+                <ThemeComparison active={palette} />
             )
         }
         <SiteHeader />

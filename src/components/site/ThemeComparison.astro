@@ -1,6 +1,13 @@
 ---
+import "../../styles/palette-dev-dark.css";
+
 interface Props {
-    active: "paper" | "atlantic";
+    active:
+        | "paper"
+        | "atlantic"
+        | "linen"
+        | "lilac"
+        | "paper-terracotta";
 }
 
 const { active } = Astro.props;
@@ -17,7 +24,7 @@ const { active } = Astro.props;
                 <legend class="visually-hidden">Color palette</legend>
                 <a
                     class="theme-option"
-                    href="/"
+                    href="/theme-a/"
                     aria-current={active === "paper" ? "page" : undefined}
                 >
                     <span class="swatch swatch-paper" aria-hidden="true"></span>
@@ -37,6 +44,44 @@ const { active } = Astro.props;
                     ></span>
                     <span>
                         <strong>Atlantic</strong>
+                        <small>Terracotta</small>
+                    </span>
+                </a>
+                <a
+                    class="theme-option"
+                    href="/theme-c/"
+                    aria-current={active === "linen" ? "page" : undefined}
+                >
+                    <span class="swatch swatch-linen" aria-hidden="true"></span>
+                    <span>
+                        <strong>Linen</strong>
+                        <small>Forest</small>
+                    </span>
+                </a>
+                <a
+                    class="theme-option"
+                    href="/theme-d/"
+                    aria-current={active === "lilac" ? "page" : undefined}
+                >
+                    <span class="swatch swatch-lilac" aria-hidden="true"></span>
+                    <span>
+                        <strong>Lilac</strong>
+                        <small>Aubergine</small>
+                    </span>
+                </a>
+                <a
+                    class="theme-option"
+                    href="/"
+                    aria-current={
+                        active === "paper-terracotta" ? "page" : undefined
+                    }
+                >
+                    <span
+                        class="swatch swatch-paper-terracotta"
+                        aria-hidden="true"
+                    ></span>
+                    <span>
+                        <strong>Paper</strong>
                         <small>Terracotta</small>
                     </span>
                 </a>
@@ -102,48 +147,6 @@ const { active } = Astro.props;
         });
     })();
 </script>
-
-<style is:global>
-    :root[data-palette="paper"][data-mode="dark"] {
-        color-scheme: dark;
-        --color-background: #0d1424;
-        --color-surface: #141d30;
-        --color-surface-raised: #1b263d;
-        --color-text: #f2f4f8;
-        --color-text-muted: #aab3c4;
-        --color-text-inverse: #17202b;
-        --color-border: #2d3950;
-        --color-accent: #a8b4ff;
-        --color-accent-hover: #c3caff;
-        --color-accent-soft: #202b4d;
-        --color-focus: #75a7ff;
-        --color-status: #a3e635;
-        --color-panel: #f2f4f8;
-        --color-panel-text: #17202b;
-        --color-panel-accent: #3155d8;
-        --shadow-card: 0 1.5rem 4rem rgb(0 0 0 / 18%);
-    }
-
-    :root[data-palette="atlantic"][data-mode="dark"] {
-        color-scheme: dark;
-        --color-background: #0b1620;
-        --color-surface: #112130;
-        --color-surface-raised: #182b3b;
-        --color-text: #f2f7fb;
-        --color-text-muted: #9babb9;
-        --color-text-inverse: #152438;
-        --color-border: #2a4153;
-        --color-accent: #ff9a78;
-        --color-accent-hover: #ffb49a;
-        --color-accent-soft: #3b241d;
-        --color-focus: #7ab8ff;
-        --color-status: #55d6c2;
-        --color-panel: #f2f7fb;
-        --color-panel-text: #152438;
-        --color-panel-accent: #a34124;
-        --shadow-card: 0 1.5rem 4rem rgb(0 0 0 / 22%);
-    }
-</style>
 
 <style>
     .theme-comparison {
@@ -249,6 +252,18 @@ const { active } = Astro.props;
         background: #a34124;
     }
 
+    .swatch-linen {
+        background: #2f6b4f;
+    }
+
+    .swatch-lilac {
+        background: #7246a8;
+    }
+
+    .swatch-paper-terracotta {
+        background: #a34124;
+    }
+
     .appearance-options {
         display: flex;
         align-items: center;
@@ -287,16 +302,28 @@ const { active } = Astro.props;
         line-height: 1;
     }
 
+    @media (max-width: 64rem) {
+        .comparison-inner > p {
+            display: none;
+        }
+
+        .theme-controls {
+            inline-size: 100%;
+            gap: var(--space-2);
+        }
+
+        .theme-option {
+            min-inline-size: 6.75rem;
+            padding-inline: var(--space-2);
+        }
+    }
+
     @media (max-width: 48rem) {
         .comparison-inner {
             align-items: stretch;
             inline-size: min(100% - 2 * var(--space-4), 76rem);
-            min-block-size: 6.75rem;
+            min-block-size: 9.75rem;
             padding-block: var(--space-3);
-        }
-
-        .comparison-inner > p {
-            display: none;
         }
 
         .theme-controls {
@@ -305,14 +332,23 @@ const { active } = Astro.props;
             gap: var(--space-2);
         }
 
-        .theme-options,
         .appearance-options {
+            inline-size: 100%;
+        }
+
+        .theme-options {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
             inline-size: 100%;
         }
 
         .theme-option {
             flex: 1;
             min-inline-size: 0;
+        }
+
+        .theme-option:last-child {
+            grid-column: 1 / -1;
         }
 
         .appearance-option {

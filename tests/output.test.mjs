@@ -5,7 +5,10 @@ import test from "node:test";
 
 const distDirectory = join(process.cwd(), "dist");
 const indexPath = join(distDirectory, "index.html");
+const themeAPath = join(distDirectory, "theme-a", "index.html");
 const themeBPath = join(distDirectory, "theme-b", "index.html");
+const themeCPath = join(distDirectory, "theme-c", "index.html");
+const themeDPath = join(distDirectory, "theme-d", "index.html");
 const cvPath = join(distDirectory, "cv.pdf");
 
 test("build output is static and loads no bundled client-side JavaScript", () => {
@@ -51,34 +54,71 @@ test("homepage output has the planned semantic structure", () => {
     assert.equal(existsSync(cvPath), true);
 });
 
-test("alternate palette builds without development-only theme controls", () => {
+test("preview palettes build in isolation without development-only controls", () => {
+    assert.equal(existsSync(themeAPath), true);
     assert.equal(existsSync(themeBPath), true);
+    assert.equal(existsSync(themeCPath), true);
+    assert.equal(existsSync(themeDPath), true);
 
     const indexHtml = readFileSync(indexPath, "utf8");
+    const themeAHtml = readFileSync(themeAPath, "utf8");
     const themeBHtml = readFileSync(themeBPath, "utf8");
+    const themeCHtml = readFileSync(themeCPath, "utf8");
+    const themeDHtml = readFileSync(themeDPath, "utf8");
 
-    assert.match(indexHtml, /data-palette="paper"/);
+    assert.match(indexHtml, /data-palette="paper-terracotta"/);
+    assert.match(themeAHtml, /data-palette="paper"/);
     assert.match(themeBHtml, /data-palette="atlantic"/);
-    assert.match(themeBHtml, /<meta name="robots" content="noindex">/);
+    assert.match(themeCHtml, /data-palette="linen"/);
+    assert.match(themeDHtml, /data-palette="lilac"/);
     assert.match(indexHtml, /--color-background:#f3f0e9/);
-    assert.doesNotMatch(indexHtml, /#edf3f8|#0d1424|#0b1620/);
+    assert.match(indexHtml, /--color-accent:#a34124/);
+    assert.doesNotMatch(
+        indexHtml,
+        /#edf3f8|#f2f1e9|#f3f0f6|#0d1424|#0b1620|#0f1814|#17121d/,
+    );
+    assert.match(themeAHtml, /--color-background:#f3f0e9/);
+    assert.match(themeAHtml, /--color-accent:#3155d8/);
+    assert.doesNotMatch(themeAHtml, /#a34124/);
     assert.match(themeBHtml, /--color-background:#edf3f8/);
-    assert.doesNotMatch(themeBHtml, /#f3f0e9|#0d1424|#0b1620/);
+    assert.doesNotMatch(
+        themeBHtml,
+        /#f3f0e9|#f2f1e9|#f3f0f6|#0d1424|#0b1620|#0f1814|#17121d/,
+    );
+    assert.match(themeCHtml, /--color-background:#f2f1e9/);
+    assert.doesNotMatch(
+        themeCHtml,
+        /#f3f0e9|#edf3f8|#f3f0f6|#0d1424|#0b1620|#0f1814|#17121d/,
+    );
+    assert.match(themeDHtml, /--color-background:#f3f0f6/);
+    assert.doesNotMatch(
+        themeDHtml,
+        /#f3f0e9|#edf3f8|#f2f1e9|#0d1424|#0b1620|#0f1814|#17121d/,
+    );
+    for (const previewHtml of [
+        themeAHtml,
+        themeBHtml,
+        themeCHtml,
+        themeDHtml,
+    ]) {
+        assert.match(previewHtml, /<meta name="robots" content="noindex">/);
+        assert.doesNotMatch(previewHtml, /theme-comparison/);
+        assert.doesNotMatch(previewHtml, /data-mode-option=/);
+        assert.doesNotMatch(previewHtml, /portfolio-color-mode/);
+        assert.match(
+            previewHtml,
+            /<link rel="stylesheet" href="\/_astro\/[^"']+\.css"/,
+        );
+        assert.doesNotMatch(previewHtml, /_astro\/[^"']+\.js/);
+    }
+
     assert.doesNotMatch(indexHtml, /theme-comparison/);
-    assert.doesNotMatch(themeBHtml, /theme-comparison/);
     assert.doesNotMatch(indexHtml, /data-mode-option=/);
-    assert.doesNotMatch(themeBHtml, /data-mode-option=/);
     assert.doesNotMatch(indexHtml, /portfolio-color-mode/);
-    assert.doesNotMatch(themeBHtml, /portfolio-color-mode/);
     assert.doesNotMatch(
         readLinkedStylesheets(indexHtml),
-        /theme-comparison|appearance-option|#edf3f8|#0d1424|#0b1620/,
+        /theme-comparison|appearance-option|#edf3f8|#f2f1e9|#f3f0f6|#0d1424|#0b1620|#0f1814|#17121d/,
     );
-    assert.match(
-        themeBHtml,
-        /<link rel="stylesheet" href="\/_astro\/[^"']+\.css"/,
-    );
-    assert.doesNotMatch(themeBHtml, /_astro\/[^"']+\.js/);
 });
 
 function readLinkedStylesheets(html) {
