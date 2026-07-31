@@ -21,7 +21,7 @@ const {
     aria-labelledby={headingId}
 >
     <div class="section-heading">
-        <p class="section-index">{index}</p>
+        <p class="section-index type-label">{index}</p>
         <h2 id={headingId}>{title}</h2>
         {description && <p>{description}</p>}
     </div>
@@ -46,17 +46,12 @@ const {
     .section-index {
         margin-block-end: var(--space-4);
         color: var(--color-accent);
-        font-family: var(--font-mono);
-        font-size: var(--font-size-small);
-        font-weight: 700;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
     }
 
     h2 {
         font-size: var(--font-size-heading);
-        font-weight: 720;
-        letter-spacing: -0.055em;
+        font-weight: var(--font-weight-bold);
+        letter-spacing: var(--letter-spacing-heading);
         line-height: var(--line-height-heading);
     }
 

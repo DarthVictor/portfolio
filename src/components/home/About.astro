@@ -44,9 +44,9 @@ import HomeSection from "./HomeSection.astro";
         grid-column: 1 / -1;
         max-inline-size: 24ch;
         font-size: clamp(2rem, 4vw, 3.5rem);
-        font-weight: 620;
-        letter-spacing: -0.055em;
-        line-height: 1.08;
+        font-weight: var(--font-weight-semibold);
+        letter-spacing: var(--letter-spacing-heading);
+        line-height: var(--line-height-heading);
     }
 
     .about-copy > p:not(.about-lead) {
@@ -67,7 +67,7 @@ import HomeSection from "./HomeSection.astro";
         border-block-start: 1px solid var(--color-border);
         padding-block-start: var(--space-3);
         font-size: 0.875rem;
-        font-weight: 650;
+        font-weight: var(--font-weight-semibold);
     }
 
     .principles span {

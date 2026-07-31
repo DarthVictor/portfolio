@@ -5,10 +5,9 @@ import test from "node:test";
 
 const distDirectory = join(process.cwd(), "dist");
 const indexPath = join(distDirectory, "index.html");
-const themeAPath = join(distDirectory, "theme-a", "index.html");
-const themeBPath = join(distDirectory, "theme-b", "index.html");
-const themeCPath = join(distDirectory, "theme-c", "index.html");
-const themeDPath = join(distDirectory, "theme-d", "index.html");
+const removedThemePaths = ["theme-a", "theme-b", "theme-c", "theme-d"].map(
+    (theme) => join(distDirectory, theme, "index.html"),
+);
 const cvPath = join(distDirectory, "cv.pdf");
 
 test("build output is static and loads no bundled client-side JavaScript", () => {
@@ -21,6 +20,7 @@ test("build output is static and loads no bundled client-side JavaScript", () =>
         /<link rel="stylesheet" href="\/_astro\/[^"']+\.css"/,
     );
     assert.doesNotMatch(indexHtml, /_astro\/[^"']+\.js/);
+    assert.doesNotMatch(indexHtml, /<script\b/);
 });
 
 test("homepage output has the planned semantic structure", () => {
@@ -54,72 +54,32 @@ test("homepage output has the planned semantic structure", () => {
     assert.equal(existsSync(cvPath), true);
 });
 
-test("preview palettes build in isolation without development-only controls", () => {
-    assert.equal(existsSync(themeAPath), true);
-    assert.equal(existsSync(themeBPath), true);
-    assert.equal(existsSync(themeCPath), true);
-    assert.equal(existsSync(themeDPath), true);
-
+test("production uses only the system-aware Paper Terracotta palette", () => {
     const indexHtml = readFileSync(indexPath, "utf8");
-    const themeAHtml = readFileSync(themeAPath, "utf8");
-    const themeBHtml = readFileSync(themeBPath, "utf8");
-    const themeCHtml = readFileSync(themeCPath, "utf8");
-    const themeDHtml = readFileSync(themeDPath, "utf8");
+    const styles = readPageStyles(indexHtml);
 
-    assert.match(indexHtml, /data-palette="paper-terracotta"/);
-    assert.match(themeAHtml, /data-palette="paper"/);
-    assert.match(themeBHtml, /data-palette="atlantic"/);
-    assert.match(themeCHtml, /data-palette="linen"/);
-    assert.match(themeDHtml, /data-palette="lilac"/);
-    assert.match(indexHtml, /--color-background:#f3f0e9/);
-    assert.match(indexHtml, /--color-accent:#a34124/);
-    assert.doesNotMatch(
-        indexHtml,
-        /#edf3f8|#f2f1e9|#f3f0f6|#0d1424|#0b1620|#0f1814|#17121d/,
-    );
-    assert.match(themeAHtml, /--color-background:#f3f0e9/);
-    assert.match(themeAHtml, /--color-accent:#3155d8/);
-    assert.doesNotMatch(themeAHtml, /#a34124/);
-    assert.match(themeBHtml, /--color-background:#edf3f8/);
-    assert.doesNotMatch(
-        themeBHtml,
-        /#f3f0e9|#f2f1e9|#f3f0f6|#0d1424|#0b1620|#0f1814|#17121d/,
-    );
-    assert.match(themeCHtml, /--color-background:#f2f1e9/);
-    assert.doesNotMatch(
-        themeCHtml,
-        /#f3f0e9|#edf3f8|#f3f0f6|#0d1424|#0b1620|#0f1814|#17121d/,
-    );
-    assert.match(themeDHtml, /--color-background:#f3f0f6/);
-    assert.doesNotMatch(
-        themeDHtml,
-        /#f3f0e9|#edf3f8|#f2f1e9|#0d1424|#0b1620|#0f1814|#17121d/,
-    );
-    for (const previewHtml of [
-        themeAHtml,
-        themeBHtml,
-        themeCHtml,
-        themeDHtml,
-    ]) {
-        assert.match(previewHtml, /<meta name="robots" content="noindex">/);
-        assert.doesNotMatch(previewHtml, /theme-comparison/);
-        assert.doesNotMatch(previewHtml, /data-mode-option=/);
-        assert.doesNotMatch(previewHtml, /portfolio-color-mode/);
-        assert.match(
-            previewHtml,
-            /<link rel="stylesheet" href="\/_astro\/[^"']+\.css"/,
-        );
-        assert.doesNotMatch(previewHtml, /_astro\/[^"']+\.js/);
+    for (const themePath of removedThemePaths) {
+        assert.equal(existsSync(themePath), false);
     }
 
-    assert.doesNotMatch(indexHtml, /theme-comparison/);
-    assert.doesNotMatch(indexHtml, /data-mode-option=/);
-    assert.doesNotMatch(indexHtml, /portfolio-color-mode/);
-    assert.doesNotMatch(
-        readLinkedStylesheets(indexHtml),
-        /theme-comparison|appearance-option|#edf3f8|#f2f1e9|#f3f0f6|#0d1424|#0b1620|#0f1814|#17121d/,
-    );
+    assert.doesNotMatch(indexHtml, /data-palette|theme-comparison/);
+    assert.match(styles, /prefers-color-scheme:\s*light/);
+    assert.match(styles, /data-theme=["']?dark["']?/);
+    assert.match(styles, /data-theme=["']?light["']?/);
+    assert.match(styles, /--color-background:\s*#0d1424/);
+    assert.match(styles, /--color-background:\s*#f3f0e9/);
+    assert.match(styles, /--color-accent:\s*#ff9a78/);
+    assert.match(styles, /--color-accent:\s*#a34124/);
+    assert.match(styles, /outline-color:\s*var\(--color-panel-accent\)/);
 });
+
+function readPageStyles(html) {
+    const inlineStyles = [...html.matchAll(/<style[^>]*>([\s\S]*?)<\/style>/g)]
+        .map(([, styles]) => styles)
+        .join("\n");
+
+    return `${inlineStyles}\n${readLinkedStylesheets(html)}`;
+}
 
 function readLinkedStylesheets(html) {
     return [...html.matchAll(/href="(\/_astro\/[^"']+\.css)"/g)]

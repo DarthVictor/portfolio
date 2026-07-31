@@ -15,7 +15,7 @@ import HomeSection from "./HomeSection.astro";
                 <li>
                     <article>
                         <div>
-                            <p class="company">{item.company}</p>
+                            <p class="company type-label">{item.company}</p>
                             <h3>{item.title}</h3>
                             {item.companyList && (
                                 <p class="company-list">{item.companyList}</p>
@@ -63,18 +63,13 @@ import HomeSection from "./HomeSection.astro";
 
     .company {
         color: var(--color-accent);
-        font-family: var(--font-mono);
-        font-size: var(--font-size-small);
-        font-weight: 700;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
     }
 
     h3 {
         margin-block-start: var(--space-2);
         font-size: clamp(1.15rem, 2vw, 1.5rem);
-        font-weight: 660;
-        letter-spacing: -0.03em;
+        font-weight: var(--font-weight-bold);
+        letter-spacing: var(--letter-spacing-heading);
         line-height: 1.2;
     }
 

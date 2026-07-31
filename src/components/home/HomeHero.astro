@@ -1,7 +1,11 @@
+---
+import { profileLinks } from "../../data/homepage";
+---
+
 <section class="hero" aria-labelledby="introduction-heading">
     <div class="hero-topline">
-        <p class="eyebrow">Senior frontend + full-stack engineer</p>
-        <p class="current-role">
+        <p class="eyebrow type-label">Senior frontend + full-stack engineer</p>
+        <p class="current-role type-label">
             <span aria-hidden="true"></span>
             Currently at Tolstoy
         </p>
@@ -25,12 +29,12 @@
             <div class="hero-actions">
                 <a
                     class="button button-primary"
-                    href="mailto:follet.victor@gmail.com"
+                    href={`mailto:${profileLinks.email}`}
                 >
                     Start a conversation
                     <span aria-hidden="true">↗</span>
                 </a>
-                <a class="button button-secondary" href="/cv.pdf">
+                <a class="button button-secondary" href={profileLinks.cv}>
                     Download CV
                     <span aria-hidden="true">↓</span>
                 </a>
@@ -57,15 +61,6 @@
         margin-block-end: clamp(var(--space-6), 5vw, var(--space-8));
     }
 
-    .eyebrow,
-    .current-role {
-        font-family: var(--font-mono);
-        font-size: var(--font-size-small);
-        font-weight: 700;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-    }
-
     .eyebrow {
         color: var(--color-accent);
     }
@@ -90,15 +85,15 @@
     h1 {
         max-inline-size: 11ch;
         font-size: var(--font-size-display);
-        font-weight: 760;
-        letter-spacing: -0.075em;
+        font-weight: var(--font-weight-extrabold);
+        letter-spacing: var(--letter-spacing-display);
         line-height: var(--line-height-display);
     }
 
     .role-line {
         display: block;
         color: var(--color-text-muted);
-        font-weight: 520;
+        font-weight: var(--font-weight-medium);
     }
 
     .hero-details {
@@ -109,8 +104,8 @@
     .hero-statement {
         max-inline-size: 24ch;
         font-size: clamp(1.5rem, 2.7vw, 2.5rem);
-        font-weight: 620;
-        letter-spacing: -0.045em;
+        font-weight: var(--font-weight-semibold);
+        letter-spacing: var(--letter-spacing-heading);
         line-height: 1.12;
     }
 
@@ -136,7 +131,7 @@
         border-radius: var(--radius-pill);
         padding: var(--space-3) var(--space-5);
         font-size: var(--font-size-small);
-        font-weight: 750;
+        font-weight: var(--font-weight-bold);
         text-decoration: none;
         transition:
             background var(--motion-fast) var(--easing-standard),
@@ -182,7 +177,6 @@
 
         h1 {
             max-inline-size: 10ch;
-            letter-spacing: -0.065em;
         }
 
         .hero-details {

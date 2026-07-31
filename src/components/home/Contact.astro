@@ -1,16 +1,18 @@
 ---
-import { contactLinks } from "../../data/homepage";
+import { contactLinks, profileLinks } from "../../data/homepage";
 ---
 
 <section class="contact-section" aria-labelledby="contact-heading">
     <div>
-        <p class="contact-kicker">Have an interesting product problem?</p>
+        <p class="contact-kicker type-label">
+            Have an interesting product problem?
+        </p>
         <h2 id="contact-heading">Contact</h2>
         <p class="contact-lead">Let’s build something dependable.</p>
     </div>
     <div class="contact-actions">
-        <a class="contact-email" href="mailto:follet.victor@gmail.com">
-            follet.victor@gmail.com
+        <a class="contact-email" href={`mailto:${profileLinks.email}`}>
+            {profileLinks.email}
             <span aria-hidden="true">↗</span>
         </a>
         <ul class="contact-list">
@@ -42,17 +44,11 @@ import { contactLinks } from "../../data/homepage";
     .contact-kicker {
         margin-block-end: var(--space-5);
         color: var(--color-panel-accent);
-        font-family: var(--font-mono);
-        font-size: var(--font-size-small);
-        font-weight: 700;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
     }
 
     h2 {
         font-size: 1rem;
-        font-weight: 720;
-        letter-spacing: 0;
+        font-weight: var(--font-weight-bold);
         line-height: var(--line-height-heading);
     }
 
@@ -60,8 +56,8 @@ import { contactLinks } from "../../data/homepage";
         max-inline-size: 10ch;
         margin-block-start: var(--space-5);
         font-size: clamp(2.5rem, 6vw, 5rem);
-        font-weight: 680;
-        letter-spacing: -0.065em;
+        font-weight: var(--font-weight-bold);
+        letter-spacing: var(--letter-spacing-display);
         line-height: 0.98;
     }
 
@@ -80,7 +76,7 @@ import { contactLinks } from "../../data/homepage";
         border-block-end: 1px solid currentColor;
         padding-block-end: var(--space-3);
         font-size: clamp(1rem, 2vw, 1.35rem);
-        font-weight: 620;
+        font-weight: var(--font-weight-semibold);
         text-decoration: none;
     }
 
@@ -105,6 +101,10 @@ import { contactLinks } from "../../data/homepage";
     .contact-list a:hover {
         border-color: var(--color-accent);
         background: var(--color-accent);
+    }
+
+    .contact-section :focus-visible {
+        outline-color: var(--color-panel-accent);
     }
 
     @media (max-width: 48rem) {

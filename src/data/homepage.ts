@@ -33,6 +33,11 @@ export interface ContactLink {
     symbol: string;
 }
 
+export const profileLinks = {
+    email: "follet.victor@gmail.com",
+    cv: "/cv.pdf",
+} as const;
+
 export const selectedWork = [
     {
         meta: "Tolstoy · AI + Design systems",
@@ -136,7 +141,7 @@ export const contactLinks = [
         symbol: "↗",
     },
     {
-        href: "/cv.pdf",
+        href: profileLinks.cv,
         label: "Download CV",
         symbol: "↓",
     },

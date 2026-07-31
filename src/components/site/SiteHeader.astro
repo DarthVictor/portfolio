@@ -1,5 +1,5 @@
 <header class="site-header">
-    <div class="header-inner">
+    <div class="header-inner site-container">
         <a class="brand" href="#introduction-heading" aria-label="Back to top">
             VF<span class="brand-dot" aria-hidden="true">.</span>
         </a>
@@ -23,15 +23,13 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        inline-size: min(100% - 2 * var(--space-5), 76rem);
         min-block-size: 5rem;
-        margin-inline: auto;
     }
 
     .brand {
         font-size: 1.35rem;
-        font-weight: 800;
-        letter-spacing: -0.06em;
+        font-weight: var(--font-weight-extrabold);
+        letter-spacing: var(--letter-spacing-display);
         text-decoration: none;
     }
 
@@ -48,7 +46,7 @@
     nav a {
         color: var(--color-text-muted);
         font-size: var(--font-size-small);
-        font-weight: 650;
+        font-weight: var(--font-weight-semibold);
         text-decoration: none;
     }
 
@@ -65,7 +63,6 @@
 
     @media (max-width: 48rem) {
         .header-inner {
-            inline-size: min(100% - 2 * var(--space-4), 76rem);
             min-block-size: 4.25rem;
         }
 

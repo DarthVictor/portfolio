@@ -13,8 +13,8 @@ import HomeSection from "./HomeSection.astro";
         {
             capabilities.map((capability) => (
                 <li class:list={{ "capability-featured": capability.featured }}>
-                    <p class="capability-label">{capability.label}</p>
-                    <h3>{capability.title}</h3>
+                    <p class="capability-label type-label">{capability.label}</p>
+                    <h3 class="type-card-title">{capability.title}</h3>
                     <p>{capability.summary}</p>
                     <p
                         class:list={[
@@ -42,10 +42,10 @@ import HomeSection from "./HomeSection.astro";
     .capability-list li {
         position: relative;
         min-block-size: 20rem;
-        border: 1px solid var(--color-border);
-        border-radius: var(--radius-medium);
+        border: var(--card-border);
+        border-radius: var(--card-radius);
         background: var(--color-surface);
-        padding: clamp(var(--space-5), 4vw, var(--space-7));
+        padding: var(--card-padding);
         overflow: hidden;
     }
 
@@ -57,20 +57,11 @@ import HomeSection from "./HomeSection.astro";
 
     .capability-label {
         color: var(--color-accent);
-        font-family: var(--font-mono);
-        font-size: var(--font-size-small);
-        font-weight: 700;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
     }
 
     h3 {
         max-inline-size: 12ch;
         margin-block-start: var(--space-4);
-        font-size: clamp(1.5rem, 3vw, 2.25rem);
-        font-weight: 680;
-        letter-spacing: -0.045em;
-        line-height: 1.08;
     }
 
     li > p:not(.capability-label, .capability-mark) {
@@ -87,8 +78,8 @@ import HomeSection from "./HomeSection.astro";
         inset-block-end: calc(var(--space-6) * -1);
         color: color-mix(in srgb, var(--color-accent) 16%, transparent);
         font-size: 9rem;
-        font-weight: 800;
-        letter-spacing: -0.1em;
+        font-weight: var(--font-weight-extrabold);
+        letter-spacing: var(--letter-spacing-decorative);
         line-height: 1;
         user-select: none;
     }

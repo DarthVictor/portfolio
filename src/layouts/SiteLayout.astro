@@ -6,87 +6,26 @@ import "../styles/global.css";
 interface Props {
     title: string;
     description: string;
-    palette?:
-        | "paper"
-        | "atlantic"
-        | "linen"
-        | "lilac"
-        | "paper-terracotta";
-    noIndex?: boolean;
 }
 
-const {
-    title,
-    description,
-    palette = "paper-terracotta",
-    noIndex = false,
-} = Astro.props;
-const showThemeControls = import.meta.env.DEV;
-const ThemeComparison = showThemeControls
-    ? (await import("../components/site/ThemeComparison.astro")).default
-    : null;
+const { title, description } = Astro.props;
 ---
 
-<html lang="en" data-palette={palette}>
+<html lang="en">
     <head>
         <meta charset="utf-8" />
-        {
-            showThemeControls && (
-                <script is:inline>
-                    {`
-                        (() => {
-                            const storageKey = "portfolio-color-mode";
-                            let mode = null;
-
-                            try {
-                                mode = localStorage.getItem(storageKey);
-                            } catch {
-                                mode = null;
-                            }
-
-                            if (mode !== "light" && mode !== "dark") {
-                                mode = matchMedia("(prefers-color-scheme: dark)").matches
-                                    ? "dark"
-                                    : "light";
-                            }
-
-                            document.documentElement.dataset.mode = mode;
-                        })();
-                    `}
-                </script>
-            )
-        }
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <link rel="icon" href="/favicon.ico" />
         <meta name="viewport" content="width=device-width" />
         <meta name="generator" content={Astro.generator} />
         <meta name="description" content={description} />
-        {noIndex && <meta name="robots" content="noindex" />}
         <title>{title}</title>
     </head>
     <body>
-        {
-            ThemeComparison && (
-                <ThemeComparison active={palette} />
-            )
-        }
         <SiteHeader />
-        <main>
+        <main class="site-container">
             <slot />
         </main>
         <SiteFooter />
     </body>
 </html>
-
-<style>
-    main {
-        inline-size: min(100% - 2 * var(--space-5), 76rem);
-        margin-inline: auto;
-    }
-
-    @media (max-width: 48rem) {
-        main {
-            inline-size: min(100% - 2 * var(--space-4), 76rem);
-        }
-    }
-</style>
