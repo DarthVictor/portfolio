@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title description">
+  <title id="title">Bright Data payment workflows draft cover</title>
+  <desc id="description">Abstract branching payment workflow on a dark blue background.</desc>
+  <rect width="1600" height="900" fill="#0d1424"/>
+  <g fill="#19233a" stroke="#ff9a78" stroke-width="7">
+    <rect x="170" y="330" width="330" height="180" rx="90"/>
+    <rect x="650" y="150" width="300" height="150" rx="75"/>
+    <rect x="650" y="350" width="300" height="150" rx="75"/>
+    <rect x="650" y="550" width="300" height="150" rx="75"/>
+    <rect x="1110" y="330" width="330" height="180" rx="90"/>
+  </g>
+  <g fill="none" stroke="#f3f0e9" stroke-width="7" opacity=".7">
+    <path d="M500 420c90 0 70-195 150-195"/>
+    <path d="M500 420h150"/>
+    <path d="M500 420c90 0 70 205 150 205"/>
+    <path d="M950 225c90 0 70 195 160 195M950 425h160M950 625c90 0 70-205 160-205"/>
+  </g>
+  <text x="120" y="790" fill="#f3f0e9" font-family="system-ui, sans-serif" font-size="62" font-weight="700">Payment workflows</text>
+  <text x="122" y="842" fill="#ff9a78" font-family="monospace" font-size="25" letter-spacing="5">PREVIEW DRAFT</text>
+</svg>

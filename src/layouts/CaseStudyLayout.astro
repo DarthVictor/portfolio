@@ -54,7 +54,12 @@ const confidentialityNotes = {
         </header>
 
         <figure class="cover">
-            <img src={data.cover.src} alt={data.cover.alt} />
+            <img
+                src={data.cover.src}
+                alt={data.cover.alt}
+                width={data.cover.width}
+                height={data.cover.height}
+            />
         </figure>
 
         <div class="case-body">
@@ -169,7 +174,8 @@ const confidentialityNotes = {
 
     .cover img {
         inline-size: 100%;
-        block-size: auto;
+        block-size: 100%;
+        object-fit: cover;
     }
 
     .case-body {

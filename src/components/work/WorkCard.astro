@@ -3,9 +3,13 @@ import type { SelectedWorkItem } from "../../data/homepage";
 
 type Props = SelectedWorkItem & {
     number: string;
+    caseStudies: readonly {
+        href: string;
+        label: string;
+    }[];
 };
 
-const { number, meta, title, summary, technologies } = Astro.props;
+const { number, meta, title, summary, technologies, caseStudies } = Astro.props;
 ---
 
 <li class="work-card">
@@ -14,6 +18,20 @@ const { number, meta, title, summary, technologies } = Astro.props;
         <p class="work-meta type-label">{meta}</p>
         <h3 class="type-card-title">{title}</h3>
         <p>{summary}</p>
+        {
+            caseStudies.length > 0 && (
+                <ul class="case-links" aria-label="Related case studies">
+                    {caseStudies.map(({ href, label }) => (
+                        <li>
+                            <a href={href}>
+                                {label}
+                                <span aria-hidden="true">↗</span>
+                            </a>
+                        </li>
+                    ))}
+                </ul>
+            )
+        }
         <ul class="tag-list" aria-label="Technologies">
             {technologies.map((technology) => <li>{technology}</li>)}
         </ul>
@@ -54,11 +72,31 @@ const { number, meta, title, summary, technologies } = Astro.props;
         color: var(--color-text-muted);
     }
 
+    .case-links {
+        display: grid;
+        gap: var(--space-2);
+        margin-block-start: var(--space-6);
+        list-style: none;
+    }
+
+    .case-links a {
+        display: inline-flex;
+        align-items: baseline;
+        gap: var(--space-2);
+        color: var(--color-accent);
+        font-weight: var(--font-weight-semibold);
+    }
+
+    .case-links span {
+        font-family: var(--font-mono);
+        font-size: var(--font-size-small);
+    }
+
     .tag-list {
         display: flex;
         flex-wrap: wrap;
         gap: var(--space-2);
-        margin-block-start: var(--space-6);
+        margin-block-start: var(--space-5);
         list-style: none;
     }
 

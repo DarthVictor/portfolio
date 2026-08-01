@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title description">
+  <title id="title">Tolstoy AI integrations draft cover</title>
+  <desc id="description">Abstract connected nodes on a dark blue background.</desc>
+  <rect width="1600" height="900" fill="#0d1424"/>
+  <g fill="none" stroke="#ff9a78" stroke-width="8" opacity=".76">
+    <path d="M250 610 520 340l260 220 300-300 270 250"/>
+    <circle cx="250" cy="610" r="50"/>
+    <circle cx="520" cy="340" r="50"/>
+    <circle cx="780" cy="560" r="50"/>
+    <circle cx="1080" cy="260" r="50"/>
+    <circle cx="1350" cy="510" r="50"/>
+  </g>
+  <text x="120" y="790" fill="#f3f0e9" font-family="system-ui, sans-serif" font-size="62" font-weight="700">AI integrations</text>
+  <text x="122" y="842" fill="#ff9a78" font-family="monospace" font-size="25" letter-spacing="5">PREVIEW DRAFT</text>
+</svg>
