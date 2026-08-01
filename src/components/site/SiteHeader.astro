@@ -1,13 +1,22 @@
+---
+const isWorkRoute =
+    Astro.url.pathname === "/work" || Astro.url.pathname.startsWith("/work/");
+---
+
 <header class="site-header">
     <div class="header-inner site-container">
-        <a class="brand" href="#introduction-heading" aria-label="Back to top">
+        <a class="brand" href="/" aria-label="Go to homepage">
             VF<span class="brand-dot" aria-hidden="true">.</span>
         </a>
         <nav aria-label="Primary navigation">
-            <a href="#selected-work-heading">Work</a>
-            <a href="#experience-heading">Experience</a>
-            <a class="nav-about" href="#about-heading">About</a>
-            <a class="nav-contact" href="#contact-heading">Contact</a>
+            <a href="/work" aria-current={isWorkRoute ? "page" : undefined}
+                >Work</a
+            >
+            <a class="nav-experience" href="/#experience-heading"
+                >Experience</a
+            >
+            <a class="nav-about" href="/#about-heading">About</a>
+            <a class="nav-contact" href="/#contact-heading">Contact</a>
         </nav>
     </div>
 </header>
@@ -54,6 +63,12 @@
         color: var(--color-text);
     }
 
+    nav a[aria-current="page"] {
+        color: var(--color-text);
+        text-decoration: underline;
+        text-decoration-color: var(--color-accent);
+    }
+
     .nav-contact {
         border: 1px solid var(--color-border);
         border-radius: var(--radius-pill);
@@ -71,7 +86,7 @@
         }
 
         .nav-about,
-        nav a[href="#experience-heading"] {
+        .nav-experience {
             display: none;
         }
     }

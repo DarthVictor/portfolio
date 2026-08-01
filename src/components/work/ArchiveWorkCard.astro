@@ -1,0 +1,110 @@
+---
+import type { WorkEntry } from "../../lib/work-content";
+
+interface Props {
+    entry: WorkEntry;
+    number: string;
+}
+
+const { entry, number } = Astro.props;
+const { data } = entry;
+---
+
+<li class="archive-card">
+    <article>
+        <div class="card-topline">
+            <span class="work-number" aria-hidden="true">{number}</span>
+            {data.draft && <span class="draft-label type-label">Draft</span>}
+        </div>
+        <p class="work-meta type-label">
+            {data.employerLabel} · {data.period}
+        </p>
+        <h2 class="type-card-title">
+            <a href={`/work/${entry.id}/`}>{data.title}</a>
+        </h2>
+        <p class="summary">{data.summary}</p>
+        <p class="role">{data.role}</p>
+        <ul class="tag-list" aria-label="Disciplines and technologies">
+            {[...data.disciplines, ...data.technologies].map((tag) => (
+                <li>{tag}</li>
+            ))}
+        </ul>
+    </article>
+</li>
+
+<style>
+    .archive-card {
+        min-inline-size: 0;
+        border: var(--card-border);
+        border-radius: var(--card-radius);
+        background: var(--color-surface);
+        padding: var(--card-padding);
+        box-shadow: var(--shadow-card);
+        list-style: none;
+    }
+
+    .card-topline {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: var(--space-4);
+    }
+
+    .work-number,
+    .role {
+        color: var(--color-text-muted);
+        font-family: var(--font-mono);
+        font-size: var(--font-size-small);
+    }
+
+    .draft-label,
+    .work-meta {
+        color: var(--color-accent);
+    }
+
+    .work-meta {
+        margin-block-start: var(--space-6);
+    }
+
+    h2 {
+        max-inline-size: 22ch;
+        margin-block-start: var(--space-3);
+    }
+
+    h2 a {
+        text-decoration-color: transparent;
+        transition: color var(--motion-fast) var(--easing-standard);
+    }
+
+    h2 a:hover {
+        color: var(--color-accent);
+    }
+
+    .summary {
+        max-inline-size: 62ch;
+        margin-block-start: var(--space-5);
+        color: var(--color-text-muted);
+    }
+
+    .role {
+        margin-block-start: var(--space-4);
+    }
+
+    .tag-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-2);
+        margin-block-start: var(--space-6);
+        list-style: none;
+    }
+
+    .tag-list li {
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-pill);
+        background: var(--color-surface-raised);
+        padding: var(--space-1) var(--space-3);
+        color: var(--color-text-muted);
+        font-family: var(--font-mono);
+        font-size: var(--font-size-micro);
+    }
+</style>

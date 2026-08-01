@@ -1,0 +1,70 @@
+---
+interface Props {
+    context: string;
+    decision: string;
+    rationale: string;
+    tradeoff: string;
+    outcome?: string;
+}
+
+const { context, decision, rationale, tradeoff, outcome } = Astro.props;
+---
+
+<aside class="decision-block" aria-label="Decision">
+    <p class="type-label">Decision</p>
+    <dl>
+        <div>
+            <dt>Context</dt>
+            <dd>{context}</dd>
+        </div>
+        <div>
+            <dt>Choice</dt>
+            <dd>{decision}</dd>
+        </div>
+        <div>
+            <dt>Reasoning</dt>
+            <dd>{rationale}</dd>
+        </div>
+        <div>
+            <dt>Trade-off</dt>
+            <dd>{tradeoff}</dd>
+        </div>
+        {
+            outcome && (
+                <div>
+                    <dt>Outcome</dt>
+                    <dd>{outcome}</dd>
+                </div>
+            )
+        }
+    </dl>
+</aside>
+
+<style>
+    .decision-block {
+        margin-block: var(--space-7);
+        border-inline-start: 0.25rem solid var(--color-accent);
+        border-radius: 0 var(--radius-medium) var(--radius-medium) 0;
+        background: var(--color-surface);
+        padding: var(--space-6);
+    }
+
+    .type-label {
+        color: var(--color-accent);
+    }
+
+    dl {
+        display: grid;
+        gap: var(--space-5);
+        margin: var(--space-5) 0 0;
+    }
+
+    dt {
+        font-weight: var(--font-weight-bold);
+    }
+
+    dd {
+        margin: var(--space-1) 0 0;
+        color: var(--color-text-muted);
+    }
+</style>

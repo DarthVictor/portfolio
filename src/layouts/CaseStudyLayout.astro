@@ -1,0 +1,254 @@
+---
+import SiteLayout from "./SiteLayout.astro";
+import type { WorkEntry } from "../lib/work-content";
+
+interface Props {
+    entry: WorkEntry;
+}
+
+const { entry } = Astro.props;
+const { data } = entry;
+const confidentialityNotes = {
+    public: "This case study uses public information.",
+    anonymized: "Some identifying details are anonymized.",
+    private: "Details are limited to respect confidentiality.",
+};
+---
+
+<SiteLayout
+    title={`${data.title} — Victor Follet`}
+    description={data.seoDescription}
+    noindex={data.draft}
+>
+    <article class="case-study">
+        <header class="case-header">
+            <a class="back-link" href="/work">← All work</a>
+            <div class="title-row">
+                <p class="type-label">Case study</p>
+                {data.draft && <span class="draft-label type-label">Draft</span>}
+            </div>
+            <h1>{data.title}</h1>
+            <p class="summary">{data.summary}</p>
+            <dl class="project-facts">
+                <div>
+                    <dt>Organization</dt>
+                    <dd>{data.employerLabel}</dd>
+                </div>
+                <div>
+                    <dt>Role</dt>
+                    <dd>{data.role}</dd>
+                </div>
+                <div>
+                    <dt>Period</dt>
+                    <dd>{data.period}</dd>
+                </div>
+            </dl>
+            <ul class="tag-list" aria-label="Disciplines and technologies">
+                {[...data.disciplines, ...data.technologies].map((tag) => (
+                    <li>{tag}</li>
+                ))}
+            </ul>
+            <p class="confidentiality-note">
+                {confidentialityNotes[data.confidentiality]}
+            </p>
+        </header>
+
+        <figure class="cover">
+            <img src={data.cover.src} alt={data.cover.alt} />
+        </figure>
+
+        <div class="case-body">
+            <slot />
+        </div>
+
+        <footer class="case-footer">
+            <a href="/work">← Back to all work</a>
+        </footer>
+    </article>
+</SiteLayout>
+
+<style>
+    .case-study {
+        padding-block: clamp(var(--space-7), 8vw, var(--space-9));
+    }
+
+    .case-header,
+    .case-body,
+    .case-footer {
+        inline-size: min(100%, 48rem);
+        margin-inline: auto;
+    }
+
+    .back-link {
+        color: var(--color-text-muted);
+        font-family: var(--font-mono);
+        font-size: var(--font-size-small);
+    }
+
+    .title-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: var(--space-4);
+        margin-block-start: var(--space-7);
+        color: var(--color-accent);
+    }
+
+    .draft-label {
+        border: 1px solid currentcolor;
+        border-radius: var(--radius-pill);
+        padding: var(--space-1) var(--space-3);
+    }
+
+    h1 {
+        margin-block-start: var(--space-4);
+        font-size: var(--font-size-display);
+        letter-spacing: var(--letter-spacing-display);
+        line-height: var(--line-height-display);
+    }
+
+    .summary {
+        max-inline-size: 60ch;
+        margin-block-start: var(--space-6);
+        color: var(--color-text-muted);
+        font-size: clamp(1.125rem, 2vw, 1.35rem);
+    }
+
+    .project-facts {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: var(--space-5);
+        margin: var(--space-7) 0 0;
+        border-block: 1px solid var(--color-border);
+        padding-block: var(--space-5);
+    }
+
+    dt {
+        color: var(--color-text-muted);
+        font-family: var(--font-mono);
+        font-size: var(--font-size-micro);
+        letter-spacing: var(--letter-spacing-label);
+        text-transform: uppercase;
+    }
+
+    dd {
+        margin: var(--space-1) 0 0;
+        font-weight: var(--font-weight-semibold);
+    }
+
+    .tag-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-2);
+        margin-block-start: var(--space-5);
+        list-style: none;
+    }
+
+    .tag-list li {
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-pill);
+        padding: var(--space-1) var(--space-3);
+        color: var(--color-text-muted);
+        font-family: var(--font-mono);
+        font-size: var(--font-size-micro);
+    }
+
+    .confidentiality-note {
+        margin-block-start: var(--space-5);
+        color: var(--color-text-muted);
+        font-size: var(--font-size-small);
+    }
+
+    .cover {
+        margin: var(--space-8) 0 0;
+        overflow: hidden;
+        border: var(--card-border);
+        border-radius: var(--radius-large);
+        background: var(--color-surface);
+    }
+
+    .cover img {
+        inline-size: 100%;
+        block-size: auto;
+    }
+
+    .case-body {
+        margin-block-start: var(--space-8);
+    }
+
+    .case-body :global(h2),
+    .case-body :global(h3) {
+        margin-block: var(--space-8) var(--space-4);
+        letter-spacing: var(--letter-spacing-heading);
+        line-height: var(--line-height-heading);
+    }
+
+    .case-body :global(h2) {
+        font-size: var(--font-size-heading);
+    }
+
+    .case-body :global(h3) {
+        font-size: 1.35rem;
+    }
+
+    .case-body :global(p),
+    .case-body :global(ul),
+    .case-body :global(ol),
+    .case-body :global(pre),
+    .case-body :global(blockquote) {
+        margin-block-start: var(--space-5);
+    }
+
+    .case-body :global(ul),
+    .case-body :global(ol) {
+        padding-inline-start: var(--space-6);
+    }
+
+    .case-body :global(li + li) {
+        margin-block-start: var(--space-2);
+    }
+
+    .case-body :global(blockquote) {
+        border-inline-start: 0.25rem solid var(--color-accent);
+        padding-inline-start: var(--space-5);
+        color: var(--color-text-muted);
+    }
+
+    .case-body :global(code) {
+        border-radius: var(--radius-small);
+        background: var(--color-surface);
+        padding: 0.15em 0.35em;
+        font-family: var(--font-mono);
+        font-size: 0.9em;
+    }
+
+    .case-body :global(pre) {
+        overflow-x: auto;
+        border: var(--card-border);
+        border-radius: var(--radius-medium);
+        background: var(--color-surface);
+        padding: var(--space-5);
+    }
+
+    .case-body :global(pre code) {
+        padding: 0;
+        background: transparent;
+    }
+
+    .case-footer {
+        margin-block-start: var(--space-9);
+        border-block-start: 1px solid var(--color-border);
+        padding-block-start: var(--space-6);
+        font-weight: var(--font-weight-semibold);
+    }
+
+    @media (max-width: 48rem) {
+        .project-facts {
+            grid-template-columns: minmax(0, 1fr);
+        }
+
+        .cover {
+            border-radius: var(--radius-medium);
+        }
+    }
+</style>

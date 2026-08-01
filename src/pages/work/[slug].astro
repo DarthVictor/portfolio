@@ -1,0 +1,21 @@
+---
+import { render, type CollectionEntry } from "astro:content";
+
+import CaseStudyLayout from "../../layouts/CaseStudyLayout.astro";
+import { getWorkStaticPaths } from "../../lib/work-content";
+
+export async function getStaticPaths() {
+    return getWorkStaticPaths();
+}
+
+interface Props {
+    entry: CollectionEntry<"work">;
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+---
+
+<CaseStudyLayout entry={entry}>
+    <Content />
+</CaseStudyLayout>

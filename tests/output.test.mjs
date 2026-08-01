@@ -5,6 +5,7 @@ import test from "node:test";
 
 const distDirectory = join(process.cwd(), "dist");
 const indexPath = join(distDirectory, "index.html");
+const workIndexPath = join(distDirectory, "work", "index.html");
 const removedThemePaths = ["theme-a", "theme-b", "theme-c", "theme-d"].map(
     (theme) => join(distDirectory, theme, "index.html"),
 );
@@ -50,8 +51,28 @@ test("homepage output has the planned semantic structure", () => {
         { level: 2, text: "How I work" },
         { level: 2, text: "Contact" },
     ]);
+    assert.match(indexHtml, /href="\/work"/);
+    assert.match(indexHtml, /href="\/#experience-heading"/);
+    assert.match(indexHtml, /href="\/#about-heading"/);
+    assert.match(indexHtml, /href="\/#contact-heading"/);
     assert.match(indexHtml, /href="\/cv\.pdf"/);
     assert.equal(existsSync(cvPath), true);
+});
+
+test("work archive is static, empty by design, and route-safe", () => {
+    assert.equal(existsSync(workIndexPath), true);
+
+    const workHtml = readFileSync(workIndexPath, "utf8");
+
+    assert.match(workHtml, /<h1[^>]*>Work<\/h1>/);
+    assert.match(workHtml, /Case studies are being prepared/);
+    assert.match(workHtml, /href="\/work"[^>]*aria-current="page"/);
+    assert.match(workHtml, /href="\/#experience-heading"/);
+    assert.match(workHtml, /href="\/#about-heading"/);
+    assert.match(workHtml, /href="\/#contact-heading"/);
+    assert.match(workHtml, /href="#top"/);
+    assert.doesNotMatch(workHtml, /_astro\/[^"']+\.js/);
+    assert.doesNotMatch(workHtml, /<script\b/);
 });
 
 test("production uses only the system-aware Paper Terracotta palette", () => {
