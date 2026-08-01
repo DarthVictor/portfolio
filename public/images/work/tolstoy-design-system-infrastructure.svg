@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title description">
+  <title id="title">Tolstoy design-system infrastructure draft cover</title>
+  <desc id="description">Abstract modular interface blocks on a dark blue background.</desc>
+  <rect width="1600" height="900" fill="#0d1424"/>
+  <g fill="#19233a" stroke="#ff9a78" stroke-width="6">
+    <rect x="180" y="170" width="360" height="210" rx="34"/>
+    <rect x="620" y="170" width="800" height="210" rx="34"/>
+    <rect x="180" y="450" width="800" height="170" rx="34"/>
+    <rect x="1060" y="450" width="360" height="170" rx="34"/>
+  </g>
+  <text x="120" y="790" fill="#f3f0e9" font-family="system-ui, sans-serif" font-size="62" font-weight="700">Design-system infrastructure</text>
+  <text x="122" y="842" fill="#ff9a78" font-family="monospace" font-size="25" letter-spacing="5">PREVIEW DRAFT</text>
+</svg>

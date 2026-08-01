@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title description">
+  <title id="title">Luxoft microfrontend migration draft cover</title>
+  <desc id="description">Abstract independently arranged modules on a dark blue background.</desc>
+  <rect width="1600" height="900" fill="#0d1424"/>
+  <g fill="#19233a" stroke="#ff9a78" stroke-width="7">
+    <rect x="190" y="170" width="380" height="210" rx="34"/>
+    <rect x="610" y="170" width="380" height="210" rx="34"/>
+    <rect x="1030" y="170" width="380" height="210" rx="34"/>
+    <rect x="400" y="440" width="380" height="210" rx="34"/>
+    <rect x="820" y="440" width="380" height="210" rx="34"/>
+  </g>
+  <g fill="#f3f0e9">
+    <circle cx="380" cy="275" r="28"/><circle cx="800" cy="275" r="28"/><circle cx="1220" cy="275" r="28"/>
+    <circle cx="590" cy="545" r="28"/><circle cx="1010" cy="545" r="28"/>
+  </g>
+  <text x="120" y="790" fill="#f3f0e9" font-family="system-ui, sans-serif" font-size="62" font-weight="700">Microfrontend migration</text>
+  <text x="122" y="842" fill="#ff9a78" font-family="monospace" font-size="25" letter-spacing="5">PREVIEW DRAFT</text>
+</svg>

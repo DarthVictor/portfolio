@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 
 import {
     createWorkStaticPaths,
+    getWorkHref,
     getSortedVisibleWorkEntries,
     sortWorkEntries,
 } from "../../src/lib/work-entries";
@@ -12,7 +13,7 @@ interface WorkFixture {
         draft: boolean;
         featured: boolean;
         featuredOrder?: number;
-        publishedAt: Date;
+        publishedAt?: Date;
         title: string;
     };
 }
@@ -65,6 +66,20 @@ describe("sortWorkEntries", () => {
             "older",
         ]);
     });
+
+    it("orders entries without publication dates deterministically", () => {
+        const entries = [
+            entry("zebra", { publishedAt: undefined, title: "Zebra" }),
+            entry("published", { publishedAt: new Date("2026-01-01") }),
+            entry("alpha", { publishedAt: undefined, title: "Alpha" }),
+        ];
+
+        expect(sortWorkEntries(entries).map(({ id }) => id)).toEqual([
+            "published",
+            "alpha",
+            "zebra",
+        ]);
+    });
 });
 
 describe("work visibility and paths", () => {
@@ -94,5 +109,11 @@ describe("work visibility and paths", () => {
                 props: { entry: entries[0] },
             },
         ]);
+    });
+
+    it("builds a trailing-slash work URL from an entry ID", () => {
+        expect(getWorkHref("example-case-study")).toBe(
+            "/work/example-case-study/",
+        );
     });
 });

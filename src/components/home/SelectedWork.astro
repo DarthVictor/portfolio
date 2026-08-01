@@ -1,7 +1,24 @@
 ---
 import { selectedWork } from "../../data/homepage";
+import { getVisibleWorkEntries } from "../../lib/work-content";
+import { getWorkHref } from "../../lib/work-entries";
 import WorkCard from "../work/WorkCard.astro";
 import HomeSection from "./HomeSection.astro";
+
+const visibleEntries = new Map(
+    (await getVisibleWorkEntries()).map((entry) => [entry.id, entry]),
+);
+
+const workItems = selectedWork.map((work) => ({
+    ...work,
+    caseStudies: work.caseStudySlugs.flatMap((slug) => {
+        const entry = visibleEntries.get(slug);
+
+        return entry
+            ? [{ href: getWorkHref(entry.id), label: entry.data.title }]
+            : [];
+    }),
+}));
 ---
 
 <HomeSection
@@ -12,7 +29,7 @@ import HomeSection from "./HomeSection.astro";
 >
     <ol class="work-list">
         {
-            selectedWork.map((work, index) => (
+            workItems.map((work, index) => (
                 <WorkCard
                     {...work}
                     number={String(index + 1).padStart(2, "0")}

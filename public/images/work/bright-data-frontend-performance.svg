@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title description">
+  <title id="title">Bright Data frontend performance draft cover</title>
+  <desc id="description">Abstract descending timing bars on a dark blue background.</desc>
+  <rect width="1600" height="900" fill="#0d1424"/>
+  <g fill="#ff9a78">
+    <rect x="210" y="220" width="190" height="430" rx="28" opacity=".34"/>
+    <rect x="480" y="310" width="190" height="340" rx="28" opacity=".5"/>
+    <rect x="750" y="390" width="190" height="260" rx="28" opacity=".68"/>
+    <rect x="1020" y="470" width="190" height="180" rx="28" opacity=".86"/>
+  </g>
+  <path d="M1250 250h150v150" fill="none" stroke="#f3f0e9" stroke-width="10"/>
+  <path d="m1400 250-260 260" fill="none" stroke="#f3f0e9" stroke-width="10"/>
+  <text x="120" y="790" fill="#f3f0e9" font-family="system-ui, sans-serif" font-size="62" font-weight="700">Frontend performance</text>
+  <text x="122" y="842" fill="#ff9a78" font-family="monospace" font-size="25" letter-spacing="5">PREVIEW DRAFT</text>
+</svg>

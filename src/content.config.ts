@@ -2,30 +2,14 @@ import { defineCollection, reference } from "astro:content";
 import { glob } from "astro/loaders";
 import { z } from "astro/zod";
 
+import { workSchema } from "./lib/work-schema";
+
 const work = defineCollection({
     loader: glob({
         base: "./src/content/work",
         pattern: "**/*.{md,mdx}",
     }),
-    schema: z.object({
-        title: z.string(),
-        summary: z.string(),
-        employerLabel: z.string(),
-        role: z.string(),
-        period: z.string(),
-        disciplines: z.array(z.string()).min(1),
-        technologies: z.array(z.string()).min(1),
-        featured: z.boolean().default(false),
-        featuredOrder: z.number().int().nonnegative().optional(),
-        draft: z.boolean().default(false),
-        publishedAt: z.coerce.date(),
-        cover: z.object({
-            src: z.string(),
-            alt: z.string(),
-        }),
-        seoDescription: z.string(),
-        confidentiality: z.enum(["public", "anonymized", "private"]),
-    }),
+    schema: workSchema,
 });
 
 const decisions = defineCollection({

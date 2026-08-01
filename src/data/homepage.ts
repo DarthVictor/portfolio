@@ -3,6 +3,7 @@ export interface SelectedWorkItem {
     title: string;
     summary: string;
     technologies: readonly string[];
+    caseStudySlugs: readonly string[];
 }
 
 interface DateLabel {
@@ -45,6 +46,10 @@ export const selectedWork = [
         summary:
             "Building AI-agent capabilities for third-party integrations alongside reusable React and TypeScript UI infrastructure.",
         technologies: ["React", "TypeScript", "AI integrations"],
+        caseStudySlugs: [
+            "tolstoy-ai-integrations",
+            "tolstoy-design-system-infrastructure",
+        ],
     },
     {
         meta: "Bright Data · SaaS platform",
@@ -52,6 +57,10 @@ export const selectedWork = [
         summary:
             "Improving frontend performance on a proxy-management platform and building payment flows across React and Node.js services.",
         technologies: ["React", "Node.js", "Payments"],
+        caseStudySlugs: [
+            "bright-data-frontend-performance",
+            "bright-data-payment-workflows",
+        ],
     },
     {
         meta: "Tenengroup · E-commerce",
@@ -59,6 +68,7 @@ export const selectedWork = [
         summary:
             "Creating shopping-cart experiences and a scalable Next.js data-access and API layer for e-commerce products.",
         technologies: ["Next.js", "APIs", "E-commerce"],
+        caseStudySlugs: ["tenengroup-checkout-ux"],
     },
 ] satisfies readonly SelectedWorkItem[];
 

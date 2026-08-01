@@ -1,33 +1,38 @@
 import assert from "node:assert/strict";
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync } from "node:fs";
 import { join } from "node:path";
 import test from "node:test";
 
-const distDirectory = join(process.cwd(), "dist");
-const indexPath = join(distDirectory, "index.html");
-const workIndexPath = join(distDirectory, "work", "index.html");
+import {
+    assertNoClientJavaScript,
+    assertRootRelativeLinksResolve,
+    cvPath,
+    distDirectory,
+    draftCaseStudies,
+    expectHeadings,
+    indexPath,
+    readOutput,
+    readPageStyles,
+    workIndexPath,
+    workPagePath,
+} from "./output-helpers.mjs";
+
 const removedThemePaths = ["theme-a", "theme-b", "theme-c", "theme-d"].map(
     (theme) => join(distDirectory, theme, "index.html"),
 );
-const cvPath = join(distDirectory, "cv.pdf");
 
-test("build output is static and loads no bundled client-side JavaScript", () => {
-    assert.equal(existsSync(indexPath), true);
-
-    const indexHtml = readFileSync(indexPath, "utf8");
+test("production output is static and loads no bundled client-side JavaScript", () => {
+    const indexHtml = readOutput(indexPath);
 
     assert.match(
         indexHtml,
         /<link rel="stylesheet" href="\/_astro\/[^"']+\.css"/,
     );
-    assert.doesNotMatch(indexHtml, /_astro\/[^"']+\.js/);
-    assert.doesNotMatch(indexHtml, /<script\b/);
+    assertNoClientJavaScript(indexHtml, "production homepage");
 });
 
-test("homepage output has the planned semantic structure", () => {
-    assert.equal(existsSync(indexPath), true);
-
-    const indexHtml = readFileSync(indexPath, "utf8");
+test("production homepage has the planned semantic structure", () => {
+    const indexHtml = readOutput(indexPath);
     const mainMatch = indexHtml.match(/<main[^>]*>([\s\S]*?)<\/main>/);
 
     assert.ok(mainMatch);
@@ -57,12 +62,14 @@ test("homepage output has the planned semantic structure", () => {
     assert.match(indexHtml, /href="\/#contact-heading"/);
     assert.match(indexHtml, /href="\/cv\.pdf"/);
     assert.equal(existsSync(cvPath), true);
+
+    for (const { slug } of draftCaseStudies) {
+        assert.doesNotMatch(indexHtml, new RegExp(`/work/${slug}/`));
+    }
 });
 
-test("work archive is static, empty by design, and route-safe", () => {
-    assert.equal(existsSync(workIndexPath), true);
-
-    const workHtml = readFileSync(workIndexPath, "utf8");
+test("production work archive stays empty and contains no draft routes", () => {
+    const workHtml = readOutput(workIndexPath);
 
     assert.match(workHtml, /<h1[^>]*>Work<\/h1>/);
     assert.match(workHtml, /Case studies are being prepared/);
@@ -71,12 +78,16 @@ test("work archive is static, empty by design, and route-safe", () => {
     assert.match(workHtml, /href="\/#about-heading"/);
     assert.match(workHtml, /href="\/#contact-heading"/);
     assert.match(workHtml, /href="#top"/);
-    assert.doesNotMatch(workHtml, /_astro\/[^"']+\.js/);
-    assert.doesNotMatch(workHtml, /<script\b/);
+    assertNoClientJavaScript(workHtml, "production work archive");
+
+    for (const { slug, title } of draftCaseStudies) {
+        assert.equal(existsSync(workPagePath(slug)), false);
+        assert.doesNotMatch(workHtml, new RegExp(escapeRegExp(title)));
+    }
 });
 
 test("production uses only the system-aware Paper Terracotta palette", () => {
-    const indexHtml = readFileSync(indexPath, "utf8");
+    const indexHtml = readOutput(indexPath);
     const styles = readPageStyles(indexHtml);
 
     for (const themePath of removedThemePaths) {
@@ -94,25 +105,10 @@ test("production uses only the system-aware Paper Terracotta palette", () => {
     assert.match(styles, /outline-color:\s*var\(--color-panel-accent\)/);
 });
 
-function readPageStyles(html) {
-    const inlineStyles = [...html.matchAll(/<style[^>]*>([\s\S]*?)<\/style>/g)]
-        .map(([, styles]) => styles)
-        .join("\n");
+test("production root-relative links resolve", () => {
+    assertRootRelativeLinksResolve([indexPath, workIndexPath]);
+});
 
-    return `${inlineStyles}\n${readLinkedStylesheets(html)}`;
-}
-
-function readLinkedStylesheets(html) {
-    return [...html.matchAll(/href="(\/_astro\/[^"']+\.css)"/g)]
-        .map(([, stylesheetPath]) =>
-            readFileSync(join(distDirectory, stylesheetPath), "utf8"),
-        )
-        .join("\n");
-}
-
-function expectHeadings(actual, expected) {
-    const primaryHeadings = actual.filter(({ level }) => level < 3);
-
-    assert.deepEqual(primaryHeadings, expected);
-    assert.equal(actual.filter(({ level }) => level === 1).length, 1);
+function escapeRegExp(value) {
+    return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }

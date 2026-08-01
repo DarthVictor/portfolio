@@ -1,5 +1,6 @@
 ---
 import type { WorkEntry } from "../../lib/work-content";
+import { getWorkHref } from "../../lib/work-entries";
 
 interface Props {
     entry: WorkEntry;
@@ -20,7 +21,7 @@ const { data } = entry;
             {data.employerLabel} · {data.period}
         </p>
         <h2 class="type-card-title">
-            <a href={`/work/${entry.id}/`}>{data.title}</a>
+            <a href={getWorkHref(entry.id)}>{data.title}</a>
         </h2>
         <p class="summary">{data.summary}</p>
         <p class="role">{data.role}</p>

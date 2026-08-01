@@ -9,15 +9,18 @@
     "scripts": {
         "dev": "astro dev",
         "build": "astro build",
+        "build:preview": "astro build --mode preview",
         "preview": "astro preview",
         "astro": "astro",
         "lint": "biome lint .",
         "format": "biome format --write .",
         "format:check": "biome format .",
         "test": "pnpm test:unit",
-        "test:output": "node --test tests/output.test.mjs",
+        "test:output": "node --test tests/output.production.test.mjs",
+        "test:output:preview": "pnpm build:preview && node --test tests/output.preview.test.mjs",
+        "test:output:production": "pnpm build && pnpm test:output",
         "test:unit": "vitest run",
-        "verify": "pnpm format:check && pnpm lint && pnpm test:unit && pnpm build && pnpm test:output",
+        "verify": "pnpm format:check && pnpm lint && pnpm test:unit && pnpm test:output:production && pnpm test:output:preview && pnpm build",
         "cv:pdf": "node scripts/generate-cv-pdf.mjs"
     },
     "dependencies": {

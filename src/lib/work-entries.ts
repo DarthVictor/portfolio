@@ -9,7 +9,7 @@ export interface SortableWorkEntry extends DraftableEntry {
     data: DraftableEntry["data"] & {
         featured?: boolean;
         featuredOrder?: number;
-        publishedAt: Date;
+        publishedAt?: Date;
         title: string;
     };
 }
@@ -46,8 +46,8 @@ export function sortWorkEntries<T extends SortableWorkEntry>(
         }
 
         const dateComparison =
-            second.data.publishedAt.valueOf() -
-            first.data.publishedAt.valueOf();
+            (second.data.publishedAt?.valueOf() ?? 0) -
+            (first.data.publishedAt?.valueOf() ?? 0);
 
         if (dateComparison !== 0) {
             return dateComparison;
@@ -55,6 +55,10 @@ export function sortWorkEntries<T extends SortableWorkEntry>(
 
         return first.data.title.localeCompare(second.data.title, "en");
     });
+}
+
+export function getWorkHref(id: string): string {
+    return `/work/${id}/`;
 }
 
 export function getSortedVisibleWorkEntries<T extends SortableWorkEntry>(
