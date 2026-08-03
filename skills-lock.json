@@ -1,0 +1,11 @@
+{
+    "version": 1,
+    "skills": {
+        "technical-article-writer": {
+            "source": "samber/cc-skills",
+            "sourceType": "github",
+            "skillPath": "skills/technical-article-writer/SKILL.md",
+            "computedHash": "7409462c460c90d0f3bede162496b0925d64b783d3efdcf59a7c9dfd2e1c96a2"
+        }
+    }
+}

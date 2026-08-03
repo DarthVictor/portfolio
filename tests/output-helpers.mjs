@@ -10,33 +10,8 @@ export const cvPath = join(distDirectory, "cv.pdf");
 export const draftCaseStudies = [
     {
         slug: "tolstoy-ai-integrations",
-        title: "Scaling AI Studio integrations",
+        title: "What Building 30+ Integrations Taught Me About AI Product Engineering",
         homepage: true,
-    },
-    {
-        slug: "tolstoy-design-system-infrastructure",
-        title: "Reusable UI foundations for AI workflows",
-        homepage: true,
-    },
-    {
-        slug: "bright-data-frontend-performance",
-        title: "Improving Toolip.io page-load performance",
-        homepage: true,
-    },
-    {
-        slug: "bright-data-payment-workflows",
-        title: "Payments across three providers",
-        homepage: true,
-    },
-    {
-        slug: "tenengroup-checkout-ux",
-        title: "Reducing cart abandonment through checkout work",
-        homepage: true,
-    },
-    {
-        slug: "luxoft-microfrontend-migration",
-        title: "Enabling independent microfrontend deployment",
-        homepage: false,
     },
 ];
 

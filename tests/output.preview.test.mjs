@@ -11,7 +11,7 @@ import {
     workPagePath,
 } from "./output-helpers.mjs";
 
-test("preview work archive contains six ordered draft cards", () => {
+test("preview work archive contains the real draft case study", () => {
     const workHtml = readOutput(workIndexPath);
     const cardCount = (workHtml.match(/class="archive-card"/g) ?? []).length;
 
@@ -58,8 +58,14 @@ test("every preview draft route is labeled, noindexed, stable, and static", () =
             /<span class="draft-label type-label"[^>]*>Draft<\/span>/,
         );
         assert.match(html, new RegExp(`<h1[^>]*>${escapeRegExp(title)}</h1>`));
-        assert.match(html, /aria-label="Editorial question"/);
-        assert.match(html, /<img[^>]*width="1600"[^>]*height="900"/);
+
+        assert.doesNotMatch(html, /aria-label="Editorial question"/);
+        assert.match(
+            html,
+            /<img[^>]*src="\/images\/work\/tolstoy_connectors\.png"[^>]*width="2635"[^>]*height="1960"/,
+        );
+        assert.match(html, /\/images\/work\/klaviyo_integration\.png/);
+
         assert.match(html, /href="\/work"/);
         assertNoClientJavaScript(html, `preview ${slug}`);
     }

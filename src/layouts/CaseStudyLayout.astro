@@ -77,7 +77,11 @@ const confidentialityNotes = {
         padding-block: clamp(var(--space-7), 8vw, var(--space-9));
     }
 
-    .case-header,
+    .case-header {
+        inline-size: min(100%, 60rem);
+        margin-inline: auto;
+    }
+
     .case-body,
     .case-footer {
         inline-size: min(100%, 48rem);
@@ -107,9 +111,10 @@ const confidentialityNotes = {
 
     h1 {
         margin-block-start: var(--space-4);
-        font-size: var(--font-size-display);
+        font-size: clamp(3.25rem, 6vw, 6rem);
         letter-spacing: var(--letter-spacing-display);
         line-height: var(--line-height-display);
+        text-wrap: balance;
     }
 
     .summary {
@@ -166,15 +171,18 @@ const confidentialityNotes = {
 
     .cover {
         margin: var(--space-8) 0 0;
+        aspect-ratio: 16 / 10;
         overflow: hidden;
         border: var(--card-border);
         border-radius: var(--radius-large);
-        background: var(--color-surface);
+        background: var(--color-surface-raised);
+        box-shadow: var(--shadow-card);
     }
 
     .cover img {
         inline-size: 100%;
         block-size: 100%;
+        object-position: center top;
         object-fit: cover;
     }
 
@@ -239,6 +247,26 @@ const confidentialityNotes = {
     .case-body :global(pre code) {
         padding: 0;
         background: transparent;
+    }
+
+    .case-body :global(.case-image) {
+        overflow: hidden;
+        margin-block: var(--space-8);
+        border: var(--card-border);
+        border-radius: var(--radius-medium);
+        background: var(--color-surface-raised);
+        box-shadow: var(--shadow-card);
+    }
+
+    .case-body :global(.case-image img) {
+        inline-size: 100%;
+    }
+
+    .case-body :global(.case-image figcaption) {
+        border-block-start: 1px solid var(--color-border);
+        padding: var(--space-4) var(--space-5);
+        color: var(--color-text-muted);
+        font-size: var(--font-size-small);
     }
 
     .case-footer {

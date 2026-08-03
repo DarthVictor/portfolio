@@ -16,21 +16,28 @@ Slug: `tolstoy-ai-integrations`
 
 ### Supported claims
 
-| Status | Claim | Source |
-| --- | --- | --- |
-| CV-supported | Victor has been a Senior Full Stack Engineer at Tolstoy since November 2024. | `CV.md:21` |
-| CV-supported | Tolstoy's product is an AI commerce platform. | `CV.md:23` |
-| CV-supported | Victor builds full-stack features using React, TypeScript, AWS Lambda, DynamoDB, and PostgreSQL. | `CV.md:23` |
-| CV-supported | Victor designs and develops AI Studio infrastructure supporting the creation and maintenance of more than 40 third-party integrations. | `CV.md:24` |
-| CV-supported | The homepage groups AI-agent integration work with React and TypeScript UI infrastructure. | `src/data/homepage.ts:43-47` |
+| Status                        | Claim                                                                                                                                                                                      | Source                        |
+| ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------- |
+| CV-supported                  | Victor has been a Senior Full Stack Engineer at Tolstoy since November 2024.                                                                                                               | `CV.md:21`                    |
+| CV-supported                  | Tolstoy's product is an AI commerce platform.                                                                                                                                              | `CV.md:23`                    |
+| CV-supported                  | Victor builds full-stack features using React, TypeScript, AWS Lambda, DynamoDB, and PostgreSQL.                                                                                           | `CV.md:23`                    |
+| CV-supported                  | Victor designs and develops AI Studio infrastructure supporting the creation and maintenance of more than 30 third-party integrations.                                                     | `CV.md:24`                    |
+| CV-supported                  | The homepage groups AI-agent integration work with React and TypeScript UI infrastructure.                                                                                                 | `src/data/homepage.ts:43-47`  |
+| Victor-confirmed (2026-08-02) | By summer 2026, AI Studio had evolved from a small image-and-video-generation harness into a conversational content workspace.                                                             | Victor-provided article notes |
+| Victor-confirmed (2026-08-02) | The connector catalogue includes content, marketing/analytics, and customer-platform integrations, with differing asset, analytics, and customer-data workflows.                           | Victor-provided article notes |
+| Victor-confirmed (2026-08-02) | API-key and OAuth 2 integrations require different implementation and customer-setup flows. Some OAuth providers require manual application submission, demonstrations, and review.        | Victor-provided article notes |
+| Victor-confirmed (2026-08-02) | Connector validation can require paid subscriptions, API keys, and provider-approved test accounts; connectors are released in beta while real-world behaviour and feedback are validated. | Victor-provided article notes |
+| Victor-confirmed (2026-08-02) | Customers can confuse similarly named connector products such as TikTok and TikTok Shop; the product uses explicit names and clarification messages.                                       | Victor-provided article notes |
+| Victor-confirmed (2026-08-02) | Each connector has an intentionally chosen mix of compact AI skills and explicit tools, based on the connector's workflow and required actions.                                            | Victor-provided article notes |
+| Victor-confirmed (2026-08-02) | AWS monitoring and dedicated Slack channels support the operational handling of connector failures and provider changes.                                                                   | Victor-provided article notes |
 
 ### Editorial questions
 
 - Who creates or maintains integrations, and what workflow problem did the infrastructure solve?
 - What did Victor own individually, and what belonged to the wider team?
-- Which parts of the architecture and integration lifecycle can be discussed publicly?
+- Which parts of the architecture and integration lifecycle can be discussed publicly beyond the confirmed product, access, testing, and beta-release details?
 - What alternatives were considered, and what trade-offs shaped the selected approach?
-- Beyond supporting 40+ integrations, what quality, delivery, or maintenance result can be substantiated?
+- Beyond supporting 30+ integrations, what quality, delivery, or maintenance result can be substantiated?
 - What lessons changed later integration work?
 
 ## Tolstoy design-system infrastructure
@@ -39,12 +46,12 @@ Slug: `tolstoy-design-system-infrastructure`
 
 ### Supported claims
 
-| Status | Claim | Source |
-| --- | --- | --- |
-| CV-supported | Victor has been a Senior Full Stack Engineer at Tolstoy since November 2024. | `CV.md:21` |
-| CV-supported | Victor builds full-stack AI commerce features using React and TypeScript alongside AWS Lambda, DynamoDB, and PostgreSQL. | `CV.md:23` |
-| CV-supported | Victor builds reusable design-system components and shared UI foundations for AI-assisted React and TypeScript product workflows. | `CV.md:25` |
-| CV-supported | The homepage describes reusable React and TypeScript UI infrastructure alongside AI-agent capabilities. | `src/data/homepage.ts:43-47` |
+| Status       | Claim                                                                                                                             | Source                       |
+| ------------ | --------------------------------------------------------------------------------------------------------------------------------- | ---------------------------- |
+| CV-supported | Victor has been a Senior Full Stack Engineer at Tolstoy since November 2024.                                                      | `CV.md:21`                   |
+| CV-supported | Victor builds full-stack AI commerce features using React and TypeScript alongside AWS Lambda, DynamoDB, and PostgreSQL.          | `CV.md:23`                   |
+| CV-supported | Victor builds reusable design-system components and shared UI foundations for AI-assisted React and TypeScript product workflows. | `CV.md:25`                   |
+| CV-supported | The homepage describes reusable React and TypeScript UI infrastructure alongside AI-agent capabilities.                           | `src/data/homepage.ts:43-47` |
 
 ### Editorial questions
 
@@ -61,12 +68,12 @@ Slug: `bright-data-frontend-performance`
 
 ### Supported claims
 
-| Status | Claim | Source |
-| --- | --- | --- |
-| CV-supported | Victor was a Senior Full Stack Developer at Bright Data from February to November 2024. | `CV.md:27` |
-| CV-supported | Victor led development of Toolip.io, a React and TypeScript SaaS platform for managing proxy infrastructure. | `CV.md:29` |
-| CV-supported | Frontend performance improvements reduced page-load time by 25%. | `CV.md:30` |
-| CV-supported | The homepage describes performance work on a proxy-management platform. | `src/data/homepage.ts:50-54` |
+| Status       | Claim                                                                                                        | Source                       |
+| ------------ | ------------------------------------------------------------------------------------------------------------ | ---------------------------- |
+| CV-supported | Victor was a Senior Full Stack Developer at Bright Data from February to November 2024.                      | `CV.md:27`                   |
+| CV-supported | Victor led development of Toolip.io, a React and TypeScript SaaS platform for managing proxy infrastructure. | `CV.md:29`                   |
+| CV-supported | Frontend performance improvements reduced page-load time by 25%.                                             | `CV.md:30`                   |
+| CV-supported | The homepage describes performance work on a proxy-management platform.                                      | `src/data/homepage.ts:50-54` |
 
 ### Editorial questions
 
@@ -83,12 +90,12 @@ Slug: `bright-data-payment-workflows`
 
 ### Supported claims
 
-| Status | Claim | Source |
-| --- | --- | --- |
-| CV-supported | Victor was a Senior Full Stack Developer at Bright Data from February to November 2024. | `CV.md:27` |
-| CV-supported | Victor built payment workflows across React and Node.js services. | `CV.md:31` |
-| CV-supported | Those workflows integrated Stripe, PayPal, and BlueSnap. | `CV.md:31` |
-| CV-supported | The homepage describes payment flows across React and Node.js services. | `src/data/homepage.ts:50-54` |
+| Status       | Claim                                                                                   | Source                       |
+| ------------ | --------------------------------------------------------------------------------------- | ---------------------------- |
+| CV-supported | Victor was a Senior Full Stack Developer at Bright Data from February to November 2024. | `CV.md:27`                   |
+| CV-supported | Victor built payment workflows across React and Node.js services.                       | `CV.md:31`                   |
+| CV-supported | Those workflows integrated Stripe, PayPal, and BlueSnap.                                | `CV.md:31`                   |
+| CV-supported | The homepage describes payment flows across React and Node.js services.                 | `src/data/homepage.ts:50-54` |
 
 ### Editorial questions
 
@@ -105,13 +112,13 @@ Slug: `tenengroup-checkout-ux`
 
 ### Supported claims
 
-| Status | Claim | Source |
-| --- | --- | --- |
-| CV-supported | Victor was a Senior Full Stack Developer at Tenengroup from July 2022 to February 2024. | `CV.md:33` |
-| CV-supported | Victor built and optimized React shopping-cart and checkout experiences for the MYKA and Oak & Luna brands. | `CV.md:35` |
-| CV-supported | This work reduced cart abandonment by 20%. | `CV.md:35` |
-| CV-supported | The homepage describes checkout experiences and separately mentions a scalable Next.js data-access and API layer. | `src/data/homepage.ts:57-61` |
-| Question | The reusable Next.js data-access layer and .NET API collaboration may be related employer work, but are not yet confirmed as part of this checkout story. | `CV.md:36-37` |
+| Status       | Claim                                                                                                                                                     | Source                       |
+| ------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------- |
+| CV-supported | Victor was a Senior Full Stack Developer at Tenengroup from July 2022 to February 2024.                                                                   | `CV.md:33`                   |
+| CV-supported | Victor built and optimized React shopping-cart and checkout experiences for the MYKA and Oak & Luna brands.                                               | `CV.md:35`                   |
+| CV-supported | This work reduced cart abandonment by 20%.                                                                                                                | `CV.md:35`                   |
+| CV-supported | The homepage describes checkout experiences and separately mentions a scalable Next.js data-access and API layer.                                         | `src/data/homepage.ts:57-61` |
+| Question     | The reusable Next.js data-access layer and .NET API collaboration may be related employer work, but are not yet confirmed as part of this checkout story. | `CV.md:36-37`                |
 
 ### Editorial questions
 
@@ -128,12 +135,12 @@ Slug: `luxoft-microfrontend-migration`
 
 ### Supported claims
 
-| Status | Claim | Source |
-| --- | --- | --- |
-| CV-supported | Victor was Chief Frontend Developer at Luxoft from February 2021 to July 2022. | `CV.md:39` |
-| CV-supported | Victor led a microfrontend migration using Webpack Module Federation. | `CV.md:41` |
-| CV-supported | The migration enabled independent deployment of product modules and faster delivery. | `CV.md:41` |
-| Question | The VTB Bank reporting interfaces are a separate CV bullet and are not confirmed as the product migrated to microfrontends. | `CV.md:42` |
+| Status       | Claim                                                                                                                       | Source     |
+| ------------ | --------------------------------------------------------------------------------------------------------------------------- | ---------- |
+| CV-supported | Victor was Chief Frontend Developer at Luxoft from February 2021 to July 2022.                                              | `CV.md:39` |
+| CV-supported | Victor led a microfrontend migration using Webpack Module Federation.                                                       | `CV.md:41` |
+| CV-supported | The migration enabled independent deployment of product modules and faster delivery.                                        | `CV.md:41` |
+| Question     | The VTB Bank reporting interfaces are a separate CV bullet and are not confirmed as the product migrated to microfrontends. | `CV.md:42` |
 
 ### Editorial questions
 
