@@ -16,6 +16,13 @@ export const draftCaseStudies = [
         additionalImage: "/images/work/klaviyo_integration.png",
     },
     {
+        slug: "yandex-disk-spa-migration",
+        title: "2017, Before LLMs: The Patient Rewrite of Yandex.Disk",
+        homepage: false,
+        cover: "/images/work/yandex-disk-spa-migration.png",
+        additionalImage: "/images/work/yandex-disk-migration-stages.svg",
+    },
+    {
         slug: "tenengroup-ui-migration",
         title: "From Better Architecture to Better Sales in E-Commerce",
         homepage: true,

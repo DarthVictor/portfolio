@@ -1,0 +1,239 @@
+---
+title: "2017, Before LLMs: The Patient Rewrite of Yandex.Disk"
+summary: "How a live Yandex.Disk product moved from an internal frontend framework to React 16 and Redux—without stopping feature delivery."
+employerLabel: "Yandex"
+role: "Interface Developer"
+period: "Jan 2017 — Mar 2019"
+disciplines:
+    - "Frontend modernization"
+    - "SPA migration"
+    - "Incremental delivery"
+technologies:
+    - "React 16"
+    - "Redux"
+    - "ES6"
+featured: false
+draft: true
+cover:
+    src: "/images/work/yandex-disk-spa-migration.png"
+    alt: "Abstract transition from a dense legacy interface to a clean component-based application on a deep blue background."
+    width: 1672
+    height: 941
+seoDescription: "How Yandex.Disk moved from an internal frontend framework to React 16 and Redux through an incremental migration that kept feature delivery moving."
+confidentiality: "private"
+---
+
+## The rewrite we could not pause the product for
+
+In 2017, there was no ChatGPT to sketch a migration plan, no Copilot completing
+the tedious parts, and no ready-made playbook for turning a large, live product
+into a single-page application. We had React 16.0, Redux, a mature product used
+every day—and a rewrite we could not afford to pause the roadmap for.
+
+From production's point of view, the project looked like a new design for
+Yandex.Disk. Under the surface, it was a larger change: a gradual replacement
+of the frontend architecture. We wanted to move to a React-based SPA, but new
+features, improvements, and fixes still had to reach users throughout the
+migration.
+
+That constraint shaped every major decision. The goal was not to make the
+legacy system disappear in one dramatic release. It was to make the next piece
+of the product easier to build in the new architecture while the current
+product kept working.
+
+<figure class="case-image">
+    <img
+        src="/images/work/yandex-disk-modern-ui-context.png"
+        alt="Redacted modern Yandex.Disk file-manager interface with a grid of folders and documents."
+    />
+    <figcaption>
+        Yandex.Disk today, redacted for publication. The product has evolved,
+        but the file grid and its surrounding actions still connect to the
+        interaction-heavy parts of the 2017 migration.
+    </figcaption>
+</figure>
+
+## The real limitation was an internal technology boundary
+
+The existing application used [yandex-ui/noscript](https://github.com/yandex-ui/noscript),
+an internal frontend framework. The framework's details are not the point of
+this story. Its position in the system was: it was technology specific to our
+environment, without the wider ecosystem, hiring pool, or long-term momentum
+we expected from a mainstream frontend stack.
+
+It had supported a substantial product, so this was not a rejection of the
+past. The product had simply outgrown the cost of maintaining a frontend model
+that few engineers already knew and that no longer aligned with where frontend
+development was heading.
+
+React was the target because it gave us a familiar component model, a growing
+ecosystem, and a way to build a long-lived application from composable UI.
+Redux was the practical state-management choice of the time: a well-understood
+way to make application state and transitions explicit across a large
+interface.
+
+TypeScript was not part of the initial target stack. In 2017, it still felt too
+early for us to make it a foundation of a large migration. We adopted it later,
+once the JavaScript and React architecture had become stable enough to benefit
+from gradual typing.
+
+<figure class="case-image">
+    <img
+        src="/images/work/yandex-disk-migration-stages.svg"
+        alt="Four migration stages: the internal framework, a React bridge, complex React components, and complete React and Redux flows."
+    />
+    <figcaption>
+        The migration was a sequence of release-safe steps, not a separate
+        replacement project.
+    </figcaption>
+</figure>
+
+## A bridge made gradual change possible
+
+We began with [yandex-ui/noscript-react](https://github.com/yandex-ui/noscript-react),
+which let React components participate in the existing application.
+
+This was the critical first move. We did not need to convert every page,
+replace all state, or recreate the application shell before React could add
+value. We could introduce small React components into the live product and
+learn the real integration constraints as we went.
+
+The first migrations were small UI components: parts of the interface with a
+limited responsibility and a narrow surface area. This gave us a low-risk place
+to establish conventions for passing data, sharing UI behaviour, testing, and
+reviewing React code alongside the existing application.
+
+In a rewrite, the first component is rarely important because of what it does
+for the user. It is important because it shows whether the team has found a
+safe way to introduce the new world.
+
+## Components were the entry point; flows were the destination
+
+Once the bridge was proven, we moved to larger interface elements: file lists,
+menus, and context menus.
+
+These were not merely bigger versions of buttons and labels. A file list brings
+selection state, loading states, item types, bulk actions, and updates made
+elsewhere in the interface into one place. Menus and context menus depend on
+what a user selected, where they clicked, which actions are permitted, and what
+must update after an action completes.
+
+Migrating these pieces forced us to move beyond isolated rendering. The React
+component model made the UI tree clearer, but the consequential question became
+where state lived and how changes travelled through the product.
+
+That was where Redux became useful. We began migrating complete flows into
+explicit state and actions instead of treating every new React component as an
+island inside the old application. Shared state could have a deliberate home;
+user actions could become visible transitions; and React components could render
+from a predictable source of truth.
+
+The order mattered. Starting by moving all application state to Redux would
+have created a large abstraction project before proving that the UI could
+coexist with the live product. Stopping at visual components would have kept the
+most difficult coupling in place. The patient route was to earn each next step:
+embed React safely, migrate meaningful UI areas, then move the state and flows
+that made those areas behave as one application.
+
+## The awkward middle was an intentional part of the design
+
+There is a particular discomfort in a gradual rewrite: you are knowingly
+building temporary seams into a system you eventually want to simplify.
+
+For a while, old and new technologies coexisted. The team had to decide,
+feature by feature, where new work belonged and how it connected to the rest of
+the product. Sometimes the right first step was a small React component.
+Sometimes it was worth moving a whole interaction model because leaving it
+behind would only deepen the coupling.
+
+The important discipline was not pretending that every new line of code already
+belonged to a perfectly clean end state. It was making every transitional choice
+intentional:
+
+- Does this change create a reusable foothold for later migration?
+- Can it be released safely in the current product?
+- Does it reduce future dependence on the internal framework?
+- Does it keep the path toward React and Redux clearer rather than creating
+  another permanent hybrid?
+
+That work is less cinematic than a launch-day replacement. There is no single
+moment when the old application becomes the new one. Instead, the rewrite
+becomes real through a sequence of ordinary releases.
+
+<figure class="case-image">
+    <img
+        src="/images/work/yandex-disk-parallel-delivery.svg"
+        alt="A timeline showing product features and fixes shipping in parallel with the React bridge, component migration, and Redux flow migration."
+    />
+    <figcaption>
+        Feature delivery and frontend migration ran as parallel tracks on the
+        same product, rather than competing projects.
+    </figcaption>
+</figure>
+
+## Why the pre-LLM context still matters
+
+It is easy to look back from an era of AI coding assistants and assume that a
+migration's difficult part is producing code faster. In 2017, the limits were
+more obvious. We relied on code review, local understanding, careful
+decomposition, and the accumulated context of engineers who knew how the
+product actually behaved.
+
+That made architecture choices more consequential. A bad boundary would not be
+cheaply explained away or quickly regenerated. A premature state model could
+spread across the application. And a migration that blocked feature work would
+not be rescued by a burst of generated implementation.
+
+The tools have changed. The durable part of the work has not. An assistant can
+help implement a compatibility layer or suggest a Redux shape, but it cannot
+decide which slice of a live product is safe to move first, what compatibility
+cost is acceptable, or whether a team can keep delivering while an
+architectural change is underway. Those remain product and engineering
+judgements.
+
+## The rewrite was a delivery strategy
+
+The useful lesson from the Yandex.Disk migration is that a rewrite is not only
+a technical project. It is a delivery strategy.
+
+The strategy worked because we did not require the organization to choose
+between a better architecture and a working product:
+
+1. Introduce React through a compatibility layer.
+2. Migrate small UI components to establish safe patterns.
+3. Move interaction-heavy elements such as file lists and menus.
+4. Migrate shared state and complete flows to Redux.
+5. Continue shipping product work while the old framework steadily lost ground.
+
+The broader Yandex.Disk frontend modernization reduced page-load time by 20%.
+I cannot publicly separate the measurement or attribute that result to one
+migration step, but it was a useful reminder that modernization only earns its
+keep when users feel the difference.
+
+The new design made the change visible to users. The staged migration made it
+survivable for the team.
+
+## What I would take into the next rewrite
+
+**Start with a bridge, not a declaration.** A compatibility layer is not
+glamorous, but it can turn a risky replacement into a sequence of testable
+releases.
+
+**Use components to learn, then migrate flows to finish the job.** Small UI
+elements are an excellent entry point. Shared state and complete interactions
+are where the architecture actually changes.
+
+**Treat transitional code as a product of its own.** It needs clear ownership
+and a clear purpose: enable the next migration step, not become a second
+permanent framework.
+
+**Keep feature delivery inside the plan.** If a migration assumes the product
+can stop evolving, it is solving the wrong problem for a live business.
+
+**Do not confuse modern tools with engineering judgement.** Today's tools can
+accelerate implementation. They still do not replace choosing boundaries,
+sequencing risk, and preserving user value throughout a change.
+
+The patient rewrite was not the fastest route to a clean React application on
+paper. It was the route that let us build one without asking Yandex.Disk—or its
+users—to stand still.
