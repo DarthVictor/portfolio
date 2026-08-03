@@ -1,72 +1,188 @@
 ---
-title: "Scaling AI Studio integrations"
-summary: "Infrastructure supporting the creation and maintenance of more than 40 third-party integrations for an AI commerce platform."
+title: "What Building 30+ Integrations Taught Me About AI Product Engineering"
+summary: "Building a connector catalogue for AI Studio meant solving product, access, testing, and operational problems—not just calling APIs."
 employerLabel: "Tolstoy"
 role: "Senior Full Stack Engineer"
 period: "Nov 2024 — Present"
 disciplines:
-  - "AI integrations"
-  - "Full-stack engineering"
+    - "AI integrations"
+    - "Full-stack engineering"
 technologies:
-  - "React"
-  - "TypeScript"
-  - "AWS Lambda"
-  - "DynamoDB"
-  - "PostgreSQL"
+    - "React"
+    - "TypeScript"
+    - "AWS Lambda"
+    - "DynamoDB"
+    - "PostgreSQL"
 featured: true
 featuredOrder: 1
 draft: true
 cover:
-  src: "/images/work/tolstoy-ai-integrations.svg"
-  alt: "Abstract connected nodes representing an integration network."
-  width: 1600
-  height: 900
-seoDescription: "A preview case study about AI Studio infrastructure supporting more than 40 third-party integrations at Tolstoy."
+    src: "/images/work/tolstoy_connectors.png"
+    alt: "Tolstoy AI Studio connector catalogue with connected and available services."
+    width: 2635
+    height: 1960
+seoDescription: "Lessons from building 30+ third-party integrations for Tolstoy AI Studio."
 confidentiality: "private"
 ---
 
-import EditorialQuestion from "../../components/work/EditorialQuestion.astro";
+## The integration problem behind AI Studio
 
-## Situation
+Tolstoy AI Studio started as a harness for image and video generation. It was
+becoming a workspace where a team could plan, research, create, and refine
+content through one conversation.
 
-Tolstoy builds an AI commerce platform. Its AI Studio infrastructure supports the creation and maintenance of more than 40 third-party integrations.
+The conversation was only the surface. The work a marketer needed to do was
+still spread across other systems: campaigns in Meta Ads, UGC discovery on
+Instagram, email campaigns in Klaviyo, assets in Canva or Google Drive, and
+performance data in Google Analytics or Triple Whale. AI Studio had to work
+with that stack instead of asking customers to replace it.
 
-<EditorialQuestion question="Who creates and maintains integrations, and what workflow problem did the infrastructure need to solve?" />
+On paper, adding more than 30 connectors looked like work that frontier models
+should make routine: read the API documentation, generate a client, repeat. In
+practice, the hard part was turning each external platform into a reliable
+product capability. The customer needed to understand what they were
+connecting; the agent needed clear limits on what it could do; and the team
+needed a way to test and support the integration after release.
 
-## Role and scope
+That is what this work taught me about AI product engineering: the API call is
+usually the smallest part of the connector.
 
-As a Senior Full Stack Engineer, I design and develop the AI Studio integration infrastructure. My broader Tolstoy work spans React, TypeScript, AWS Lambda, DynamoDB, and PostgreSQL.
+## One catalogue, several kinds of work
 
-<EditorialQuestion question="Which parts of the integration lifecycle did I own individually, and which were shared with the wider team?" />
+The connector page gave customers one catalogue. Behind it were several
+different types of integration.
 
-## Constraints
+Content sources such as Canva and Google Drive could bring images, videos, and
+brand materials into AI Studio. Marketing and analytics platforms such as Meta
+Ads and Google Analytics provided campaign and performance context. Customer
+platforms such as Klaviyo added a third category: information about email
+campaigns and the customer relationship.
 
-<EditorialQuestion question="What scale, compatibility, maintenance, and confidentiality constraints can be described publicly?" />
+Those categories could share a UI, but not an implementation. Asset workflows
+needed imports and exports. Analytics workflows needed the right account and
+data selection. Customer-data workflows needed especially careful access
+boundaries. Treating every logo as the same kind of connector would have made
+the product simpler to build but less useful and less clear.
 
-## Decisions
+## OAuth made onboarding easier for customers and harder for us
 
-<EditorialQuestion question="What was the central technical or product decision, what context shaped it, and what trade-off did it introduce?" />
+An API key integration was usually quicker to implement, but it placed work on
+the customer: they had to find out how to create a key, then copy it into
+Tolstoy. OAuth 2.0 was more comfortable for the customer, but demanded more from
+us. It introduced consent, scopes, account selection, token refresh, and
+reconnect flows.
 
-## Alternatives
+<figure class="case-image">
+    <img
+        src="/images/work/klaviyo_integration.png"
+        alt="Klaviyo settings showing a connected default account and the option to connect another account with OAuth."
+    />
+    <figcaption>
+        The intended customer experience: connect an existing account through
+        OAuth, choose the default account for a store, and avoid creating and
+        copying an API key.
+    </figcaption>
+</figure>
 
-<EditorialQuestion question="Which alternative approaches were considered, and why was the selected approach preferred?" />
+It also created work outside the codebase. Registering an application with a
+third-party platform could require a manual submission, a video demonstration,
+and a review, as it did for services such as TikTok or Klaviyo. The catalogue
+had to make that reality visible: what was connected, what still needed setup,
+and what had to be reconnected after a provider change or a new capability
+required additional scopes.
 
-## Implementation
+## A connector needs two interfaces
 
-The confirmed scope is infrastructure for creating and maintaining integrations within AI Studio. The evidence does not yet connect individual technologies to specific integration mechanisms.
+Getting data into AI Studio was only half of the job. A connector also needed
+to be clear to the person setting it up and to the agent deciding how to use
+it.
 
-<EditorialQuestion question="Which public implementation details would best demonstrate the integration model without exposing confidential product architecture?" />
+The customer-facing interface had to answer simple questions without forcing
+users to understand provider terminology: What is this service? What will it
+connect? What can I do after I connect it? Naming mattered more than it first
+appeared. Customers sometimes used “TikTok” to mean TikTok Shop, or the other
+way around. Those are different products with different intentions, so we used
+explicit names and clarification messages instead of guessing.
 
-## Responsibilities
+The agent needed the same precision. It had to know which connector it was
+working with, what data was available, and which actions were appropriate. A
+generic instruction to “use TikTok” was not a capability definition. Clear
+names and bounded behaviour made the product less surprising for customers and
+more reliable for the agent.
 
-The confirmed responsibility is designing and developing the infrastructure that supports the integration portfolio.
+## API documentation was only the starting point
 
-## Outcomes
+Generating a request was quick. Proving that it worked for a real customer was
+not.
 
-The infrastructure supports more than 40 third-party integrations.
+Provider documentation could lag behind the behaviour we encountered, or
+assume a subscription tier that a development account did not have. Some
+connectors required a paid plan, an API key, or a provider-approved test account
+before we could validate a meaningful workflow. A successful response from an
+endpoint was not enough. We needed to know that the right account, permissions,
+and data were available in the way a customer would actually use them.
 
-<EditorialQuestion question="Is there a substantiated quality, delivery-speed, adoption, or maintenance outcome beyond the supported integration count?" />
+That shaped the delivery process. We first established access and a narrow
+end-to-end workflow, then released the connector in beta for testing. Beta was
+not a disclaimer for unfinished work. It set an honest boundary while we
+validated the connector against real accounts, provider behaviour, and customer
+feedback before expanding its capabilities.
 
-## Lessons
+## Skills for judgement, tools for action
 
-<EditorialQuestion question="What lesson from this work changed how later integrations were designed or maintained?" />
+That boundary shaped how we designed AI-facing capabilities. The question was
+not whether every connector should have the same number of skills and tools.
+It was which parts of a workflow required judgement and guidance, and which
+needed an explicit operation.
+
+We used skills when the agent needed context: how to interpret a connector,
+how to sequence a workflow, or when to ask the customer for clarification. We
+used explicit tools for bounded operations, such as retrieving information or
+performing a well-defined action. This kept the agent's choices visible and
+gave us a clearer place to control what each connector could do.
+
+The TikTok naming problem shows why this separation mattered. An ambiguous
+request could require clarification about whether the customer meant TikTok,
+TikTok Ads, or TikTok Shop before the agent took action. A skill could hold
+that guidance; once the target was clear, a tool could perform a bounded
+operation against the selected platform.
+
+The balance varied by connector. A small, focused integration needed less
+guidance than one that combined account selection, analytics interpretation,
+and several actions. Skills therefore needed to stay compact and specific.
+At the scale of a connector catalogue, unnecessary instructions make the agent
+harder to steer and make every workflow more expensive to maintain.
+
+## Releasing a connector also meant operating it
+
+The work did not stop after a connector reached beta. Tokens expired, external
+interfaces changed, customers connected unexpected account configurations, and
+new product capabilities sometimes required additional scopes.
+
+We used AWS monitoring and dedicated Slack channels to make those failures
+visible and actionable. The operational question was rarely just “did the API
+call fail?” It was whether the problem came from the provider, expired access,
+an account configuration, a change in available data, or our own integration.
+That distinction determined what needed to happen next and who could resolve
+it.
+
+## The public outcome
+
+AI Studio infrastructure supported the creation and maintenance of more than 30
+third-party integrations. I cannot share a public delivery-speed or adoption
+metric, but the work established a repeatable path: define the customer
+workflow, make the capabilities explicit, establish real access and testing,
+release a bounded beta, and keep operating the connector after launch.
+
+## What I would carry into the next integration project
+
+**Start with the workflow, not the API.** A connection only matters when a
+customer understands what it unlocks and can use it in their existing work.
+
+**Treat access and testing as delivery work.** OAuth, provider approval, test
+accounts, and account configuration affect scope and schedule just as much as
+the implementation does.
+
+**Give the agent explicit boundaries.** A connector needs clear names, focused
+skills, and explicit tools where an action must be bounded. That is how a
+growing catalogue remains useful rather than becoming a collection of logos.

@@ -41,34 +41,12 @@ export const profileLinks = {
 
 export const selectedWork = [
     {
-        meta: "Tolstoy · AI + Design systems",
-        title: "AI integrations built on reusable UI foundations",
+        meta: "Tolstoy · AI integrations",
+        title: "Building 30+ AI integrations",
         summary:
-            "Building AI-agent capabilities for third-party integrations alongside reusable React and TypeScript UI infrastructure.",
+            "Building a connector catalogue for AI Studio across customer workflows, access, testing, and operations.",
         technologies: ["React", "TypeScript", "AI integrations"],
-        caseStudySlugs: [
-            "tolstoy-ai-integrations",
-            "tolstoy-design-system-infrastructure",
-        ],
-    },
-    {
-        meta: "Bright Data · SaaS platform",
-        title: "Faster product workflows and resilient payments",
-        summary:
-            "Improving frontend performance on a proxy-management platform and building payment flows across React and Node.js services.",
-        technologies: ["React", "Node.js", "Payments"],
-        caseStudySlugs: [
-            "bright-data-frontend-performance",
-            "bright-data-payment-workflows",
-        ],
-    },
-    {
-        meta: "Tenengroup · E-commerce",
-        title: "Checkout experiences backed by scalable data access",
-        summary:
-            "Creating shopping-cart experiences and a scalable Next.js data-access and API layer for e-commerce products.",
-        technologies: ["Next.js", "APIs", "E-commerce"],
-        caseStudySlugs: ["tenengroup-checkout-ux"],
+        caseStudySlugs: ["tolstoy-ai-integrations"],
     },
 ] satisfies readonly SelectedWorkItem[];
 

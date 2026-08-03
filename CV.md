@@ -21,7 +21,7 @@ Senior frontend and full-stack engineer with 15+ years of experience building AI
 **Nov 2024 - Present | Senior Full Stack Engineer | Tolstoy | Tel Aviv-Yafo, Israel**
 
 - Build full-stack features for Tolstoy's AI commerce platform using React, TypeScript, AWS Lambda, DynamoDB, and PostgreSQL.
-- Design and develop AI Studio infrastructure supporting the creation and maintenance of 40+ third-party integrations.
+- Design and develop AI Studio infrastructure supporting the creation and maintenance of 30+ third-party integrations.
 - Build reusable design-system components and shared UI foundations for AI-assisted React and TypeScript product workflows.
 
 **Feb 2024 - Nov 2024 | Senior Full Stack Developer | Bright Data | Netanya, Israel**
