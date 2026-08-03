@@ -106,9 +106,9 @@ Slug: `bright-data-payment-workflows`
 - Which alternatives and trade-offs were considered?
 - Is there a measurable reliability, conversion, or delivery outcome?
 
-## Tenengroup checkout UX
+## Tenengroup commerce platform migration
 
-Slug: `tenengroup-checkout-ux`
+Slug: `tenengroup-ui-migration`
 
 ### Supported claims
 
@@ -118,7 +118,12 @@ Slug: `tenengroup-checkout-ux`
 | CV-supported | Victor built and optimized React shopping-cart and checkout experiences for the MYKA and Oak & Luna brands.                                               | `CV.md:35`                   |
 | CV-supported | This work reduced cart abandonment by 20%.                                                                                                                | `CV.md:35`                   |
 | CV-supported | The homepage describes checkout experiences and separately mentions a scalable Next.js data-access and API layer.                                         | `src/data/homepage.ts:57-61` |
-| Question     | The reusable Next.js data-access layer and .NET API collaboration may be related employer work, but are not yet confirmed as part of this checkout story. | `CV.md:36-37`                |
+| Victor-confirmed (2026-08-03) | The initial implementation combined .NET-rendered templates with React and Redux widgets, receiving a centrally assembled state payload. | Victor-provided case-study notes |
+| Victor-confirmed (2026-08-03) | The migration moved the brands to a modular Next.js and React application using SWR for server state and Zustand for client state. | Victor-provided case-study notes |
+| Victor-confirmed (2026-08-03) | Modular data access made server state easier to cache and removed the need to pass central state from .NET templates into React. | Victor-provided case-study notes |
+| Victor-confirmed (2026-08-03) | The shared platform supported brand-specific customisation and internationalisation: MYKA operated in 10+ languages, while Oak & Luna and additional brands such as Lime & Lou could use the same backend with different configurations. | Victor-provided case-study notes |
+| Victor-confirmed (2026-08-03) | The new platform used managed Kubernetes on AWS and declarative Terraform deployments, replacing a Windows VPN-dependent deployment workflow. | Victor-provided case-study notes |
+| Victor-confirmed (2026-08-03) | Checkout was the first rewritten UI; the migration ultimately moved all UI to Next.js and React, and all backend services from .NET Framework to a modern .NET API. | Victor-provided case-study notes |
 
 ### Editorial questions
 
@@ -126,7 +131,6 @@ Slug: `tenengroup-checkout-ux`
 - How was the 20% abandonment reduction measured and attributed?
 - Which research, analytics, experiments, or design inputs were used?
 - What did Victor own across UI, state, APIs, and cross-team delivery?
-- Were the Next.js data-access layer and .NET API collaboration part of this specific initiative?
 - Which alternatives, trade-offs, and lessons can be discussed publicly?
 
 ## Luxoft microfrontend migration
@@ -156,6 +160,6 @@ Slug: `luxoft-microfrontend-migration`
 
 - The Tolstoy homepage card links to both Tolstoy drafts in preview-visible environments.
 - The Bright Data homepage card links to both Bright Data drafts in preview-visible environments.
-- The Tenengroup homepage card links only to the checkout UX draft.
+- The Tenengroup homepage card links only to the commerce platform migration draft.
 - The Luxoft draft remains discoverable through the preview work archive and does not add a fourth homepage card.
 - Production keeps the current summaries unlinked while every mapped case study remains a draft.

@@ -11,7 +11,7 @@ import {
     workPagePath,
 } from "./output-helpers.mjs";
 
-test("preview work archive contains the real draft case study", () => {
+test("preview work archive contains the real draft case studies", () => {
     const workHtml = readOutput(workIndexPath);
     const cardCount = (workHtml.match(/class="archive-card"/g) ?? []).length;
 
@@ -49,7 +49,7 @@ test("preview homepage links only to the approved mapped drafts", () => {
 });
 
 test("every preview draft route is labeled, noindexed, stable, and static", () => {
-    for (const { slug, title } of draftCaseStudies) {
+    for (const { slug, title, cover, additionalImage } of draftCaseStudies) {
         const html = readOutput(workPagePath(slug));
 
         assert.match(html, /<meta name="robots" content="noindex, nofollow"/);
@@ -60,11 +60,11 @@ test("every preview draft route is labeled, noindexed, stable, and static", () =
         assert.match(html, new RegExp(`<h1[^>]*>${escapeRegExp(title)}</h1>`));
 
         assert.doesNotMatch(html, /aria-label="Editorial question"/);
-        assert.match(
-            html,
-            /<img[^>]*src="\/images\/work\/tolstoy_connectors\.png"[^>]*width="2635"[^>]*height="1960"/,
-        );
-        assert.match(html, /\/images\/work\/klaviyo_integration\.png/);
+        assert.match(html, new RegExp(`<img[^>]*src="${escapeRegExp(cover)}"`));
+
+        if (additionalImage) {
+            assert.match(html, new RegExp(escapeRegExp(additionalImage)));
+        }
 
         assert.match(html, /href="\/work"/);
         assertNoClientJavaScript(html, `preview ${slug}`);

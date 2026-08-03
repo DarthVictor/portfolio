@@ -12,6 +12,14 @@ export const draftCaseStudies = [
         slug: "tolstoy-ai-integrations",
         title: "What Building 30+ Integrations Taught Me About AI Product Engineering",
         homepage: true,
+        cover: "/images/work/tolstoy_connectors.png",
+        additionalImage: "/images/work/klaviyo_integration.png",
+    },
+    {
+        slug: "tenengroup-ui-migration",
+        title: "From Better Architecture to Better Sales in E-Commerce",
+        homepage: true,
+        cover: "/images/work/tenengroup-checkout-ux.svg",
     },
 ];
 
