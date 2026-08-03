@@ -1,0 +1,198 @@
+---
+title: "From Better Architecture to Better Sales in E-Commerce"
+summary: "What began as a checkout rewrite became a full multi-brand migration: all UI to Next.js and React, and .NET Framework services to a modern .NET API."
+employerLabel: "Tenengroup"
+role: "Senior Full Stack Developer"
+period: "Jul 2022 — Feb 2024"
+disciplines:
+    - "E-commerce architecture"
+    - "Platform migration"
+    - "Multi-brand commerce"
+technologies:
+    - "Next.js"
+    - "React"
+    - "SWR"
+    - "Zustand"
+    - ".NET"
+    - "AWS"
+    - "Kubernetes"
+    - "Terraform"
+featured: false
+draft: true
+cover:
+    src: "/images/work/tenengroup-checkout-ux.svg"
+    alt: "Abstract three-stage commerce platform migration on a dark blue background."
+    width: 1600
+    height: 900
+seoDescription: "How Tenengroup moved a multi-brand e-commerce platform from .NET Framework and embedded widgets to a .NET API, Next.js, SWR, and Zustand."
+confidentiality: "private"
+---
+
+## A checkout rewrite exposed a platform problem
+
+The first part of the modernization was the shopping cart and checkout for
+MYKA and Oak & Luna. That was where the business stakes were easiest to see:
+when a customer is ready to buy, slow, inconsistent, or difficult-to-change UI
+quickly becomes conversion friction.
+
+The work helped reduce cart abandonment by 20%. But checkout was not the whole
+story, and it would be misleading to present the result as a checkout project
+that happened to use a new framework. Rewriting that first flow made the limits
+of the underlying platform clear. The same constraints would eventually affect
+every product page, account journey, and brand-specific experience we needed to
+ship.
+
+What began as a customer-facing rewrite became a complete platform migration:
+the UI moved to Next.js and React, and the backend moved from .NET Framework to
+a modern .NET API. The purpose was not to replace technology because it was
+old. It was to create a system that could support several international brands,
+give developers reliable boundaries to work within, and make product changes
+easier to test and release.
+
+## The previous model tied the frontend to server templates
+
+The legacy storefront combined .NET-rendered templates with React and Redux
+widgets. Server templates assembled a central state payload, then passed it to
+the widgets on the page.
+
+That approach works while a page has a small number of isolated interactions.
+As the storefront becomes a product in its own right, the costs become more
+visible. A component can depend on data assembled far away in a template. It is
+harder to see which feature owns a field, when a particular part of the page
+should refresh, or whether a change to a shared Redux flow affects another
+widget. The backend and UI are also coupled by the template boundary: server
+rendering decisions and frontend state decisions become part of the same
+system.
+
+The issue was not that React, Redux, or .NET were inherently wrong tools. It
+was that the ownership model no longer matched the scope of the product. A
+multi-brand commerce platform needs a UI that can grow feature by feature and
+an API that is a deliberate contract, not just data embedded in a page.
+
+## Rebuild the boundary, not just the screens
+
+The migration changed both sides of that boundary. The frontend became a
+Next.js application with a full React client experience. The backend moved from
+.NET Framework to a modern .NET API. This separated application concerns that
+had previously met inside server templates.
+
+On the UI, Next.js provided a modular application structure. Each feature could
+request server-backed data through its own boundary instead of receiving a
+single, centrally prepared object from .NET. On the backend, the API became the
+explicit integration point for the UI. That made the work easier to reason
+about across frontend and backend teams: a feature needed a clear data contract
+rather than a change somewhere inside a rendered template.
+
+This was the architectural shift that mattered most. Framework names are less
+important than the result: the UI could evolve independently, the backend could
+serve it through an intentional API, and both sides could be developed and
+tested as parts of a platform rather than as pieces of a page.
+
+## State needed two different homes
+
+Removing the template payload was only useful if the replacement made state
+ownership clearer. We split it according to why the state exists and how it
+changes.
+
+- **SWR** handled server state with a minimal React hook for fetching, caching,
+  revalidation, and request deduplication near the feature that uses the data.
+- **Zustand** handled client state: focused interface state that does not belong
+  in an API response or a page-wide Redux store.
+
+This distinction gave the frontend a simpler mental model. A feature could
+define what it reads from the API, how long that data stays useful, and what it
+does while the request is pending or fails. Transient UI choices could remain
+local instead of becoming a global state transition for the entire storefront.
+
+There was a cost to this design. A central payload can look simpler because it
+puts all data in one place. The modular model requires each feature to be
+explicit about its data contract and cache behaviour. At the scale of a
+commerce platform, that explicitness is valuable: it reduces hidden coupling,
+makes stale-data behaviour easier to find, and gives developers a smaller area
+to test when they change a flow.
+
+## One platform had to express several brands
+
+The platform served brands with materially different requirements. MYKA ran in
+more than 10 languages and needed substantial customisation. Oak & Luna had a
+smaller language footprint. Other products, including Lime & Lou, required
+their own product and visual variations.
+
+The temptation in multi-brand commerce is to duplicate the storefront and let
+each brand diverge. That can make the first customisation quick, but it turns
+every later capability—localisation, a new commerce flow, a defect fix, or an
+operational improvement—into repeated work.
+
+Instead, the shared platform allowed the brands to use the same backend while
+applying their own configuration, customisation, and internationalisation. The
+goal was not one generic brand experience. It was a common foundation for the
+parts that should remain consistent: data access, core commerce behaviour,
+operational patterns, and the ability to deliver an improvement once and adopt
+it where it applied.
+
+That is where the migration earned its keep. A better architecture did not mean
+removing variation; it made variation an intentional configuration concern
+instead of a reason to fork the application.
+
+## Delivery became part of the product architecture
+
+The old deployment process relied on Windows-based VPN access. This added
+friction to the development loop around a platform that needed frequent,
+low-risk iteration.
+
+The modernized platform ran on managed Kubernetes in AWS, with Terraform used
+to define infrastructure and deployments declaratively. The environment was no
+longer a place developers had to reach and adjust manually; it was versioned
+configuration that could be reviewed and reproduced.
+
+That delivery change was as important as the frontend migration. A clean API
+boundary and modular React features only improve team velocity if the team can
+test and release them predictably. Managed Kubernetes reduced infrastructure
+overhead for the application team, while Terraform made the path to deployment
+more consistent and less dependent on a particular machine, connection, or
+manual procedure.
+
+## Better architecture creates the conditions for better sales
+
+The cart and checkout work reduced abandonment by 20%. That is the measurable
+customer outcome from this period, and it belongs to the customer-facing work
+on those flows—not to a claim that migrating frameworks alone produces sales.
+
+The larger rewrite created the conditions for that kind of improvement to keep
+happening. A modern .NET API separated backend capabilities from UI templates.
+Next.js made the storefront modular. SWR and Zustand gave server and
+client state distinct, understandable homes. The multi-brand foundation made
+reuse possible without erasing localisation and brand-specific design. And
+declarative AWS delivery shortened the distance between a tested change and a
+real customer seeing it.
+
+In e-commerce, that is how architecture reaches the bottom line. It does not
+replace product judgment, design, or experimentation. It lets teams ship those
+customer-facing improvements faster, with fewer regressions and less repeated
+work across brands.
+
+## What I would take into the next modernization
+
+**Start with a valuable vertical slice, then follow the constraint.** Checkout
+was the first rewrite because it had a direct customer and business impact. It
+also revealed the platform boundaries that had to change everywhere else.
+
+**Treat the API as a product boundary.** Moving from server templates to a
+modern API lets frontend and backend work evolve through explicit contracts,
+rather than through an implicit page-rendering pipeline.
+
+**Separate server and client state on purpose.** Cacheable API data and
+short-lived UI state have different lifecycles. Giving them different homes
+makes the application easier to understand and change.
+
+**Share foundations, not every brand decision.** A platform should make
+internationalisation and customisation cheaper without forcing different brands
+into the same customer experience.
+
+**Design the release path with the application.** Declarative infrastructure is
+part of delivering product value, not work that begins after the UI is done.
+
+The useful test for a modernization is not whether the new stack looks more
+current. It is whether the next customer improvement is easier to build, safer
+to release, and possible to reuse across the business. That is the standard we
+were building toward.

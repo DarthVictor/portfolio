@@ -48,6 +48,14 @@ export const selectedWork = [
         technologies: ["React", "TypeScript", "AI integrations"],
         caseStudySlugs: ["tolstoy-ai-integrations"],
     },
+    {
+        meta: "Tenengroup · E-commerce architecture",
+        title: "From better architecture to better sales",
+        summary:
+            "Modernizing a multi-brand commerce platform: all UI to Next.js and React, and .NET Framework services to a modern .NET API.",
+        technologies: ["Next.js", "SWR", "Zustand"],
+        caseStudySlugs: ["tenengroup-ui-migration"],
+    },
 ] satisfies readonly SelectedWorkItem[];
 
 export const experience = [

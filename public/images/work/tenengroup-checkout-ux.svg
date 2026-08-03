@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title description">
-  <title id="title">Tenengroup checkout UX draft cover</title>
-  <desc id="description">Abstract three-step checkout flow on a dark blue background.</desc>
+  <title id="title">Tenengroup commerce platform migration draft cover</title>
+  <desc id="description">Abstract three-stage commerce platform migration on a dark blue background.</desc>
   <rect width="1600" height="900" fill="#0d1424"/>
   <g fill="none" stroke="#ff9a78" stroke-width="8">
     <circle cx="350" cy="390" r="115"/>
@@ -13,6 +13,6 @@
     <text x="800" y="410">02</text>
     <text x="1250" y="410">03</text>
   </g>
-  <text x="120" y="790" fill="#f3f0e9" font-family="system-ui, sans-serif" font-size="62" font-weight="700">Checkout UX</text>
+  <text x="120" y="790" fill="#f3f0e9" font-family="system-ui, sans-serif" font-size="62" font-weight="700">Commerce Platform</text>
   <text x="122" y="842" fill="#ff9a78" font-family="monospace" font-size="25" letter-spacing="5">PREVIEW DRAFT</text>
 </svg>
