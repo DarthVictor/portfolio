@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 760" role="img" aria-labelledby="title description">
+  <title id="title">The staged Yandex.Disk migration</title>
+  <desc id="description">Four stages move the Yandex.Disk frontend from an internal framework through a React bridge and component migration to React and Redux product flows.</desc>
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#101b33"/>
+      <stop offset="1" stop-color="#172a50"/>
+    </linearGradient>
+    <linearGradient id="bridge" x1="0" y1="0" x2="1" y2="0">
+      <stop stop-color="#78869c"/>
+      <stop offset="0.5" stop-color="#4b9dff"/>
+      <stop offset="1" stop-color="#ff9a78"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="150%">
+      <feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#020814" flood-opacity="0.36"/>
+    </filter>
+  </defs>
+  <rect width="1600" height="760" rx="40" fill="url(#background)"/>
+  <g fill="none" stroke="#29456e" stroke-width="1" opacity="0.7">
+    <path d="M0 120H1600M0 240H1600M0 360H1600M0 480H1600M0 600H1600"/>
+    <path d="M160 0V760M400 0V760M640 0V760M880 0V760M1120 0V760M1360 0V760"/>
+  </g>
+  <text x="100" y="118" fill="#f7f8fb" font-family="Arial, Helvetica, sans-serif" font-size="52" font-weight="700">A rewrite delivered in stages</text>
+  <text x="100" y="166" fill="#b5c1d6" font-family="Arial, Helvetica, sans-serif" font-size="25">Each step was safe to release while feature delivery continued.</text>
+  <path d="M260 515 C450 395, 575 565, 750 470 S1060 390, 1340 468" fill="none" stroke="url(#bridge)" stroke-width="10" stroke-linecap="round"/>
+  <g filter="url(#shadow)" font-family="Arial, Helvetica, sans-serif">
+    <g transform="translate(100 260)">
+      <rect width="280" height="220" rx="24" fill="#202d45" stroke="#708098" stroke-width="2"/>
+      <text x="32" y="52" fill="#b5c1d6" font-size="18" font-weight="700" letter-spacing="2">01 — FOUNDATION</text>
+      <text x="32" y="103" fill="#fff" font-size="31" font-weight="700">Internal</text>
+      <text x="32" y="141" fill="#fff" font-size="31" font-weight="700">framework</text>
+      <text x="32" y="186" fill="#b5c1d6" font-size="19">Live product, active roadmap</text>
+    </g>
+    <g transform="translate(430 260)">
+      <rect width="280" height="220" rx="24" fill="#183753" stroke="#4b9dff" stroke-width="2"/>
+      <text x="32" y="52" fill="#8ec9ff" font-size="18" font-weight="700" letter-spacing="2">02 — BRIDGE</text>
+      <text x="32" y="103" fill="#fff" font-size="31" font-weight="700">React inside</text>
+      <text x="32" y="141" fill="#fff" font-size="31" font-weight="700">the product</text>
+      <text x="32" y="186" fill="#b5c1d6" font-size="19">Compatibility before replacement</text>
+    </g>
+    <g transform="translate(760 260)">
+      <rect width="280" height="220" rx="24" fill="#183753" stroke="#4b9dff" stroke-width="2"/>
+      <text x="32" y="52" fill="#8ec9ff" font-size="18" font-weight="700" letter-spacing="2">03 — COMPONENTS</text>
+      <text x="32" y="103" fill="#fff" font-size="31" font-weight="700">File lists,</text>
+      <text x="32" y="141" fill="#fff" font-size="31" font-weight="700">menus, actions</text>
+      <text x="32" y="186" fill="#b5c1d6" font-size="19">Complex UI moves next</text>
+    </g>
+    <g transform="translate(1090 260)">
+      <rect width="280" height="220" rx="24" fill="#3d2b35" stroke="#ff9a78" stroke-width="2"/>
+      <text x="32" y="52" fill="#ffb59f" font-size="18" font-weight="700" letter-spacing="2">04 — FLOWS</text>
+      <text x="32" y="103" fill="#fff" font-size="31" font-weight="700">React +</text>
+      <text x="32" y="141" fill="#fff" font-size="31" font-weight="700">Redux</text>
+      <text x="32" y="186" fill="#d8c7cb" font-size="19">Shared state becomes explicit</text>
+    </g>
+  </g>
+  <g fill="#d7e1f0" font-family="Arial, Helvetica, sans-serif" font-size="20" text-anchor="middle">
+    <text x="240" y="565">Start with the system that exists</text>
+    <text x="570" y="565">Prove a safe integration path</text>
+    <text x="900" y="565">Move interaction-heavy areas</text>
+    <text x="1230" y="565">Migrate complete user flows</text>
+  </g>
+  <rect x="100" y="640" width="1370" height="1" fill="#3a5279"/>
+  <text x="100" y="690" fill="#b5c1d6" font-family="Arial, Helvetica, sans-serif" font-size="22">The destination mattered. The sequencing made it possible.</text>
+</svg>

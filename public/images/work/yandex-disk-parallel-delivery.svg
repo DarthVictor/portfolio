@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 720" role="img" aria-labelledby="title description">
+  <title id="title">Feature delivery and migration ran in parallel</title>
+  <desc id="description">A timeline shows product features continuing to ship while the frontend moves from small React components to complete React and Redux flows.</desc>
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#f4f0e8"/>
+      <stop offset="1" stop-color="#e8eef7"/>
+    </linearGradient>
+    <filter id="softShadow" x="-20%" y="-30%" width="140%" height="170%">
+      <feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#30405b" flood-opacity="0.14"/>
+    </filter>
+  </defs>
+  <rect width="1600" height="720" rx="40" fill="url(#background)"/>
+  <text x="100" y="110" fill="#172033" font-family="Arial, Helvetica, sans-serif" font-size="52" font-weight="700">Two tracks, one release train</text>
+  <text x="100" y="158" fill="#56647a" font-family="Arial, Helvetica, sans-serif" font-size="25">The migration could not become a reason to stop improving the product.</text>
+  <g font-family="Arial, Helvetica, sans-serif">
+    <text x="100" y="284" fill="#56647a" font-size="19" font-weight="700" letter-spacing="2">PRODUCT DELIVERY</text>
+    <path d="M350 274H1435" stroke="#f07f5d" stroke-width="8" stroke-linecap="round"/>
+    <g fill="#fff" stroke="#f07f5d" stroke-width="4" filter="url(#softShadow)">
+      <circle cx="480" cy="274" r="23"/><circle cx="730" cy="274" r="23"/><circle cx="980" cy="274" r="23"/><circle cx="1230" cy="274" r="23"/>
+    </g>
+    <g fill="#172033" font-size="21" text-anchor="middle">
+      <text x="480" y="329">Features</text><text x="730" y="329">Fixes</text><text x="980" y="329">New design</text><text x="1230" y="329">More delivery</text>
+    </g>
+    <text x="100" y="474" fill="#56647a" font-size="19" font-weight="700" letter-spacing="2">FRONTEND MIGRATION</text>
+    <path d="M350 464H1435" stroke="#2678d9" stroke-width="8" stroke-linecap="round"/>
+    <g filter="url(#softShadow)">
+      <rect x="405" y="420" width="180" height="88" rx="18" fill="#fff" stroke="#2678d9" stroke-width="3"/>
+      <rect x="655" y="420" width="180" height="88" rx="18" fill="#fff" stroke="#2678d9" stroke-width="3"/>
+      <rect x="905" y="420" width="180" height="88" rx="18" fill="#fff" stroke="#2678d9" stroke-width="3"/>
+      <rect x="1155" y="420" width="180" height="88" rx="18" fill="#fff" stroke="#2678d9" stroke-width="3"/>
+    </g>
+    <g fill="#172033" font-size="20" font-weight="700" text-anchor="middle">
+      <text x="495" y="456">React</text><text x="495" y="481">bridge</text>
+      <text x="745" y="456">Small UI</text><text x="745" y="481">components</text>
+      <text x="995" y="456">Complex UI</text><text x="995" y="481">elements</text>
+      <text x="1245" y="456">Redux</text><text x="1245" y="481">flows</text>
+    </g>
+  </g>
+  <path d="M290 274V464" stroke="#8794a8" stroke-width="2" stroke-dasharray="8 10"/>
+  <text x="100" y="620" fill="#172033" font-family="Arial, Helvetica, sans-serif" font-size="27" font-weight="700">A rewrite succeeds when it makes the next release safer—not later.</text>
+</svg>

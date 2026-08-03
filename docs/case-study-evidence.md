@@ -1,6 +1,6 @@
 # Case-study evidence matrix
 
-This document is the factual source of truth for the six preview-only case studies in delivery step 6. Draft content may use claims marked `CV-supported`. New factual detail must be marked `Victor-confirmed` with the confirmation date before it is turned into narrative prose. Everything else remains a visible editorial question.
+This document is the factual source of truth for the preview-only case studies in delivery step 6. Draft content may use claims marked `CV-supported`. New factual detail must be marked `Victor-confirmed` with the confirmation date before it is turned into narrative prose. Everything else remains a visible editorial question.
 
 ## Shared rules
 
@@ -155,6 +155,28 @@ Slug: `luxoft-microfrontend-migration`
 - How was “faster delivery” observed or measured?
 - Was the VTB reporting product part of this migration?
 - What operational trade-offs or lessons emerged after independent deployment?
+
+## Yandex.Disk SPA migration
+
+Slug: `yandex-disk-spa-migration`
+
+### Supported claims
+
+| Status                        | Claim                                                                                                                                                                                   | Source                              |
+| ----------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------- |
+| CV-supported                  | Victor was an Interface Developer at Yandex from January 2017 to March 2019.                                                                                                          | `CV.md:45`                         |
+| CV-supported                  | Victor modernized the Yandex.Disk frontend with React, Redux, and ES6, reducing page-load time by 20%.                                                                                | `CV.md:47`                         |
+| Victor-confirmed (2026-08-03) | The migration began in 2017, with React 16.0 and Redux as the target stack; TypeScript was adopted later because it was considered too early for the initial migration.                 | Victor-provided case-study notes    |
+| Victor-confirmed (2026-08-03) | The existing frontend used the internal `yandex-ui/noscript` framework.                                                                                                               | Victor-provided case-study notes    |
+| Victor-confirmed (2026-08-03) | Product delivery could not stop; while the visible production change was a new design, the team performed a full frontend rewrite through gradual releases.                             | Victor-provided case-study notes    |
+| Victor-confirmed (2026-08-03) | The team used `yandex-ui/noscript-react` to introduce small React UI components into the existing product, then migrated file lists, menus, and context menus.                         | Victor-provided case-study notes    |
+| Victor-confirmed (2026-08-03) | After migrating complex UI elements, the team moved complete flows and shared state to Redux.                                                                                          | Victor-provided case-study notes    |
+
+### Editorial questions
+
+- How was the 20% page-load improvement measured, and which parts of the modernization contributed to it?
+- Which migration boundaries and compatibility details can be discussed publicly beyond the staged sequence?
+- What ownership, team, product-scale, or timeline details can be added without exposing confidential information?
 
 ## Homepage mapping approved for this milestone
 
