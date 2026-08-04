@@ -13,21 +13,21 @@ export const caseStudies = [
         title: "What Building 30+ Integrations Taught Me About AI Product Engineering",
         homepage: true,
         cover: "/images/work/tolstoy_connectors.png",
-        additionalImage: "/images/work/klaviyo_integration.png",
+        optimizedImageCount: 2,
     },
     {
         slug: "tenengroup-ui-migration",
         title: "From Better Architecture to Better Sales in E-Commerce",
         homepage: true,
         cover: "/images/work/tenengroup-checkout-ux.svg",
-        additionalImage: "/images/work/tenengroup-platform-boundary.svg",
+        optimizedImageCount: 0,
     },
     {
         slug: "yandex-disk-spa-migration",
         title: "2017, Before LLMs: The Patient Rewrite of Yandex.Disk",
         homepage: true,
         cover: "/images/work/yandex-disk-spa-migration.png",
-        additionalImage: "/images/work/yandex-disk-migration-stages.svg",
+        optimizedImageCount: 1,
     },
 ];
 
@@ -46,10 +46,14 @@ export function assertNoClientJavaScript(html, label) {
         /_astro\/[^"']+\.js/,
         `${label} must not load bundled client-side JavaScript`,
     );
-    assert.doesNotMatch(
-        html,
-        /<script\b/,
-        `${label} must not contain script elements`,
+    const scripts = [...html.matchAll(/<script\b([^>]*)>/g)];
+
+    assert.equal(
+        scripts.every(([, attributes]) =>
+            /\btype=["']application\/ld\+json["']/.test(attributes),
+        ),
+        true,
+        `${label} must not contain executable script elements`,
     );
 }
 

@@ -1,6 +1,10 @@
 ---
+import { getImage } from "astro:assets";
+
+import WorkImage from "../components/work/WorkImage.astro";
 import SiteLayout from "./SiteLayout.astro";
 import type { WorkEntry } from "../lib/work-content";
+import { getWorkImage } from "../lib/work-images";
 
 interface Props {
     entry: WorkEntry;
@@ -13,12 +17,44 @@ const confidentialityNotes = {
     anonymized: "Some identifying details are anonymized.",
     private: "Details are limited to respect confidentiality.",
 };
+const canonicalUrl = new URL(`/work/${entry.id}/`, Astro.site);
+const coverImage = getWorkImage(data.cover.src);
+const optimizedCover =
+    coverImage === undefined
+        ? undefined
+        : await getImage({
+              src: coverImage,
+              width: 1200,
+              format: "webp",
+          });
+const articleImageUrl = new URL(
+    optimizedCover?.src ?? data.cover.src,
+    Astro.site,
+).href;
+const articleStructuredData =
+    !data.draft && data.publishedAt !== undefined
+        ? {
+              "@context": "https://schema.org",
+              "@type": "Article",
+              mainEntityOfPage: canonicalUrl.href,
+              headline: data.title,
+              description: data.seoDescription,
+              image: articleImageUrl,
+              datePublished: data.publishedAt.toISOString(),
+              author: {
+                  "@id": new URL("/#victor-follet", Astro.site).href,
+              },
+          }
+        : undefined;
 ---
 
 <SiteLayout
     title={`${data.title} — Victor Follet`}
     description={data.seoDescription}
     noindex={data.draft}
+    openGraphType="article"
+    publishedTime={data.publishedAt}
+    structuredData={articleStructuredData}
 >
     <article class="case-study">
         <header class="case-header">
@@ -29,6 +65,21 @@ const confidentialityNotes = {
             </div>
             <h1>{data.title}</h1>
             <p class="summary">{data.summary}</p>
+            {
+                !data.draft && data.publishedAt !== undefined && (
+                    <p class="byline">
+                        Written by Victor Follet ·{" "}
+                        <time datetime={data.publishedAt.toISOString()}>
+                            Published{" "}
+                            {data.publishedAt.toLocaleDateString("en-US", {
+                                day: "numeric",
+                                month: "long",
+                                year: "numeric",
+                            })}
+                        </time>
+                    </p>
+                )
+            }
             <dl class="project-facts">
                 <div>
                     <dt>Organization</dt>
@@ -75,11 +126,12 @@ const confidentialityNotes = {
         </header>
 
         <figure class="cover">
-            <img
+            <WorkImage
                 src={data.cover.src}
                 alt={data.cover.alt}
                 width={data.cover.width}
                 height={data.cover.height}
+                sizes="(min-width: 960px) 960px, 100vw"
             />
         </figure>
 
@@ -143,6 +195,13 @@ const confidentialityNotes = {
         margin-block-start: var(--space-6);
         color: var(--color-text-muted);
         font-size: clamp(1.125rem, 2vw, 1.35rem);
+    }
+
+    .byline {
+        margin-block-start: var(--space-4);
+        color: var(--color-text-muted);
+        font-family: var(--font-mono);
+        font-size: var(--font-size-small);
     }
 
     .project-facts {

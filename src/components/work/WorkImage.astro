@@ -1,0 +1,30 @@
+---
+import { Picture } from "astro:assets";
+
+import { getWorkImage } from "../../lib/work-images";
+
+interface Props {
+    alt: string;
+    height?: number;
+    sizes?: string;
+    src: string;
+    width?: number;
+}
+
+const { alt, height, sizes, src, width } = Astro.props;
+const image = getWorkImage(src);
+---
+
+{
+    image === undefined ? (
+        <img src={src} alt={alt} width={width} height={height} loading="lazy" />
+    ) : (
+        <Picture
+            src={image}
+            alt={alt}
+            formats={["avif", "webp"]}
+            layout="constrained"
+            sizes={sizes}
+        />
+    )
+}

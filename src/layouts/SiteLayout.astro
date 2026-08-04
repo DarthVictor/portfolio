@@ -7,11 +7,55 @@ interface Props {
     title: string;
     description: string;
     noindex?: boolean;
+    openGraphType?: "article" | "website";
+    publishedTime?: Date;
+    structuredData?: Record<string, unknown> | Record<string, unknown>[];
 }
 
-const { title, description, noindex = false } = Astro.props;
+const {
+    title,
+    description,
+    noindex = false,
+    openGraphType = "website",
+    publishedTime,
+    structuredData: pageStructuredData,
+} = Astro.props;
 const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
 const socialImageUrl = new URL("/images/social-preview.jpg", Astro.site);
+const personId = new URL("/#victor-follet", Astro.site).href;
+const homepageStructuredData =
+    Astro.url.pathname === "/"
+        ? [
+              {
+                  "@context": "https://schema.org",
+                  "@type": "Person",
+                  "@id": personId,
+                  name: "Victor Follet",
+                  url: new URL("/", Astro.site).href,
+                  jobTitle: "Senior Frontend Engineer",
+                  sameAs: [
+                      "https://www.linkedin.com/in/victor-follet/",
+                      "https://github.com/DarthVictor",
+                  ],
+              },
+              {
+                  "@context": "https://schema.org",
+                  "@type": "WebSite",
+                  "@id": new URL("/#website", Astro.site).href,
+                  name: "Victor Follet",
+                  url: new URL("/", Astro.site).href,
+              },
+          ]
+        : [];
+const structuredData = [
+    ...homepageStructuredData,
+    ...(pageStructuredData === undefined
+        ? []
+        : Array.isArray(pageStructuredData)
+          ? pageStructuredData
+          : [pageStructuredData]),
+];
+const jsonLd = JSON.stringify(structuredData).replaceAll("<", "\\u003c");
 ---
 
 <html lang="en">
@@ -23,7 +67,8 @@ const socialImageUrl = new URL("/images/social-preview.jpg", Astro.site);
         <meta name="generator" content={Astro.generator} />
         <meta name="description" content={description} />
         <link rel="canonical" href={canonicalUrl} />
-        <meta property="og:type" content="website" />
+        <link rel="sitemap" href="/sitemap.xml" />
+        <meta property="og:type" content={openGraphType} />
         <meta property="og:site_name" content="Victor Follet" />
         <meta property="og:title" content={title} />
         <meta property="og:description" content={description} />
@@ -32,12 +77,25 @@ const socialImageUrl = new URL("/images/social-preview.jpg", Astro.site);
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content="Victor Follet, Senior Frontend Engineer" />
+        {
+            openGraphType === "article" && publishedTime !== undefined && (
+                <meta
+                    property="article:published_time"
+                    content={publishedTime.toISOString()}
+                />
+            )
+        }
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={title} />
         <meta name="twitter:description" content={description} />
         <meta name="twitter:image" content={socialImageUrl} />
         <meta name="twitter:image:alt" content="Victor Follet, Senior Frontend Engineer" />
         {noindex && <meta name="robots" content="noindex, nofollow" />}
+        {
+            structuredData.length > 0 && (
+                <script type="application/ld+json" set:html={jsonLd} />
+            )
+        }
         <title>{title}</title>
     </head>
     <body id="top">

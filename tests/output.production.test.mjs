@@ -65,6 +65,7 @@ test("production homepage has the planned semantic structure", () => {
         indexHtml,
         /<link rel="canonical" href="https:\/\/darthvictor\.xyz\/"/,
     );
+    assert.match(indexHtml, /<link rel="sitemap" href="\/sitemap\.xml"/);
     assert.match(
         indexHtml,
         /<meta property="og:image" content="https:\/\/darthvictor\.xyz\/images\/social-preview\.jpg"/,
@@ -73,11 +74,36 @@ test("production homepage has the planned semantic structure", () => {
         indexHtml,
         /<meta name="twitter:card" content="summary_large_image"/,
     );
+    assert.match(indexHtml, /"@type":"Person"/);
+    assert.match(indexHtml, /"@type":"WebSite"/);
     assert.equal(existsSync(cvPath), true);
 
     for (const { slug } of caseStudies) {
         assert.match(indexHtml, new RegExp(`href="/work/${slug}/"`));
     }
+});
+
+test("production publishes a sitemap containing only public portfolio routes", () => {
+    const sitemap = readOutput(join(distDirectory, "sitemap.xml"));
+    const robots = readOutput(join(distDirectory, "robots.txt"));
+
+    assert.match(
+        sitemap,
+        /<urlset xmlns="http:\/\/www\.sitemaps\.org\/schemas\/sitemap\/0\.9">/,
+    );
+    assert.match(sitemap, /<loc>https:\/\/darthvictor\.xyz\/<\/loc>/);
+    assert.match(sitemap, /<loc>https:\/\/darthvictor\.xyz\/work\/<\/loc>/);
+
+    for (const { slug } of caseStudies) {
+        assert.match(
+            sitemap,
+            new RegExp(`<loc>https://darthvictor\\.xyz/work/${slug}/</loc>`),
+        );
+    }
+
+    assert.match(robots, /User-agent: \*/);
+    assert.match(robots, /Allow: \//);
+    assert.match(robots, /Sitemap: https:\/\/darthvictor\.xyz\/sitemap\.xml/);
 });
 
 test("production work archive contains published case studies and routes", () => {
@@ -94,7 +120,7 @@ test("production work archive contains published case studies and routes", () =>
     assert.match(workHtml, /href="#top"/);
     assertNoClientJavaScript(workHtml, "production work archive");
 
-    for (const { slug, title, cover, additionalImage } of caseStudies) {
+    for (const { slug, title, cover, optimizedImageCount } of caseStudies) {
         const caseStudyHtml = readOutput(workPagePath(slug));
 
         assert.match(workHtml, new RegExp(`href="/work/${slug}/"`));
@@ -116,6 +142,16 @@ test("production work archive contains published case studies and routes", () =>
         );
         assert.match(
             caseStudyHtml,
+            /<meta property="og:type" content="article"/,
+        );
+        assert.match(
+            caseStudyHtml,
+            /<meta property="article:published_time" content="[^"']+"/,
+        );
+        assert.match(caseStudyHtml, /"@type":"Article"/);
+        assert.match(caseStudyHtml, /Written by Victor Follet/);
+        assert.match(
+            caseStudyHtml,
             new RegExp(`<h1[^>]*>${escapeRegExp(title)}</h1>`),
         );
         assert.match(
@@ -132,20 +168,27 @@ test("production work archive contains published case studies and routes", () =>
             assert.match(caseStudyHtml, new RegExp(`<dt[^>]*>${label}<\/dt>`));
         }
 
-        assert.match(
-            caseStudyHtml,
-            new RegExp(`<img[^>]*src="${escapeRegExp(cover)}"`),
-        );
-
-        if (additionalImage) {
+        if (optimizedImageCount === 0) {
             assert.match(
                 caseStudyHtml,
-                new RegExp(escapeRegExp(additionalImage)),
+                new RegExp(`<img[^>]*src="${escapeRegExp(cover)}"`),
             );
+        } else {
+            assert.equal(
+                (caseStudyHtml.match(/<picture>/g) ?? []).length,
+                optimizedImageCount,
+            );
+            assert.match(caseStudyHtml, /<source[^>]*type="image\/avif"/);
+            assert.match(caseStudyHtml, /<source[^>]*type="image\/webp"/);
         }
 
         assertNoClientJavaScript(caseStudyHtml, `production ${slug}`);
     }
+
+    assert.match(
+        readOutput(workPagePath("tolstoy-ai-integrations")),
+        /<meta name="description" content="Lessons from building 30\+ third-party AI integrations for Tolstoy AI Studio, covering product design, access, testing, and operations\."/,
+    );
 });
 
 test("production uses only the system-aware Paper Terracotta palette", () => {

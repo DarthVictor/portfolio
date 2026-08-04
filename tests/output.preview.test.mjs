@@ -49,7 +49,7 @@ test("preview homepage links to the approved mapped case studies", () => {
 });
 
 test("every preview case-study route is indexable, stable, and static", () => {
-    for (const { slug, title, cover, additionalImage } of caseStudies) {
+    for (const { slug, title, cover, optimizedImageCount } of caseStudies) {
         const html = readOutput(workPagePath(slug));
 
         assert.doesNotMatch(
@@ -70,10 +70,18 @@ test("every preview case-study route is indexable, stable, and static", () => {
         }
 
         assert.doesNotMatch(html, /aria-label="Editorial question"/);
-        assert.match(html, new RegExp(`<img[^>]*src="${escapeRegExp(cover)}"`));
-
-        if (additionalImage) {
-            assert.match(html, new RegExp(escapeRegExp(additionalImage)));
+        if (optimizedImageCount === 0) {
+            assert.match(
+                html,
+                new RegExp(`<img[^>]*src="${escapeRegExp(cover)}"`),
+            );
+        } else {
+            assert.equal(
+                (html.match(/<picture>/g) ?? []).length,
+                optimizedImageCount,
+            );
+            assert.match(html, /<source[^>]*type="image\/avif"/);
+            assert.match(html, /<source[^>]*type="image\/webp"/);
         }
 
         assert.match(html, /href="\/work"/);

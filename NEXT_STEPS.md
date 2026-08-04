@@ -1,47 +1,40 @@
-# Portfolio Improvement Plan
+# SEO Implementation Plan
 
 ## Goal
 
-Turn the portfolio into credible, recruiter-ready evidence for senior frontend,
-full-stack, and product-engineering roles. Prioritize proof over decoration and
-publish only content that is accurate, shareable, and interview-defensible.
+Make `https://darthvictor.xyz` reliably discoverable, unambiguous to search
+engines, and easier to share, while preserving the portfolio's evidence-first
+content standard.
 
-## Completed improvements
+## Order of work
 
-1. **Published finished case studies**
-   - Tolstoy, Tenengroup, and Yandex case studies are production-visible,
-     indexable work without a Draft label.
+1. **Discovery foundation — complete**
+   - Generate a sitemap from public portfolio routes at build time.
+   - Publish an explicit `robots.txt` that permits crawling and names the
+     sitemap.
+   - Link the sitemap from the document head.
 
-2. **Made case studies scannable evidence**
-   - Every case study opens with a factual Problem, My scope, Key decision, and
-     Outcome panel.
-   - The Tenengroup case study includes a labelled, sanitized diagram of the
-     migration's platform boundaries and delivery foundation.
+2. **Entity and article structured data — complete**
+   - Add `Person` and `WebSite` JSON-LD to the homepage.
+   - Add `Article` JSON-LD and article-specific social metadata to public case
+     studies.
 
-3. **Reviewed visual evidence**
-   - Tolstoy's connector catalogue and OAuth settings screens substantiate the
-     integration and customer-access claims.
-   - Yandex's staged-migration and parallel-delivery diagrams substantiate the
-     migration strategy; an unrelated later-product screenshot was removed.
+3. **Metadata quality — complete**
+   - Strengthen the short Tolstoy meta description.
+   - Review every title, description, canonical URL, and social-image alt text
+     in production output.
 
-4. **Kept existing metrics unchanged**
-   - Existing numerical outcomes stay as written. Analytics and measurement
-     details are not currently available, so no new precision or attribution was
-     invented.
+4. **Page experience — complete**
+   - Replace oversized case-study PNGs with appropriately sized modern images.
+   - Recheck production performance and layout stability.
 
-5. **Clarified the hiring position**
-   - The portfolio leads with **Senior Frontend Engineer**, the strongest
-     consistent thread across the experience, case studies, and CV.
-   - Full-stack work remains supporting evidence for end-to-end product delivery.
+5. **Search-engine onboarding — manual after deployment**
+   - Verify the domain in Google Search Console.
+   - Submit the live sitemap and request indexing for the homepage and public
+     case studies.
 
-6. **Finished distribution polish**
-   - All public pages now have canonical URLs on `https://darthvictor.xyz`.
-   - Open Graph and Twitter metadata use an original 1200×630 portfolio preview.
-   - Production and preview output, navigation, and public routes were checked.
+## Guardrails
 
-## Do not add
-
-- Skill bars, technology-logo walls, decorative AI effects, or animation for
-  its own sake.
-- Unverifiable metrics, anonymous testimonials, or confidential product data.
-- More long-form prose without stronger evidence.
+- Do not publish draft or confidential content in a sitemap or structured data.
+- Do not add unsupported metrics, testimonials, or claims.
+- Keep the portfolio focused on recruiter- and client-relevant evidence.

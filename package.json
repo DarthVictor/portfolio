@@ -27,7 +27,8 @@
         "@astrojs/mdx": "^7.0.5",
         "@astrojs/preact": "^6.0.2",
         "astro": "^7.1.5",
-        "preact": "^10.29.7"
+        "preact": "^10.29.7",
+        "sharp": "^0.35.3"
     },
     "devDependencies": {
         "@biomejs/biome": "^2.5.6",

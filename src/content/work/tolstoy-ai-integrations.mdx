@@ -26,9 +26,11 @@ cover:
     alt: "Tolstoy AI Studio connector catalogue with connected and available services."
     width: 2635
     height: 1960
-seoDescription: "Lessons from building 30+ third-party integrations for Tolstoy AI Studio."
+seoDescription: "Lessons from building 30+ third-party AI integrations for Tolstoy AI Studio, covering product design, access, testing, and operations."
 confidentiality: "private"
 ---
+
+import WorkImage from "../../components/work/WorkImage.astro";
 
 ## The integration problem behind AI Studio
 
@@ -78,9 +80,10 @@ us. It introduced consent, scopes, account selection, token refresh, and
 reconnect flows.
 
 <figure class="case-image">
-    <img
+    <WorkImage
         src="/images/work/klaviyo_integration.png"
         alt="Klaviyo settings showing a connected default account and the option to connect another account with OAuth."
+        sizes="(min-width: 768px) 768px, 100vw"
     />
     <figcaption>
         The intended customer experience: connect an existing account through
