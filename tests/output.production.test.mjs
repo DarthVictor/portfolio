@@ -8,7 +8,7 @@ import {
     assertRootRelativeLinksResolve,
     cvPath,
     distDirectory,
-    draftCaseStudies,
+    caseStudies,
     expectHeadings,
     indexPath,
     readOutput,
@@ -49,7 +49,7 @@ test("production homepage has the planned semantic structure", () => {
     }));
 
     expectHeadings(headings, [
-        { level: 1, text: "Victor Follet, senior product engineer" },
+        { level: 1, text: "Victor Follet, senior frontend engineer" },
         { level: 2, text: "Selected work" },
         { level: 2, text: "Experience" },
         { level: 2, text: "Capabilities" },
@@ -61,18 +61,29 @@ test("production homepage has the planned semantic structure", () => {
     assert.match(indexHtml, /href="\/#about-heading"/);
     assert.match(indexHtml, /href="\/#contact-heading"/);
     assert.match(indexHtml, /href="\/cv\.pdf"/);
+    assert.match(
+        indexHtml,
+        /<link rel="canonical" href="https:\/\/darthvictor\.xyz\/"/,
+    );
+    assert.match(
+        indexHtml,
+        /<meta property="og:image" content="https:\/\/darthvictor\.xyz\/images\/social-preview\.jpg"/,
+    );
+    assert.match(indexHtml, /<meta name="twitter:card" content="summary_large_image"/);
     assert.equal(existsSync(cvPath), true);
 
-    for (const { slug } of draftCaseStudies) {
-        assert.doesNotMatch(indexHtml, new RegExp(`/work/${slug}/`));
+    for (const { slug } of caseStudies) {
+        assert.match(indexHtml, new RegExp(`href="/work/${slug}/"`));
     }
 });
 
-test("production work archive stays empty and contains no draft routes", () => {
+test("production work archive contains published case studies and routes", () => {
     const workHtml = readOutput(workIndexPath);
+    const cardCount = (workHtml.match(/class="archive-card"/g) ?? []).length;
 
     assert.match(workHtml, /<h1[^>]*>Work<\/h1>/);
-    assert.match(workHtml, /Case studies are being prepared/);
+    assert.equal(cardCount, caseStudies.length);
+    assert.doesNotMatch(workHtml, /Case studies are being prepared/);
     assert.match(workHtml, /href="\/work"[^>]*aria-current="page"/);
     assert.match(workHtml, /href="\/#experience-heading"/);
     assert.match(workHtml, /href="\/#about-heading"/);
@@ -80,9 +91,49 @@ test("production work archive stays empty and contains no draft routes", () => {
     assert.match(workHtml, /href="#top"/);
     assertNoClientJavaScript(workHtml, "production work archive");
 
-    for (const { slug, title } of draftCaseStudies) {
-        assert.equal(existsSync(workPagePath(slug)), false);
-        assert.doesNotMatch(workHtml, new RegExp(escapeRegExp(title)));
+    for (const { slug, title, cover, additionalImage } of caseStudies) {
+        const caseStudyHtml = readOutput(workPagePath(slug));
+
+        assert.match(workHtml, new RegExp(`href="/work/${slug}/"`));
+        assert.match(workHtml, new RegExp(escapeRegExp(title)));
+        assert.doesNotMatch(
+            caseStudyHtml,
+            /<meta name="robots" content="noindex, nofollow"/,
+        );
+        assert.doesNotMatch(caseStudyHtml, /draft-label/);
+        assert.match(
+            caseStudyHtml,
+            new RegExp(
+                `<link rel="canonical" href="https://darthvictor\\.xyz/work/${slug}/"`,
+            ),
+        );
+        assert.match(
+            caseStudyHtml,
+            /<meta property="og:image" content="https:\/\/darthvictor\.xyz\/images\/social-preview\.jpg"/,
+        );
+        assert.match(
+            caseStudyHtml,
+            new RegExp(`<h1[^>]*>${escapeRegExp(title)}</h1>`),
+        );
+        assert.match(
+            caseStudyHtml,
+            /<h2 id="evidence-heading"[^>]*>At a glance<\/h2>/,
+        );
+
+        for (const label of ["Problem", "My scope", "Key decision", "Outcome"]) {
+            assert.match(caseStudyHtml, new RegExp(`<dt[^>]*>${label}<\/dt>`));
+        }
+
+        assert.match(
+            caseStudyHtml,
+            new RegExp(`<img[^>]*src="${escapeRegExp(cover)}"`),
+        );
+
+        if (additionalImage) {
+            assert.match(caseStudyHtml, new RegExp(escapeRegExp(additionalImage)));
+        }
+
+        assertNoClientJavaScript(caseStudyHtml, `production ${slug}`);
     }
 });
 
@@ -106,7 +157,11 @@ test("production uses only the system-aware Paper Terracotta palette", () => {
 });
 
 test("production root-relative links resolve", () => {
-    assertRootRelativeLinksResolve([indexPath, workIndexPath]);
+    assertRootRelativeLinksResolve([
+        indexPath,
+        workIndexPath,
+        ...caseStudies.map(({ slug }) => workPagePath(slug)),
+    ]);
 });
 
 function escapeRegExp(value) {

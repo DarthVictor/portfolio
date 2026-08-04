@@ -17,9 +17,12 @@ import HomeSection from "./HomeSection.astro";
                         <div>
                             <p class="company type-label">{item.company}</p>
                             <h3>{item.title}</h3>
-                            {item.companyList && (
-                                <p class="company-list">{item.companyList}</p>
-                            )}
+                            <p class="location">{item.location}</p>
+                            <ul class="highlights">
+                                {item.highlights.map((highlight) => (
+                                    <li>{highlight}</li>
+                                ))}
+                            </ul>
                         </div>
                         <p class="period">
                             <time datetime={item.start.datetime}>
@@ -73,11 +76,23 @@ import HomeSection from "./HomeSection.astro";
         line-height: 1.2;
     }
 
-    .company-list {
-        max-inline-size: 48ch;
+    .location {
         margin-block-start: var(--space-3);
         color: var(--color-text-muted);
         font-size: 0.875rem;
+    }
+
+    .highlights {
+        display: grid;
+        gap: var(--space-2);
+        max-inline-size: 76ch;
+        margin-block-start: var(--space-5);
+        padding-inline-start: var(--space-4);
+        color: var(--color-text-muted);
+    }
+
+    .highlights li::marker {
+        color: var(--color-accent);
     }
 
     .period {

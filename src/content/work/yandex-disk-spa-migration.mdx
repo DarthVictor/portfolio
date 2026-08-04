@@ -4,6 +4,11 @@ summary: "How a live Yandex.Disk product moved from an internal frontend framewo
 employerLabel: "Yandex"
 role: "Interface Developer"
 period: "Jan 2017 — Mar 2019"
+evidence:
+    problem: "A live product needed to move from an internal frontend framework to React without pausing feature delivery."
+    scope: "Interface development across the React bridge, interaction-heavy components, and the move to explicit Redux flows."
+    decision: "Use a compatibility layer and migrate the product in release-safe steps instead of attempting a replacement launch."
+    outcome: "The broader frontend modernization reduced page-load time by 20%; the improvement cannot be attributed to one migration step."
 disciplines:
     - "Frontend modernization"
     - "SPA migration"
@@ -13,7 +18,7 @@ technologies:
     - "Redux"
     - "ES6"
 featured: false
-draft: true
+publishedAt: "2026-05-09"
 cover:
     src: "/images/work/yandex-disk-spa-migration.png"
     alt: "Abstract transition from a dense legacy interface to a clean component-based application on a deep blue background."
@@ -40,18 +45,6 @@ That constraint shaped every major decision. The goal was not to make the
 legacy system disappear in one dramatic release. It was to make the next piece
 of the product easier to build in the new architecture while the current
 product kept working.
-
-<figure class="case-image">
-    <img
-        src="/images/work/yandex-disk-modern-ui-context.png"
-        alt="Redacted modern Yandex.Disk file-manager interface with a grid of folders and documents."
-    />
-    <figcaption>
-        Yandex.Disk today, redacted for publication. The product has evolved,
-        but the file grid and its surrounding actions still connect to the
-        interaction-heavy parts of the 2017 migration.
-    </figcaption>
-</figure>
 
 ## The real limitation was an internal technology boundary
 

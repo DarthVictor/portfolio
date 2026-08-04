@@ -7,7 +7,7 @@ export const indexPath = join(distDirectory, "index.html");
 export const workIndexPath = join(distDirectory, "work", "index.html");
 export const cvPath = join(distDirectory, "cv.pdf");
 
-export const draftCaseStudies = [
+export const caseStudies = [
     {
         slug: "tolstoy-ai-integrations",
         title: "What Building 30+ Integrations Taught Me About AI Product Engineering",
@@ -16,17 +16,18 @@ export const draftCaseStudies = [
         additionalImage: "/images/work/klaviyo_integration.png",
     },
     {
-        slug: "yandex-disk-spa-migration",
-        title: "2017, Before LLMs: The Patient Rewrite of Yandex.Disk",
-        homepage: false,
-        cover: "/images/work/yandex-disk-spa-migration.png",
-        additionalImage: "/images/work/yandex-disk-migration-stages.svg",
-    },
-    {
         slug: "tenengroup-ui-migration",
         title: "From Better Architecture to Better Sales in E-Commerce",
         homepage: true,
         cover: "/images/work/tenengroup-checkout-ux.svg",
+        additionalImage: "/images/work/tenengroup-platform-boundary.svg",
+    },
+    {
+        slug: "yandex-disk-spa-migration",
+        title: "2017, Before LLMs: The Patient Rewrite of Yandex.Disk",
+        homepage: true,
+        cover: "/images/work/yandex-disk-spa-migration.png",
+        additionalImage: "/images/work/yandex-disk-migration-stages.svg",
     },
 ];
 

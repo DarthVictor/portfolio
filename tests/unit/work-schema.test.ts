@@ -8,6 +8,12 @@ const validEntry = {
     employerLabel: "Example",
     role: "Engineer",
     period: "2026",
+    evidence: {
+        problem: "A clear problem.",
+        scope: "A defined scope.",
+        decision: "An explicit decision.",
+        outcome: "A verifiable outcome.",
+    },
     disciplines: ["Frontend"],
     technologies: ["TypeScript"],
     cover: {

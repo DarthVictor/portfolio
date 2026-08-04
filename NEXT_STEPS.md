@@ -1,68 +1,47 @@
-# Portfolio Case-Study Plan
+# Portfolio Improvement Plan
 
 ## Goal
 
-Replace all mock work examples with truthful, detailed case studies that support
-Senior Frontend Engineer and Senior Full-Stack Engineer applications.
+Turn the portfolio into credible, recruiter-ready evidence for senior frontend,
+full-stack, and product-engineering roles. Prioritize proof over decoration and
+publish only content that is accurate, shareable, and interview-defensible.
 
-## Recommended initial case studies
+## Completed improvements
 
-1. **Tolstoy — AI integrations platform**
-   - Current AI-commerce and full-stack work.
-   - Focus: AI Studio infrastructure, 40+ third-party integrations, React,
-     TypeScript, AWS Lambda, DynamoDB, and PostgreSQL.
+1. **Published finished case studies**
+   - Tolstoy, Tenengroup, and Yandex case studies are production-visible,
+     indexable work without a Draft label.
 
-2. **Bright Data — Payment workflows**
-   - Focus: integrating Stripe, PayPal, and BlueSnap across React and Node.js
-     services.
-   - Best fit for fintech, payments, and full-stack applications.
+2. **Made case studies scannable evidence**
+   - Every case study opens with a factual Problem, My scope, Key decision, and
+     Outcome panel.
+   - The Tenengroup case study includes a labelled, sanitized diagram of the
+     migration's platform boundaries and delivery foundation.
 
-3. **Bright Data — Frontend performance**
-   - Focus: Toolip.io performance work and the 25% page-load improvement.
+3. **Reviewed visual evidence**
+   - Tolstoy's connector catalogue and OAuth settings screens substantiate the
+     integration and customer-access claims.
+   - Yandex's staged-migration and parallel-delivery diagrams substantiate the
+     migration strategy; an unrelated later-product screenshot was removed.
 
-4. **Tenengroup — Checkout and conversion**
-   - Focus: MYKA and Oak & Luna shopping-cart and checkout experiences, and
-     the 20% reduction in cart abandonment.
+4. **Kept existing metrics unchanged**
+   - Existing numerical outcomes stay as written. Analytics and measurement
+     details are not currently available, so no new precision or attribution was
+     invented.
 
-5. **Luxoft / VTB — Microfrontend migration**
-   - Focus: Webpack Module Federation, independent module deployments, and
-     frontend architecture leadership in an enterprise setting.
+5. **Clarified the hiring position**
+   - The portfolio leads with **Senior Frontend Engineer**, the strongest
+     consistent thread across the experience, case studies, and CV.
+   - Full-stack work remains supporting evidence for end-to-end product delivery.
 
-6. **Idea Platform — Founding-engineer startup work**
-   - Frame: “Building an early-stage product as a founding engineer.”
-   - Formal CV title remains **Senior Frontend Developer**.
-   - Focus: a four-person startup, early AngularJS product development,
-     NativeScript mobile work, Java EE/JAX-RS backend work, three client
-     engagements, hiring and mentoring two engineers, and establishing
-     automated testing.
+6. **Finished distribution polish**
+   - All public pages now have canonical URLs on `https://darthvictor.xyz`.
+   - Open Graph and Twitter metadata use an original 1200×630 portfolio preview.
+   - Production and preview output, navigation, and public routes were checked.
 
-## Role-specific alternatives
+## Do not add
 
-- **Startup and product roles:** Keep Idea Platform prominent.
-- **Enterprise frontend and architecture roles:** Include Luxoft and Yandex.
-- **Fintech, payments, and full-stack roles:** Include Bright Data payments
-  and Mail.ru Group / VK payment-platform and CI/CD work.
-
-## Secondary candidates
-
-- **Yandex — Frontend modernization:** strong scale and credibility signal;
-  use for frontend-product applications.
-- **Mail.ru Group / VK — Payment environments:** strong CI/CD, Docker,
-  payment-platform, and 30% feedback-cycle improvement story.
-- **Tolstoy — Design-system infrastructure:** add only if it has enough
-  concrete decisions, scope, and outcomes to stand independently.
-
-## Content workflow
-
-For each selected case study, gather only factual, shareable information:
-
-1. Situation and problem
-2. Personal role and scope
-3. Constraints and confidentiality boundaries
-4. Decisions and alternatives considered
-5. Frontend and backend implementation responsibilities
-6. Measurable outcome or validation
-7. Tradeoffs and lessons
-
-Begin with Idea Platform and Tolstoy, then complete the remaining stories in
-the order that best matches the target job applications.
+- Skill bars, technology-logo walls, decorative AI effects, or animation for
+  its own sake.
+- Unverifiable metrics, anonymous testimonials, or confidential product data.
+- More long-form prose without stronger evidence.
