@@ -1,29 +1,29 @@
 {
-  "version": 1,
-  "skills": {
-    "astro": {
-      "source": "astrolicious/agent-skills",
-      "sourceType": "github",
-      "skillPath": "skills/astro/SKILL.md",
-      "computedHash": "3a70f9666e7b6a03efb939b7e62938f4d3a6a5d956b2cc3c10011fda6ba27e9b"
-    },
-    "cv-reviewer": {
-      "source": "primordian-studio/cv-reviewer-skills",
-      "sourceType": "github",
-      "skillPath": "skills/cv-reviewer/SKILL.md",
-      "computedHash": "2d2c64f6a5c7276e67bd933675f51efbfa7719d85e68d4cdfd1f58959b215ed4"
-    },
-    "resume-tailor": {
-      "source": "claude-office-skills/skills",
-      "sourceType": "github",
-      "skillPath": "resume-tailor/SKILL.md",
-      "computedHash": "ae7015b93492bdfde83ceee06ba26bdcd8e1f2adcc9905a1974f0fa76c6f7f43"
-    },
-    "technical-article-writer": {
-      "source": "samber/cc-skills",
-      "sourceType": "github",
-      "skillPath": "skills/technical-article-writer/SKILL.md",
-      "computedHash": "7409462c460c90d0f3bede162496b0925d64b783d3efdcf59a7c9dfd2e1c96a2"
+    "version": 1,
+    "skills": {
+        "astro": {
+            "source": "astrolicious/agent-skills",
+            "sourceType": "github",
+            "skillPath": "skills/astro/SKILL.md",
+            "computedHash": "3a70f9666e7b6a03efb939b7e62938f4d3a6a5d956b2cc3c10011fda6ba27e9b"
+        },
+        "cv-reviewer": {
+            "source": "primordian-studio/cv-reviewer-skills",
+            "sourceType": "github",
+            "skillPath": "skills/cv-reviewer/SKILL.md",
+            "computedHash": "2d2c64f6a5c7276e67bd933675f51efbfa7719d85e68d4cdfd1f58959b215ed4"
+        },
+        "resume-tailor": {
+            "source": "claude-office-skills/skills",
+            "sourceType": "github",
+            "skillPath": "resume-tailor/SKILL.md",
+            "computedHash": "ae7015b93492bdfde83ceee06ba26bdcd8e1f2adcc9905a1974f0fa76c6f7f43"
+        },
+        "technical-article-writer": {
+            "source": "samber/cc-skills",
+            "sourceType": "github",
+            "skillPath": "skills/technical-article-writer/SKILL.md",
+            "computedHash": "7409462c460c90d0f3bede162496b0925d64b783d3efdcf59a7c9dfd2e1c96a2"
+        }
     }
-  }
 }

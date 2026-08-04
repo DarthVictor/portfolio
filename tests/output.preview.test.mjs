@@ -52,15 +52,20 @@ test("every preview case-study route is indexable, stable, and static", () => {
     for (const { slug, title, cover, additionalImage } of caseStudies) {
         const html = readOutput(workPagePath(slug));
 
-        assert.doesNotMatch(html, /<meta name="robots" content="noindex, nofollow"/);
+        assert.doesNotMatch(
+            html,
+            /<meta name="robots" content="noindex, nofollow"/,
+        );
         assert.doesNotMatch(html, /draft-label/);
         assert.match(html, new RegExp(`<h1[^>]*>${escapeRegExp(title)}</h1>`));
-        assert.match(
-            html,
-            /<h2 id="evidence-heading"[^>]*>At a glance<\/h2>/,
-        );
+        assert.match(html, /<h2 id="evidence-heading"[^>]*>At a glance<\/h2>/);
 
-        for (const label of ["Problem", "My scope", "Key decision", "Outcome"]) {
+        for (const label of [
+            "Problem",
+            "My scope",
+            "Key decision",
+            "Outcome",
+        ]) {
             assert.match(html, new RegExp(`<dt[^>]*>${label}<\/dt>`));
         }
 

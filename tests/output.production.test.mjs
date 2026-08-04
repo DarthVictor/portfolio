@@ -69,7 +69,10 @@ test("production homepage has the planned semantic structure", () => {
         indexHtml,
         /<meta property="og:image" content="https:\/\/darthvictor\.xyz\/images\/social-preview\.jpg"/,
     );
-    assert.match(indexHtml, /<meta name="twitter:card" content="summary_large_image"/);
+    assert.match(
+        indexHtml,
+        /<meta name="twitter:card" content="summary_large_image"/,
+    );
     assert.equal(existsSync(cvPath), true);
 
     for (const { slug } of caseStudies) {
@@ -120,7 +123,12 @@ test("production work archive contains published case studies and routes", () =>
             /<h2 id="evidence-heading"[^>]*>At a glance<\/h2>/,
         );
 
-        for (const label of ["Problem", "My scope", "Key decision", "Outcome"]) {
+        for (const label of [
+            "Problem",
+            "My scope",
+            "Key decision",
+            "Outcome",
+        ]) {
             assert.match(caseStudyHtml, new RegExp(`<dt[^>]*>${label}<\/dt>`));
         }
 
@@ -130,7 +138,10 @@ test("production work archive contains published case studies and routes", () =>
         );
 
         if (additionalImage) {
-            assert.match(caseStudyHtml, new RegExp(escapeRegExp(additionalImage)));
+            assert.match(
+                caseStudyHtml,
+                new RegExp(escapeRegExp(additionalImage)),
+            );
         }
 
         assertNoClientJavaScript(caseStudyHtml, `production ${slug}`);
