@@ -1,68 +1,44 @@
-# Portfolio Case-Study Plan
+# Portfolio Improvement Plan
 
 ## Goal
 
-Replace all mock work examples with truthful, detailed case studies that support
-Senior Frontend Engineer and Senior Full-Stack Engineer applications.
+Turn the portfolio into credible, recruiter-ready evidence for senior frontend,
+full-stack, and product-engineering roles. Prioritize proof over decoration and
+publish only content that is accurate, shareable, and interview-defensible.
 
-## Recommended initial case studies
+## Progress
 
-1. **Tolstoy — AI integrations platform**
-   - Current AI-commerce and full-stack work.
-   - Focus: AI Studio infrastructure, 40+ third-party integrations, React,
-     TypeScript, AWS Lambda, DynamoDB, and PostgreSQL.
+1. **Published finished case studies — complete**
+   - Tolstoy, Tenengroup, and Yandex case studies are now production-visible,
+     indexable work without a Draft label.
+   - Production output must include the three case-study routes and the `/work`
+     index.
 
-2. **Bright Data — Payment workflows**
-   - Focus: integrating Stripe, PayPal, and BlueSnap across React and Node.js
-     services.
-   - Best fit for fintech, payments, and full-stack applications.
+2. **Make every case study scannable evidence — current priority**
+   - Add a short opening panel: problem, personal scope, key decision, outcome,
+     and confidentiality boundary.
+   - Add sanitized visuals or diagrams where they clarify the work; begin with
+     the Tenengroup study, which currently lacks in-body evidence.
 
-3. **Bright Data — Frontend performance**
-   - Focus: Toolip.io performance work and the 25% page-load improvement.
+3. **Make claims interview-safe**
+   - For each metric, record baseline, measurement period, source, and Victor's
+     direct contribution.
+   - Reword or remove any outcome that cannot be explained precisely.
 
-4. **Tenengroup — Checkout and conversion**
-   - Focus: MYKA and Oak & Luna shopping-cart and checkout experiences, and
-     the 20% reduction in cart abandonment.
+4. **Clarify the hiring position**
+   - Choose one primary headline and align the hero, selected work, and CV to
+     it: senior frontend/product engineer or senior full-stack/product engineer.
+   - Replace the Yandex "Before LLMs" framing with a title centred on the
+     migration and delivery achievement.
 
-5. **Luxoft / VTB — Microfrontend migration**
-   - Focus: Webpack Module Federation, independent module deployments, and
-     frontend architecture leadership in an enterprise setting.
+5. **Finish distribution polish**
+   - Add canonical URLs and Open Graph/Twitter metadata after confirming the
+     public domain and social-preview image.
+   - Recheck desktop and mobile navigation, accessibility, and production output.
 
-6. **Idea Platform — Founding-engineer startup work**
-   - Frame: “Building an early-stage product as a founding engineer.”
-   - Formal CV title remains **Senior Frontend Developer**.
-   - Focus: a four-person startup, early AngularJS product development,
-     NativeScript mobile work, Java EE/JAX-RS backend work, three client
-     engagements, hiring and mentoring two engineers, and establishing
-     automated testing.
+## Do not add
 
-## Role-specific alternatives
-
-- **Startup and product roles:** Keep Idea Platform prominent.
-- **Enterprise frontend and architecture roles:** Include Luxoft and Yandex.
-- **Fintech, payments, and full-stack roles:** Include Bright Data payments
-  and Mail.ru Group / VK payment-platform and CI/CD work.
-
-## Secondary candidates
-
-- **Yandex — Frontend modernization:** strong scale and credibility signal;
-  use for frontend-product applications.
-- **Mail.ru Group / VK — Payment environments:** strong CI/CD, Docker,
-  payment-platform, and 30% feedback-cycle improvement story.
-- **Tolstoy — Design-system infrastructure:** add only if it has enough
-  concrete decisions, scope, and outcomes to stand independently.
-
-## Content workflow
-
-For each selected case study, gather only factual, shareable information:
-
-1. Situation and problem
-2. Personal role and scope
-3. Constraints and confidentiality boundaries
-4. Decisions and alternatives considered
-5. Frontend and backend implementation responsibilities
-6. Measurable outcome or validation
-7. Tradeoffs and lessons
-
-Begin with Idea Platform and Tolstoy, then complete the remaining stories in
-the order that best matches the target job applications.
+- Skill bars, technology-logo walls, decorative AI effects, or animation for
+  its own sake.
+- Unverifiable metrics, anonymous testimonials, or confidential product data.
+- More long-form prose without stronger evidence.
