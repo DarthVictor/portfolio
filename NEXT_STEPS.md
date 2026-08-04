@@ -17,16 +17,17 @@ publish only content that is accurate, shareable, and interview-defensible.
 2. **Make case studies scannable evidence — complete**
    - Every case study opens with a factual Problem, My scope, Key decision, and
      Outcome panel.
-   - The Tenengroup case study now includes a labelled, sanitized diagram of the
+   - The Tenengroup case study includes a labelled, sanitized diagram of the
      migration's platform boundaries and delivery foundation.
 
-3. **Review remaining visual evidence — current priority**
-   - Check that the existing Tolstoy and Yandex images substantiate a specific
-     claim rather than act as decoration.
-   - Add or replace visual evidence only where it improves the reader's ability
-     to assess the engineering work.
+3. **Review remaining visual evidence — complete**
+   - Tolstoy's connector catalogue and OAuth settings screens substantiate the
+     integration and customer-access claims.
+   - Yandex's staged-migration and parallel-delivery diagrams substantiate the
+     migration strategy; the later-product screenshot was removed because it
+     did not evidence the 2017–2019 work.
 
-4. **Make claims interview-safe**
+4. **Make claims interview-safe — current priority**
    - For each metric, record baseline, measurement period, source, and Victor's
      direct contribution.
    - Reword or remove any outcome that cannot be explained precisely.
