@@ -4,6 +4,11 @@ summary: "What began as a checkout rewrite became a full multi-brand migration: 
 employerLabel: "Tenengroup"
 role: "Senior Full Stack Developer"
 period: "Jul 2022 — Feb 2024"
+evidence:
+    problem: "A template-coupled storefront made multi-brand commerce changes harder to build, test, and release."
+    scope: "Senior full-stack delivery across cart and checkout, the frontend platform, and API contracts with .NET teams."
+    decision: "Replace server-template coupling with a Next.js and React frontend, a modern .NET API, and explicit server/client state boundaries."
+    outcome: "Cart and checkout work reduced abandonment by 20% while creating a reusable multi-brand platform foundation."
 disciplines:
     - "E-commerce architecture"
     - "Platform migration"
@@ -87,6 +92,18 @@ This was the architectural shift that mattered most. Framework names are less
 important than the result: the UI could evolve independently, the backend could
 serve it through an intentional API, and both sides could be developed and
 tested as parts of a platform rather than as pieces of a page.
+
+<figure class="case-image">
+    <img
+        src="/images/work/tenengroup-platform-boundary.svg"
+        alt="Simplified diagram of the migration from .NET templates and React widgets to a Next.js and React frontend behind a modern .NET API, with shared multi-brand delivery infrastructure."
+    />
+    <figcaption>
+        A simplified model of the migration's intended boundaries, rather than a
+        literal production topology: shared platform foundations, explicit API
+        contracts, and intentional variation for each brand.
+    </figcaption>
+</figure>
 
 ## State needed two different homes
 

@@ -55,6 +55,14 @@ test("every preview case-study route is indexable, stable, and static", () => {
         assert.doesNotMatch(html, /<meta name="robots" content="noindex, nofollow"/);
         assert.doesNotMatch(html, /draft-label/);
         assert.match(html, new RegExp(`<h1[^>]*>${escapeRegExp(title)}</h1>`));
+        assert.match(
+            html,
+            /<h2 id="evidence-heading"[^>]*>At a glance<\/h2>/,
+        );
+
+        for (const label of ["Problem", "My scope", "Key decision", "Outcome"]) {
+            assert.match(html, new RegExp(`<dt[^>]*>${label}<\/dt>`));
+        }
 
         assert.doesNotMatch(html, /aria-label="Editorial question"/);
         assert.match(html, new RegExp(`<img[^>]*src="${escapeRegExp(cover)}"`));

@@ -20,6 +20,7 @@ export const caseStudies = [
         title: "From Better Architecture to Better Sales in E-Commerce",
         homepage: true,
         cover: "/images/work/tenengroup-checkout-ux.svg",
+        additionalImage: "/images/work/tenengroup-platform-boundary.svg",
     },
     {
         slug: "yandex-disk-spa-migration",

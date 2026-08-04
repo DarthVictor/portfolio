@@ -48,6 +48,27 @@ const confidentialityNotes = {
                     <li>{tag}</li>
                 ))}
             </ul>
+            <section class="case-evidence" aria-labelledby="evidence-heading">
+                <h2 id="evidence-heading">At a glance</h2>
+                <dl class="evidence-list">
+                    <div>
+                        <dt>Problem</dt>
+                        <dd>{data.evidence.problem}</dd>
+                    </div>
+                    <div>
+                        <dt>My scope</dt>
+                        <dd>{data.evidence.scope}</dd>
+                    </div>
+                    <div>
+                        <dt>Key decision</dt>
+                        <dd>{data.evidence.decision}</dd>
+                    </div>
+                    <div>
+                        <dt>Outcome</dt>
+                        <dd>{data.evidence.outcome}</dd>
+                    </div>
+                </dl>
+            </section>
             <p class="confidentiality-note">
                 {confidentialityNotes[data.confidentiality]}
             </p>
@@ -161,6 +182,38 @@ const confidentialityNotes = {
         color: var(--color-text-muted);
         font-family: var(--font-mono);
         font-size: var(--font-size-micro);
+    }
+
+    .case-evidence {
+        margin-block-start: var(--space-8);
+        border: var(--card-border);
+        border-radius: var(--radius-medium);
+        background: var(--color-surface);
+        padding: var(--card-padding);
+    }
+
+    .case-evidence h2 {
+        font-size: var(--font-size-heading);
+        letter-spacing: var(--letter-spacing-heading);
+        line-height: var(--line-height-heading);
+    }
+
+    .evidence-list {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: var(--space-5) var(--space-7);
+        margin: var(--space-6) 0 0;
+    }
+
+    .evidence-list > div {
+        border-block-start: 1px solid var(--color-border);
+        padding-block-start: var(--space-3);
+    }
+
+    .evidence-list dd {
+        color: var(--color-text-muted);
+        font-weight: var(--font-weight-medium);
+        line-height: 1.5;
     }
 
     .confidentiality-note {
@@ -278,6 +331,10 @@ const confidentialityNotes = {
 
     @media (max-width: 48rem) {
         .project-facts {
+            grid-template-columns: minmax(0, 1fr);
+        }
+
+        .evidence-list {
             grid-template-columns: minmax(0, 1fr);
         }
 

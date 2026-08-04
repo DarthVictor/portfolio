@@ -98,6 +98,15 @@ test("production work archive contains published case studies and routes", () =>
         );
         assert.match(
             caseStudyHtml,
+            /<h2 id="evidence-heading"[^>]*>At a glance<\/h2>/,
+        );
+
+        for (const label of ["Problem", "My scope", "Key decision", "Outcome"]) {
+            assert.match(caseStudyHtml, new RegExp(`<dt[^>]*>${label}<\/dt>`));
+        }
+
+        assert.match(
+            caseStudyHtml,
             new RegExp(`<img[^>]*src="${escapeRegExp(cover)}"`),
         );
 

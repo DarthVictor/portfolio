@@ -7,6 +7,12 @@ export const workSchema = z
         employerLabel: z.string(),
         role: z.string(),
         period: z.string(),
+        evidence: z.object({
+            problem: z.string(),
+            scope: z.string(),
+            decision: z.string(),
+            outcome: z.string(),
+        }),
         disciplines: z.array(z.string()).min(1),
         technologies: z.array(z.string()).min(1),
         featured: z.boolean().default(false),
