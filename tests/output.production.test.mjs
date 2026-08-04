@@ -49,7 +49,7 @@ test("production homepage has the planned semantic structure", () => {
     }));
 
     expectHeadings(headings, [
-        { level: 1, text: "Victor Follet, senior product engineer" },
+        { level: 1, text: "Victor Follet, senior frontend engineer" },
         { level: 2, text: "Selected work" },
         { level: 2, text: "Experience" },
         { level: 2, text: "Capabilities" },
@@ -61,6 +61,15 @@ test("production homepage has the planned semantic structure", () => {
     assert.match(indexHtml, /href="\/#about-heading"/);
     assert.match(indexHtml, /href="\/#contact-heading"/);
     assert.match(indexHtml, /href="\/cv\.pdf"/);
+    assert.match(
+        indexHtml,
+        /<link rel="canonical" href="https:\/\/darthvictor\.xyz\/"/,
+    );
+    assert.match(
+        indexHtml,
+        /<meta property="og:image" content="https:\/\/darthvictor\.xyz\/images\/social-preview\.jpg"/,
+    );
+    assert.match(indexHtml, /<meta name="twitter:card" content="summary_large_image"/);
     assert.equal(existsSync(cvPath), true);
 
     for (const { slug } of caseStudies) {
@@ -92,6 +101,16 @@ test("production work archive contains published case studies and routes", () =>
             /<meta name="robots" content="noindex, nofollow"/,
         );
         assert.doesNotMatch(caseStudyHtml, /draft-label/);
+        assert.match(
+            caseStudyHtml,
+            new RegExp(
+                `<link rel="canonical" href="https://darthvictor\\.xyz/work/${slug}/"`,
+            ),
+        );
+        assert.match(
+            caseStudyHtml,
+            /<meta property="og:image" content="https:\/\/darthvictor\.xyz\/images\/social-preview\.jpg"/,
+        );
         assert.match(
             caseStudyHtml,
             new RegExp(`<h1[^>]*>${escapeRegExp(title)}</h1>`),

@@ -6,42 +6,38 @@ Turn the portfolio into credible, recruiter-ready evidence for senior frontend,
 full-stack, and product-engineering roles. Prioritize proof over decoration and
 publish only content that is accurate, shareable, and interview-defensible.
 
-## Progress
+## Completed improvements
 
-1. **Published finished case studies — complete**
+1. **Published finished case studies**
    - Tolstoy, Tenengroup, and Yandex case studies are production-visible,
      indexable work without a Draft label.
-   - Production output contains the three case-study routes and the `/work`
-     index.
 
-2. **Make case studies scannable evidence — complete**
+2. **Made case studies scannable evidence**
    - Every case study opens with a factual Problem, My scope, Key decision, and
      Outcome panel.
    - The Tenengroup case study includes a labelled, sanitized diagram of the
      migration's platform boundaries and delivery foundation.
 
-3. **Review remaining visual evidence — complete**
+3. **Reviewed visual evidence**
    - Tolstoy's connector catalogue and OAuth settings screens substantiate the
      integration and customer-access claims.
    - Yandex's staged-migration and parallel-delivery diagrams substantiate the
-     migration strategy; the later-product screenshot was removed because it
-     did not evidence the 2017–2019 work.
+     migration strategy; an unrelated later-product screenshot was removed.
 
-4. **Make claims interview-safe — current priority**
-   - For each metric, record baseline, measurement period, source, and Victor's
-     direct contribution.
-   - Reword or remove any outcome that cannot be explained precisely.
+4. **Kept existing metrics unchanged**
+   - Existing numerical outcomes stay as written. Analytics and measurement
+     details are not currently available, so no new precision or attribution was
+     invented.
 
-5. **Clarify the hiring position**
-   - Choose one primary headline and align the hero, selected work, and CV to
-     it: senior frontend/product engineer or senior full-stack/product engineer.
-   - Replace the Yandex "Before LLMs" framing with a title centred on the
-     migration and delivery achievement.
+5. **Clarified the hiring position**
+   - The portfolio leads with **Senior Frontend Engineer**, the strongest
+     consistent thread across the experience, case studies, and CV.
+   - Full-stack work remains supporting evidence for end-to-end product delivery.
 
-6. **Finish distribution polish**
-   - Add canonical URLs and Open Graph/Twitter metadata after confirming the
-     public domain and social-preview image.
-   - Recheck desktop and mobile navigation, accessibility, and production output.
+6. **Finished distribution polish**
+   - All public pages now have canonical URLs on `https://darthvictor.xyz`.
+   - Open Graph and Twitter metadata use an original 1200×630 portfolio preview.
+   - Production and preview output, navigation, and public routes were checked.
 
 ## Do not add
 
