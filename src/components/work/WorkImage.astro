@@ -1,7 +1,10 @@
 ---
 import { Picture } from "astro:assets";
 
-import { getWorkImage } from "../../lib/work-images";
+import {
+    getWorkImage,
+    getWorkImageDimensions,
+} from "../../lib/work-images";
 
 interface Props {
     alt: string;
@@ -13,18 +16,41 @@ interface Props {
 
 const { alt, height, sizes, src, width } = Astro.props;
 const image = getWorkImage(src);
+const dimensions = getWorkImageDimensions(src);
+const aspectRatio =
+    dimensions === undefined ? undefined : `${dimensions.width} / ${dimensions.height}`;
 ---
 
 {
     image === undefined ? (
         <img src={src} alt={alt} width={width} height={height} loading="lazy" />
     ) : (
-        <Picture
-            src={image}
-            alt={alt}
-            formats={["avif", "webp"]}
-            layout="constrained"
-            sizes={sizes}
-        />
+        <span class="work-image" style={`--work-image-aspect-ratio: ${aspectRatio}`}>
+            <Picture
+                src={image}
+                alt={alt}
+                formats={["avif", "webp"]}
+                layout="constrained"
+                sizes={sizes}
+            />
+        </span>
     )
 }
+
+<style>
+    .work-image {
+        display: block;
+        aspect-ratio: var(--work-image-aspect-ratio);
+    }
+
+    .work-image :global(picture),
+    .work-image :global(img) {
+        display: block;
+        inline-size: 100%;
+        block-size: 100%;
+    }
+
+    .work-image :global(img) {
+        object-fit: contain;
+    }
+</style>

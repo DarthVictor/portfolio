@@ -120,7 +120,13 @@ test("production work archive contains published case studies and routes", () =>
     assert.match(workHtml, /href="#top"/);
     assertNoClientJavaScript(workHtml, "production work archive");
 
-    for (const { slug, title, cover, optimizedImageCount } of caseStudies) {
+    for (const {
+        slug,
+        title,
+        cover,
+        coverAspectRatio,
+        optimizedImageCount,
+    } of caseStudies) {
         const caseStudyHtml = readOutput(workPagePath(slug));
 
         assert.match(workHtml, new RegExp(`href="/work/${slug}/"`));
@@ -158,6 +164,12 @@ test("production work archive contains published case studies and routes", () =>
             caseStudyHtml,
             /<h2 id="evidence-heading"[^>]*>At a glance<\/h2>/,
         );
+        assert.match(
+            caseStudyHtml,
+            new RegExp(
+                `<figure class="cover" style="--cover-aspect-ratio: ${escapeRegExp(coverAspectRatio)}"[^>]*>`,
+            ),
+        );
 
         for (const label of [
             "Problem",
@@ -175,7 +187,7 @@ test("production work archive contains published case studies and routes", () =>
             );
         } else {
             assert.equal(
-                (caseStudyHtml.match(/<picture>/g) ?? []).length,
+                (caseStudyHtml.match(/<picture\b/g) ?? []).length,
                 optimizedImageCount,
             );
             assert.match(caseStudyHtml, /<source[^>]*type="image\/avif"/);
@@ -188,6 +200,10 @@ test("production work archive contains published case studies and routes", () =>
     assert.match(
         readOutput(workPagePath("tolstoy-ai-integrations")),
         /<meta name="description" content="Lessons from building 30\+ third-party AI integrations for Tolstoy AI Studio, covering product design, access, testing, and operations\."/,
+    );
+    assert.match(
+        readOutput(workPagePath("tolstoy-ai-integrations")),
+        /<span class="work-image" style="--work-image-aspect-ratio: 910 \/ 739"[^>]*>/,
     );
 });
 

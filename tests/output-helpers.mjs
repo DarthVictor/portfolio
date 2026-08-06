@@ -13,6 +13,7 @@ export const caseStudies = [
         title: "What Building 30+ Integrations Taught Me About AI Product Engineering",
         homepage: true,
         cover: "/images/work/tolstoy_connectors.png",
+        coverAspectRatio: "1758 / 1881",
         optimizedImageCount: 2,
     },
     {
@@ -20,6 +21,7 @@ export const caseStudies = [
         title: "From Better Architecture to Better Sales in E-Commerce",
         homepage: true,
         cover: "/images/work/tenengroup-checkout-ux.svg",
+        coverAspectRatio: "1600 / 900",
         optimizedImageCount: 0,
     },
     {
@@ -27,6 +29,7 @@ export const caseStudies = [
         title: "2017, Before LLMs: The Patient Rewrite of Yandex.Disk",
         homepage: true,
         cover: "/images/work/yandex-disk-spa-migration.png",
+        coverAspectRatio: "1672 / 941",
         optimizedImageCount: 1,
     },
 ];

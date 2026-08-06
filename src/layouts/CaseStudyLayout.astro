@@ -12,6 +12,7 @@ interface Props {
 
 const { entry } = Astro.props;
 const { data } = entry;
+const coverAspectRatio = `${data.cover.width} / ${data.cover.height}`;
 const confidentialityNotes = {
     public: "This case study uses public information.",
     anonymized: "Some identifying details are anonymized.",
@@ -125,7 +126,10 @@ const articleStructuredData =
             </p>
         </header>
 
-        <figure class="cover">
+        <figure
+            class="cover"
+            style={`--cover-aspect-ratio: ${coverAspectRatio}`}
+        >
             <WorkImage
                 src={data.cover.src}
                 alt={data.cover.alt}
@@ -283,7 +287,7 @@ const articleStructuredData =
 
     .cover {
         margin: var(--space-8) 0 0;
-        aspect-ratio: 16 / 10;
+        aspect-ratio: var(--cover-aspect-ratio);
         overflow: hidden;
         border: var(--card-border);
         border-radius: var(--radius-large);
@@ -291,7 +295,7 @@ const articleStructuredData =
         box-shadow: var(--shadow-card);
     }
 
-    .cover img {
+    .cover :global(img) {
         inline-size: 100%;
         block-size: 100%;
         object-position: center top;
