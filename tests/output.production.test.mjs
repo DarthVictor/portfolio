@@ -56,7 +56,7 @@ test("production homepage has the planned semantic structure", () => {
         { level: 2, text: "How I work" },
         { level: 2, text: "Contact" },
     ]);
-    assert.match(indexHtml, /href="\/work"/);
+    assert.match(indexHtml, /href="\/work\/"/);
     assert.match(indexHtml, /href="\/#experience-heading"/);
     assert.match(indexHtml, /href="\/#about-heading"/);
     assert.match(indexHtml, /href="\/#contact-heading"/);
@@ -101,6 +101,14 @@ test("production publishes a sitemap containing only public portfolio routes", (
         );
     }
 
+    const urlCount = (sitemap.match(/<url>/g) ?? []).length;
+    const lastmodCount = (
+        sitemap.match(/<lastmod>\d{4}-\d{2}-\d{2}<\/lastmod>/g) ?? []
+    ).length;
+
+    assert.equal(urlCount, caseStudies.length + 2);
+    assert.equal(lastmodCount, urlCount);
+
     assert.match(robots, /User-agent: \*/);
     assert.match(robots, /Allow: \//);
     assert.match(robots, /Sitemap: https:\/\/darthvictor\.xyz\/sitemap\.xml/);
@@ -113,7 +121,7 @@ test("production work archive contains published case studies and routes", () =>
     assert.match(workHtml, /<h1[^>]*>Work<\/h1>/);
     assert.equal(cardCount, caseStudies.length);
     assert.doesNotMatch(workHtml, /Case studies are being prepared/);
-    assert.match(workHtml, /href="\/work"[^>]*aria-current="page"/);
+    assert.match(workHtml, /href="\/work\/"[^>]*aria-current="page"/);
     assert.match(workHtml, /href="\/#experience-heading"/);
     assert.match(workHtml, /href="\/#about-heading"/);
     assert.match(workHtml, /href="\/#contact-heading"/);
@@ -177,7 +185,7 @@ test("production work archive contains published case studies and routes", () =>
             "Key decision",
             "Outcome",
         ]) {
-            assert.match(caseStudyHtml, new RegExp(`<dt[^>]*>${label}<\/dt>`));
+            assert.match(caseStudyHtml, new RegExp(`<dt[^>]*>${label}</dt>`));
         }
 
         if (optimizedImageCount === 0) {

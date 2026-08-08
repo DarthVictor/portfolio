@@ -3,13 +3,13 @@ import type { SelectedWorkItem } from "../../data/homepage";
 
 type Props = SelectedWorkItem & {
     number: string;
-    caseStudies: readonly {
+    links: readonly {
         href: string;
         label: string;
     }[];
 };
 
-const { number, meta, title, summary, technologies, caseStudies } = Astro.props;
+const { number, meta, title, summary, technologies, links } = Astro.props;
 ---
 
 <li class="work-card">
@@ -19,9 +19,9 @@ const { number, meta, title, summary, technologies, caseStudies } = Astro.props;
         <h3 class="type-card-title">{title}</h3>
         <p>{summary}</p>
         {
-            caseStudies.length > 0 && (
-                <ul class="case-links" aria-label="Related case studies">
-                    {caseStudies.map(({ href, label }) => (
+            links.length > 0 && (
+                <ul class="card-links" aria-label="Project links">
+                    {links.map(({ href, label }) => (
                         <li>
                             <a href={href}>
                                 {label}
@@ -72,14 +72,14 @@ const { number, meta, title, summary, technologies, caseStudies } = Astro.props;
         color: var(--color-text-muted);
     }
 
-    .case-links {
+    .card-links {
         display: grid;
         gap: var(--space-2);
         margin-block-start: var(--space-6);
         list-style: none;
     }
 
-    .case-links a {
+    .card-links a {
         display: inline-flex;
         align-items: baseline;
         gap: var(--space-2);
@@ -87,7 +87,7 @@ const { number, meta, title, summary, technologies, caseStudies } = Astro.props;
         font-weight: var(--font-weight-semibold);
     }
 
-    .case-links span {
+    .card-links span {
         font-family: var(--font-mono);
         font-size: var(--font-size-small);
     }

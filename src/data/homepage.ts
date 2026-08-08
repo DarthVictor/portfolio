@@ -4,6 +4,10 @@ export interface SelectedWorkItem {
     summary: string;
     technologies: readonly string[];
     caseStudySlugs: readonly string[];
+    externalLinks?: readonly {
+        href: string;
+        label: string;
+    }[];
 }
 
 interface DateLabel {
@@ -64,6 +68,20 @@ export const selectedWork = [
             "Moving a live Yandex.Disk product from an internal frontend framework to React and Redux without stopping feature delivery.",
         technologies: ["React 16", "Redux", "ES6"],
         caseStudySlugs: ["yandex-disk-spa-migration"],
+    },
+    {
+        meta: "Personal project · Election data",
+        title: "Israel Election Results Explorer",
+        summary:
+            "Official Knesset results for elections 21–25, mapped by locality and comparable across elections.",
+        technologies: ["SolidJS", "TypeScript", "Leaflet"],
+        caseStudySlugs: [],
+        externalLinks: [
+            {
+                href: "https://israel-election-results.darthvictor.xyz",
+                label: "Open the live explorer",
+            },
+        ],
     },
 ] satisfies readonly SelectedWorkItem[];
 

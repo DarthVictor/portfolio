@@ -11,13 +11,16 @@ const visibleEntries = new Map(
 
 const workItems = selectedWork.map((work) => ({
     ...work,
-    caseStudies: work.caseStudySlugs.flatMap((slug) => {
-        const entry = visibleEntries.get(slug);
+    links: [
+        ...work.caseStudySlugs.flatMap((slug) => {
+            const entry = visibleEntries.get(slug);
 
-        return entry
-            ? [{ href: getWorkHref(entry.id), label: entry.data.title }]
-            : [];
-    }),
+            return entry
+                ? [{ href: getWorkHref(entry.id), label: entry.data.title }]
+                : [];
+        }),
+        ...(work.externalLinks ?? []),
+    ],
 }));
 ---
 

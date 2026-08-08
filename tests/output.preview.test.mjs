@@ -66,7 +66,7 @@ test("every preview case-study route is indexable, stable, and static", () => {
             "Key decision",
             "Outcome",
         ]) {
-            assert.match(html, new RegExp(`<dt[^>]*>${label}<\/dt>`));
+            assert.match(html, new RegExp(`<dt[^>]*>${label}</dt>`));
         }
 
         assert.doesNotMatch(html, /aria-label="Editorial question"/);
@@ -77,14 +77,14 @@ test("every preview case-study route is indexable, stable, and static", () => {
             );
         } else {
             assert.equal(
-                (html.match(/<picture>/g) ?? []).length,
+                (html.match(/<picture\b/g) ?? []).length,
                 optimizedImageCount,
             );
             assert.match(html, /<source[^>]*type="image\/avif"/);
             assert.match(html, /<source[^>]*type="image\/webp"/);
         }
 
-        assert.match(html, /href="\/work"/);
+        assert.match(html, /href="\/work\/"/);
         assertNoClientJavaScript(html, `preview ${slug}`);
     }
 });
