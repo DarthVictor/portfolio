@@ -222,6 +222,11 @@ export const contactLinks = [
         symbol: "↗",
     },
     {
+        href: profileLinks.medium,
+        label: "Medium",
+        symbol: "↗",
+    },
+    {
         href: profileLinks.cv,
         label: "Download CV",
         symbol: "↓",

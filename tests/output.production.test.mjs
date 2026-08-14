@@ -78,6 +78,7 @@ test("production homepage has the planned semantic structure", () => {
     assert.match(indexHtml, /"@type":"Person"/);
     assert.match(indexHtml, /"@type":"ProfilePage"/);
     assert.match(indexHtml, /"jobTitle":"Senior Full-Stack Engineer"/);
+    assert.match(indexHtml, /https:\/\/medium\.com\/@follet\.victor/);
     assert.match(
         indexHtml,
         /<meta property="og:image:alt" content="Victor Follet, Senior Full-Stack Engineer"/,

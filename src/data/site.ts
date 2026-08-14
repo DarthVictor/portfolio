@@ -14,4 +14,5 @@ export const profileLinks = {
     cv: "/cv.pdf",
     linkedin: "https://www.linkedin.com/in/victor-follet/",
     github: "https://github.com/DarthVictor",
+    medium: "https://medium.com/@follet.victor",
 } as const;
