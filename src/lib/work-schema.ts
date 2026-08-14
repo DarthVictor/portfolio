@@ -19,12 +19,21 @@ export const workSchema = z
         featuredOrder: z.number().int().nonnegative().optional(),
         draft: z.boolean().default(false),
         publishedAt: z.coerce.date().optional(),
+        updatedAt: z.coerce.date().optional(),
         cover: z.object({
             src: z.string(),
             alt: z.string(),
             width: z.number().int().positive(),
             height: z.number().int().positive(),
         }),
+        socialImage: z
+            .object({
+                src: z.string(),
+                alt: z.string(),
+                width: z.number().int().positive(),
+                height: z.number().int().positive(),
+            })
+            .optional(),
         seoDescription: z.string(),
         confidentiality: z.enum(["public", "anonymized", "private"]),
     })

@@ -58,4 +58,19 @@ describe("workSchema publication contract", () => {
             expect(result.data.publishedAt).toBeInstanceOf(Date);
         }
     });
+
+    it("coerces an optional modified date", () => {
+        const result = workSchema.safeParse({
+            ...validEntry,
+            draft: false,
+            publishedAt: "2026-08-01",
+            updatedAt: "2026-08-14",
+        });
+
+        expect(result.success).toBe(true);
+
+        if (result.success) {
+            expect(result.data.updatedAt).toBeInstanceOf(Date);
+        }
+    });
 });

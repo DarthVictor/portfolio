@@ -4,11 +4,31 @@ import SiteLayout from "../../layouts/SiteLayout.astro";
 import { getVisibleWorkEntries } from "../../lib/work-content";
 
 const entries = await getVisibleWorkEntries();
+const workUrl = new URL("/work/", Astro.site).href;
+const workStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+        {
+            "@type": "ListItem",
+            position: 1,
+            name: "Home",
+            item: new URL("/", Astro.site).href,
+        },
+        {
+            "@type": "ListItem",
+            position: 2,
+            name: "Work",
+            item: workUrl,
+        },
+    ],
+};
 ---
 
 <SiteLayout
     title="Work — Victor Follet"
     description="Case studies about product engineering, system design, and technical leadership by Victor Follet."
+    structuredData={workStructuredData}
 >
     <section class="work-archive" aria-labelledby="work-heading">
         <header class="archive-header">

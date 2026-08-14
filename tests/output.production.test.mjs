@@ -49,7 +49,7 @@ test("production homepage has the planned semantic structure", () => {
     }));
 
     expectHeadings(headings, [
-        { level: 1, text: "Victor Follet, senior frontend engineer" },
+        { level: 1, text: "Victor Follet, senior full-stack engineer" },
         { level: 2, text: "Selected work" },
         { level: 2, text: "Experience" },
         { level: 2, text: "Capabilities" },
@@ -60,6 +60,7 @@ test("production homepage has the planned semantic structure", () => {
     assert.match(indexHtml, /href="\/#experience-heading"/);
     assert.match(indexHtml, /href="\/#about-heading"/);
     assert.match(indexHtml, /href="\/#contact-heading"/);
+    assert.match(indexHtml, /Discuss an engineering role/);
     assert.match(indexHtml, /href="\/cv\.pdf"/);
     assert.match(
         indexHtml,
@@ -75,6 +76,13 @@ test("production homepage has the planned semantic structure", () => {
         /<meta name="twitter:card" content="summary_large_image"/,
     );
     assert.match(indexHtml, /"@type":"Person"/);
+    assert.match(indexHtml, /"@type":"ProfilePage"/);
+    assert.match(indexHtml, /"jobTitle":"Senior Full-Stack Engineer"/);
+    assert.match(indexHtml, /https:\/\/medium\.com\/@follet\.victor/);
+    assert.match(
+        indexHtml,
+        /<meta property="og:image:alt" content="Victor Follet, Senior Full-Stack Engineer"/,
+    );
     assert.match(indexHtml, /"@type":"WebSite"/);
     assert.equal(existsSync(cvPath), true);
 
@@ -105,9 +113,34 @@ test("production publishes a sitemap containing only public portfolio routes", (
     const lastmodCount = (
         sitemap.match(/<lastmod>\d{4}-\d{2}-\d{2}<\/lastmod>/g) ?? []
     ).length;
+    const sitemapLocations = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(
+        ([, location]) => location,
+    );
+    const sitemapLastModifiedDates = [
+        ...sitemap.matchAll(/<lastmod>(\d{4}-\d{2}-\d{2})<\/lastmod>/g),
+    ].map(([, date]) => date);
 
     assert.equal(urlCount, caseStudies.length + 2);
-    assert.equal(lastmodCount, urlCount);
+    assert.equal(lastmodCount, caseStudies.length);
+    assert.equal(new Set(sitemapLocations).size, sitemapLocations.length);
+    assert.equal(
+        sitemapLocations.every((location) =>
+            location.startsWith("https://darthvictor.xyz/"),
+        ),
+        true,
+    );
+    assert.equal(
+        sitemapLastModifiedDates.every((date) => new Date(date) <= new Date()),
+        true,
+    );
+    assert.doesNotMatch(
+        sitemap,
+        /<url><loc>https:\/\/darthvictor\.xyz\/<\/loc><lastmod>/,
+    );
+    assert.doesNotMatch(
+        sitemap,
+        /<url><loc>https:\/\/darthvictor\.xyz\/work\/<\/loc><lastmod>/,
+    );
 
     assert.match(robots, /User-agent: \*/);
     assert.match(robots, /Allow: \//);
@@ -119,6 +152,7 @@ test("production work archive contains published case studies and routes", () =>
     const cardCount = (workHtml.match(/class="archive-card"/g) ?? []).length;
 
     assert.match(workHtml, /<h1[^>]*>Work<\/h1>/);
+    assert.match(workHtml, /"@type":"BreadcrumbList"/);
     assert.equal(cardCount, caseStudies.length);
     assert.doesNotMatch(workHtml, /Case studies are being prepared/);
     assert.match(workHtml, /href="\/work\/"[^>]*aria-current="page"/);
@@ -150,9 +184,14 @@ test("production work archive contains published case studies and routes", () =>
                 `<link rel="canonical" href="https://darthvictor\\.xyz/work/${slug}/"`,
             ),
         );
+        assert.doesNotMatch(caseStudyHtml, /images\/social-preview\.jpg/);
         assert.match(
             caseStudyHtml,
-            /<meta property="og:image" content="https:\/\/darthvictor\.xyz\/images\/social-preview\.jpg"/,
+            /<meta property="og:image" content="https:\/\/darthvictor\.xyz\/(?:_astro\/|images\/work\/)[^"']+"/,
+        );
+        assert.match(
+            caseStudyHtml,
+            /<meta property="og:image:alt" content="[^"']+"/,
         );
         assert.match(
             caseStudyHtml,
@@ -163,6 +202,7 @@ test("production work archive contains published case studies and routes", () =>
             /<meta property="article:published_time" content="[^"']+"/,
         );
         assert.match(caseStudyHtml, /"@type":"Article"/);
+        assert.match(caseStudyHtml, /"@type":"BreadcrumbList"/);
         assert.match(caseStudyHtml, /Written by Victor Follet/);
         assert.match(
             caseStudyHtml,

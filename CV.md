@@ -1,12 +1,12 @@
 # Victor Follet
 
-**Senior Frontend & Full-Stack Engineer**
+**Senior Full-Stack Engineer**
 
 Tel Aviv-Yafo, Israel | +972-53-708-5958 | [follet.victor@gmail.com](mailto:follet.victor@gmail.com) | [LinkedIn](https://www.linkedin.com/in/victor-follet/) | [GitHub](https://github.com/DarthVictor)
 
 ## Summary
 
-Senior frontend and full-stack engineer with 15+ years of experience building AI commerce, fintech, SaaS, and high-traffic e-commerce products. Specialized in React, TypeScript, frontend architecture, design systems, and performance, with hands-on experience across Node.js, APIs, databases, and AWS. Led modernization, platform, payments, and integration initiatives at companies including Tolstoy, Bright Data, Mail.ru Group, and Yandex.
+Senior full-stack engineer with 15+ years of experience building AI commerce, fintech, SaaS, and high-traffic e-commerce products. Specialized in React, TypeScript, frontend architecture, design systems, and performance, with hands-on experience across Node.js, APIs, databases, and AWS. Led modernization, platform, payments, and integration initiatives at companies including Tolstoy, Bright Data, Mail.ru Group, and Yandex.
 
 ## Technical Skills
 

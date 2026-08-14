@@ -1,3 +1,5 @@
+import { profileLinks } from "./site";
+
 export interface SelectedWorkItem {
     meta: string;
     title: string;
@@ -38,11 +40,6 @@ export interface ContactLink {
     label: string;
     symbol: string;
 }
-
-export const profileLinks = {
-    email: "follet.victor@gmail.com",
-    cv: "/cv.pdf",
-} as const;
 
 export const selectedWork = [
     {
@@ -215,13 +212,18 @@ export const principles = [
 
 export const contactLinks = [
     {
-        href: "https://www.linkedin.com/in/victor-follet/",
+        href: profileLinks.linkedin,
         label: "LinkedIn",
         symbol: "↗",
     },
     {
-        href: "https://github.com/DarthVictor",
+        href: profileLinks.github,
         label: "GitHub",
+        symbol: "↗",
+    },
+    {
+        href: profileLinks.medium,
+        label: "Medium",
         symbol: "↗",
     },
     {
