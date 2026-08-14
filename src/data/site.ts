@@ -6,6 +6,7 @@ export const siteIdentity = {
     description:
         "Victor Follet is a senior full-stack engineer specializing in React, TypeScript, APIs, cloud infrastructure, and product systems.",
     socialImageAlt: "Victor Follet, Senior Full-Stack Engineer",
+    contactSubject: "Senior engineering role for Victor Follet",
 } as const;
 
 export const profileLinks = {

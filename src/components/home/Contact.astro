@@ -1,18 +1,21 @@
 ---
 import { contactLinks } from "../../data/homepage";
-import { profileLinks } from "../../data/site";
+import { profileLinks, siteIdentity } from "../../data/site";
 ---
 
 <section class="contact-section" aria-labelledby="contact-heading">
     <div>
         <p class="contact-kicker type-label">
-            Have an interesting product problem?
+            Hiring for a senior product engineering role?
         </p>
         <h2 id="contact-heading">Contact</h2>
         <p class="contact-lead">Let’s build something dependable.</p>
     </div>
     <div class="contact-actions">
-        <a class="contact-email" href={`mailto:${profileLinks.email}`}>
+        <a
+            class="contact-email"
+            href={`mailto:${profileLinks.email}?subject=${encodeURIComponent(siteIdentity.contactSubject)}`}
+        >
             {profileLinks.email}
             <span aria-hidden="true">↗</span>
         </a>

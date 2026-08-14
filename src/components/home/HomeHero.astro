@@ -31,7 +31,7 @@ import { profileLinks, siteIdentity } from "../../data/site";
             <div class="hero-actions">
                 <a
                     class="button button-primary"
-                    href={`mailto:${profileLinks.email}`}
+                    href={`mailto:${profileLinks.email}?subject=${encodeURIComponent(siteIdentity.contactSubject)}`}
                 >
                     Discuss an engineering role
                     <span aria-hidden="true">↗</span>

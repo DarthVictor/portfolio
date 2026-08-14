@@ -60,6 +60,7 @@ test("production homepage has the planned semantic structure", () => {
     assert.match(indexHtml, /href="\/#experience-heading"/);
     assert.match(indexHtml, /href="\/#about-heading"/);
     assert.match(indexHtml, /href="\/#contact-heading"/);
+    assert.match(indexHtml, /Discuss an engineering role/);
     assert.match(indexHtml, /href="\/cv\.pdf"/);
     assert.match(
         indexHtml,
