@@ -16,15 +16,14 @@ import HomeSection from "./HomeSection.astro";
                     <p class="capability-label type-label">{capability.label}</p>
                     <h3 class="type-card-title">{capability.title}</h3>
                     <p>{capability.summary}</p>
-                    <p
+                    <span
                         class:list={[
                             "capability-mark",
                             capability.markClass,
                         ]}
+                        data-mark={capability.mark}
                         aria-hidden="true"
-                    >
-                        {capability.mark}
-                    </p>
+                    ></span>
                 </li>
             ))
         }
@@ -64,7 +63,7 @@ import HomeSection from "./HomeSection.astro";
         margin-block-start: var(--space-4);
     }
 
-    li > p:not(.capability-label, .capability-mark) {
+    li > p:not(.capability-label) {
         position: relative;
         z-index: 1;
         max-inline-size: 34ch;
@@ -82,6 +81,10 @@ import HomeSection from "./HomeSection.astro";
         letter-spacing: var(--letter-spacing-decorative);
         line-height: 1;
         user-select: none;
+    }
+
+    .capability-mark::before {
+        content: attr(data-mark);
     }
 
     .code-mark {

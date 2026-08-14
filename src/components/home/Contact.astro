@@ -12,6 +12,7 @@ import { profileLinks, siteIdentity } from "../../data/site";
         <p class="contact-lead">Let’s build something dependable.</p>
     </div>
     <div class="contact-actions">
+        <!--email_off-->
         <a
             class="contact-email"
             href={`mailto:${profileLinks.email}?subject=${encodeURIComponent(siteIdentity.contactSubject)}`}
@@ -19,6 +20,7 @@ import { profileLinks, siteIdentity } from "../../data/site";
             {profileLinks.email}
             <span aria-hidden="true">↗</span>
         </a>
+        <!--/email_off-->
         <ul class="contact-list">
             {
                 contactLinks.map((link) => (
@@ -76,6 +78,7 @@ import { profileLinks, siteIdentity } from "../../data/site";
         display: flex;
         align-items: center;
         justify-content: space-between;
+        min-block-size: 2.75rem;
         gap: var(--space-4);
         border-block-end: 1px solid currentColor;
         padding-block-end: var(--space-3);
@@ -94,6 +97,7 @@ import { profileLinks, siteIdentity } from "../../data/site";
     .contact-list a {
         display: inline-flex;
         align-items: center;
+        min-block-size: 2.75rem;
         gap: var(--space-2);
         border: 1px solid color-mix(in srgb, currentColor 40%, transparent);
         border-radius: var(--radius-pill);

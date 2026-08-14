@@ -29,6 +29,7 @@ import { profileLinks, siteIdentity } from "../../data/site";
                 systems.
             </p>
             <div class="hero-actions">
+                <!--email_off-->
                 <a
                     class="button button-primary"
                     href={`mailto:${profileLinks.email}?subject=${encodeURIComponent(siteIdentity.contactSubject)}`}
@@ -36,6 +37,7 @@ import { profileLinks, siteIdentity } from "../../data/site";
                     Discuss an engineering role
                     <span aria-hidden="true">↗</span>
                 </a>
+                <!--/email_off-->
                 <a class="button button-secondary" href={profileLinks.cv}>
                     Download CV
                     <span aria-hidden="true">↓</span>
