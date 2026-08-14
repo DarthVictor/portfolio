@@ -32,20 +32,65 @@ const articleImageUrl = new URL(
     optimizedCover?.src ?? data.cover.src,
     Astro.site,
 ).href;
+const articleImage = {
+    url:
+        data.socialImage === undefined
+            ? articleImageUrl
+            : new URL(data.socialImage.src, Astro.site).href,
+    alt: data.socialImage?.alt ?? data.cover.alt,
+    width: data.socialImage?.width ?? optimizedCover?.attributes.width ?? data.cover.width,
+    height:
+        data.socialImage?.height ??
+        optimizedCover?.attributes.height ??
+        data.cover.height,
+};
+const articleModifiedAt = data.updatedAt;
 const articleStructuredData =
     !data.draft && data.publishedAt !== undefined
-        ? {
-              "@context": "https://schema.org",
-              "@type": "Article",
-              mainEntityOfPage: canonicalUrl.href,
-              headline: data.title,
-              description: data.seoDescription,
-              image: articleImageUrl,
-              datePublished: data.publishedAt.toISOString(),
-              author: {
-                  "@id": new URL("/#victor-follet", Astro.site).href,
+        ? [
+              {
+                  "@context": "https://schema.org",
+                  "@type": "Article",
+                  mainEntityOfPage: {
+                      "@type": "WebPage",
+                      "@id": canonicalUrl.href,
+                  },
+                  headline: data.title,
+                  description: data.seoDescription,
+                  image: articleImage.url,
+                  datePublished: data.publishedAt.toISOString(),
+                  ...(articleModifiedAt === undefined
+                      ? {}
+                      : { dateModified: articleModifiedAt.toISOString() }),
+                  author: {
+                      "@id": new URL("/#victor-follet", Astro.site).href,
+                  },
               },
-          }
+              {
+                  "@context": "https://schema.org",
+                  "@type": "BreadcrumbList",
+                  itemListElement: [
+                      {
+                          "@type": "ListItem",
+                          position: 1,
+                          name: "Home",
+                          item: new URL("/", Astro.site).href,
+                      },
+                      {
+                          "@type": "ListItem",
+                          position: 2,
+                          name: "Work",
+                          item: new URL("/work/", Astro.site).href,
+                      },
+                      {
+                          "@type": "ListItem",
+                          position: 3,
+                          name: data.title,
+                          item: canonicalUrl.href,
+                      },
+                  ],
+              },
+          ]
         : undefined;
 ---
 
@@ -55,6 +100,8 @@ const articleStructuredData =
     noindex={data.draft}
     openGraphType="article"
     publishedTime={data.publishedAt}
+    modifiedTime={articleModifiedAt}
+    socialImage={articleImage}
     structuredData={articleStructuredData}
 >
     <article class="case-study">

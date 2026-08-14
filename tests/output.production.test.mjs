@@ -76,6 +76,7 @@ test("production homepage has the planned semantic structure", () => {
         /<meta name="twitter:card" content="summary_large_image"/,
     );
     assert.match(indexHtml, /"@type":"Person"/);
+    assert.match(indexHtml, /"@type":"ProfilePage"/);
     assert.match(indexHtml, /"jobTitle":"Senior Full-Stack Engineer"/);
     assert.match(
         indexHtml,
@@ -125,6 +126,7 @@ test("production work archive contains published case studies and routes", () =>
     const cardCount = (workHtml.match(/class="archive-card"/g) ?? []).length;
 
     assert.match(workHtml, /<h1[^>]*>Work<\/h1>/);
+    assert.match(workHtml, /"@type":"BreadcrumbList"/);
     assert.equal(cardCount, caseStudies.length);
     assert.doesNotMatch(workHtml, /Case studies are being prepared/);
     assert.match(workHtml, /href="\/work\/"[^>]*aria-current="page"/);
@@ -156,9 +158,14 @@ test("production work archive contains published case studies and routes", () =>
                 `<link rel="canonical" href="https://darthvictor\\.xyz/work/${slug}/"`,
             ),
         );
+        assert.doesNotMatch(caseStudyHtml, /images\/social-preview\.jpg/);
         assert.match(
             caseStudyHtml,
-            /<meta property="og:image" content="https:\/\/darthvictor\.xyz\/images\/social-preview\.jpg"/,
+            /<meta property="og:image" content="https:\/\/darthvictor\.xyz\/(?:_astro\/|images\/work\/)[^"']+"/,
+        );
+        assert.match(
+            caseStudyHtml,
+            /<meta property="og:image:alt" content="[^"']+"/,
         );
         assert.match(
             caseStudyHtml,
@@ -169,6 +176,7 @@ test("production work archive contains published case studies and routes", () =>
             /<meta property="article:published_time" content="[^"']+"/,
         );
         assert.match(caseStudyHtml, /"@type":"Article"/);
+        assert.match(caseStudyHtml, /"@type":"BreadcrumbList"/);
         assert.match(caseStudyHtml, /Written by Victor Follet/);
         assert.match(
             caseStudyHtml,

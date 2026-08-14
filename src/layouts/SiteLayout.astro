@@ -10,6 +10,13 @@ interface Props {
     noindex?: boolean;
     openGraphType?: "article" | "website";
     publishedTime?: Date;
+    modifiedTime?: Date;
+    socialImage?: {
+        url: string;
+        alt: string;
+        width: number;
+        height: number;
+    };
     structuredData?: Record<string, unknown> | Record<string, unknown>[];
 }
 
@@ -19,11 +26,20 @@ const {
     noindex = false,
     openGraphType = "website",
     publishedTime,
+    modifiedTime,
+    socialImage,
     structuredData: pageStructuredData,
 } = Astro.props;
 const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
-const socialImageUrl = new URL("/images/social-preview.jpg", Astro.site);
+const defaultSocialImage = {
+    url: new URL("/images/social-preview.jpg", Astro.site).href,
+    alt: siteIdentity.socialImageAlt,
+    width: 1200,
+    height: 630,
+};
+const activeSocialImage = socialImage ?? defaultSocialImage;
 const personId = new URL("/#victor-follet", Astro.site).href;
+const homepageUrl = new URL("/", Astro.site).href;
 const homepageStructuredData =
     Astro.url.pathname === "/"
         ? [
@@ -32,16 +48,32 @@ const homepageStructuredData =
                   "@type": "Person",
                   "@id": personId,
                   name: siteIdentity.name,
-                  url: new URL("/", Astro.site).href,
+                  alternateName: "DarthVictor",
+                  description: siteIdentity.description,
+                  url: homepageUrl,
                   jobTitle: siteIdentity.role,
+                  knowsAbout: [
+                      "React",
+                      "TypeScript",
+                      "Product engineering",
+                      "API design",
+                      "Cloud infrastructure",
+                  ],
                   sameAs: [profileLinks.linkedin, profileLinks.github],
+              },
+              {
+                  "@context": "https://schema.org",
+                  "@type": "ProfilePage",
+                  "@id": new URL("/#profile", Astro.site).href,
+                  mainEntity: { "@id": personId },
+                  url: homepageUrl,
               },
               {
                   "@context": "https://schema.org",
                   "@type": "WebSite",
                   "@id": new URL("/#website", Astro.site).href,
                   name: siteIdentity.name,
-                  url: new URL("/", Astro.site).href,
+                  url: homepageUrl,
               },
           ]
         : [];
@@ -71,10 +103,10 @@ const jsonLd = JSON.stringify(structuredData).replaceAll("<", "\\u003c");
         <meta property="og:title" content={title} />
         <meta property="og:description" content={description} />
         <meta property="og:url" content={canonicalUrl} />
-        <meta property="og:image" content={socialImageUrl} />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
-        <meta property="og:image:alt" content={siteIdentity.socialImageAlt} />
+        <meta property="og:image" content={activeSocialImage.url} />
+        <meta property="og:image:width" content={String(activeSocialImage.width)} />
+        <meta property="og:image:height" content={String(activeSocialImage.height)} />
+        <meta property="og:image:alt" content={activeSocialImage.alt} />
         {
             openGraphType === "article" && publishedTime !== undefined && (
                 <meta
@@ -83,11 +115,19 @@ const jsonLd = JSON.stringify(structuredData).replaceAll("<", "\\u003c");
                 />
             )
         }
+        {
+            openGraphType === "article" && modifiedTime !== undefined && (
+                <meta
+                    property="article:modified_time"
+                    content={modifiedTime.toISOString()}
+                />
+            )
+        }
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={title} />
         <meta name="twitter:description" content={description} />
-        <meta name="twitter:image" content={socialImageUrl} />
-        <meta name="twitter:image:alt" content={siteIdentity.socialImageAlt} />
+        <meta name="twitter:image" content={activeSocialImage.url} />
+        <meta name="twitter:image:alt" content={activeSocialImage.alt} />
         {noindex && <meta name="robots" content="noindex, nofollow" />}
         {
             structuredData.length > 0 && (
