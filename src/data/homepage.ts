@@ -184,20 +184,19 @@ export const experience = [
 
 export const capabilities = [
     {
-        label: "Interface",
-        title: "Frontend systems",
+        label: "Full stack",
+        title: "End-to-end product systems",
         summary:
-            "React, Next.js, TypeScript, JavaScript, design systems, and frontend architecture.",
-        mark: "Aa",
+            "React, TypeScript, Node.js, APIs, PostgreSQL, DynamoDB, and the systems that connect product experiences to reliable services.",
+        mark: "∞",
         featured: true,
     },
     {
-        label: "Product",
-        title: "Platform delivery",
+        label: "Frontend",
+        title: "Product interfaces",
         summary:
-            "Node.js, Express, REST APIs, PostgreSQL, MongoDB, and DynamoDB.",
-        mark: "</>",
-        markClass: "code-mark",
+            "React, Next.js, TypeScript, design systems, performance, and frontend architecture for complex product workflows.",
+        mark: "Aa",
     },
     {
         label: "Operations",
