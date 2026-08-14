@@ -112,9 +112,34 @@ test("production publishes a sitemap containing only public portfolio routes", (
     const lastmodCount = (
         sitemap.match(/<lastmod>\d{4}-\d{2}-\d{2}<\/lastmod>/g) ?? []
     ).length;
+    const sitemapLocations = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(
+        ([, location]) => location,
+    );
+    const sitemapLastModifiedDates = [
+        ...sitemap.matchAll(/<lastmod>(\d{4}-\d{2}-\d{2})<\/lastmod>/g),
+    ].map(([, date]) => date);
 
     assert.equal(urlCount, caseStudies.length + 2);
-    assert.equal(lastmodCount, urlCount);
+    assert.equal(lastmodCount, caseStudies.length);
+    assert.equal(new Set(sitemapLocations).size, sitemapLocations.length);
+    assert.equal(
+        sitemapLocations.every((location) =>
+            location.startsWith("https://darthvictor.xyz/"),
+        ),
+        true,
+    );
+    assert.equal(
+        sitemapLastModifiedDates.every((date) => new Date(date) <= new Date()),
+        true,
+    );
+    assert.doesNotMatch(
+        sitemap,
+        /<url><loc>https:\/\/darthvictor\.xyz\/<\/loc><lastmod>/,
+    );
+    assert.doesNotMatch(
+        sitemap,
+        /<url><loc>https:\/\/darthvictor\.xyz\/work\/<\/loc><lastmod>/,
+    );
 
     assert.match(robots, /User-agent: \*/);
     assert.match(robots, /Allow: \//);
