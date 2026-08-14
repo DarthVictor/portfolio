@@ -1,6 +1,7 @@
 ---
 import SiteFooter from "../components/site/SiteFooter.astro";
 import SiteHeader from "../components/site/SiteHeader.astro";
+import { profileLinks, siteIdentity } from "../data/site";
 import "../styles/global.css";
 
 interface Props {
@@ -30,19 +31,16 @@ const homepageStructuredData =
                   "@context": "https://schema.org",
                   "@type": "Person",
                   "@id": personId,
-                  name: "Victor Follet",
+                  name: siteIdentity.name,
                   url: new URL("/", Astro.site).href,
-                  jobTitle: "Senior Frontend Engineer",
-                  sameAs: [
-                      "https://www.linkedin.com/in/victor-follet/",
-                      "https://github.com/DarthVictor",
-                  ],
+                  jobTitle: siteIdentity.role,
+                  sameAs: [profileLinks.linkedin, profileLinks.github],
               },
               {
                   "@context": "https://schema.org",
                   "@type": "WebSite",
                   "@id": new URL("/#website", Astro.site).href,
-                  name: "Victor Follet",
+                  name: siteIdentity.name,
                   url: new URL("/", Astro.site).href,
               },
           ]
@@ -69,14 +67,14 @@ const jsonLd = JSON.stringify(structuredData).replaceAll("<", "\\u003c");
         <link rel="canonical" href={canonicalUrl} />
         <link rel="sitemap" href="/sitemap.xml" />
         <meta property="og:type" content={openGraphType} />
-        <meta property="og:site_name" content="Victor Follet" />
+        <meta property="og:site_name" content={siteIdentity.name} />
         <meta property="og:title" content={title} />
         <meta property="og:description" content={description} />
         <meta property="og:url" content={canonicalUrl} />
         <meta property="og:image" content={socialImageUrl} />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
-        <meta property="og:image:alt" content="Victor Follet, Senior Frontend Engineer" />
+        <meta property="og:image:alt" content={siteIdentity.socialImageAlt} />
         {
             openGraphType === "article" && publishedTime !== undefined && (
                 <meta
@@ -89,7 +87,7 @@ const jsonLd = JSON.stringify(structuredData).replaceAll("<", "\\u003c");
         <meta name="twitter:title" content={title} />
         <meta name="twitter:description" content={description} />
         <meta name="twitter:image" content={socialImageUrl} />
-        <meta name="twitter:image:alt" content="Victor Follet, Senior Frontend Engineer" />
+        <meta name="twitter:image:alt" content={siteIdentity.socialImageAlt} />
         {noindex && <meta name="robots" content="noindex, nofollow" />}
         {
             structuredData.length > 0 && (

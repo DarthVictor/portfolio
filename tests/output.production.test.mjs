@@ -49,7 +49,7 @@ test("production homepage has the planned semantic structure", () => {
     }));
 
     expectHeadings(headings, [
-        { level: 1, text: "Victor Follet, senior frontend engineer" },
+        { level: 1, text: "Victor Follet, senior full-stack engineer" },
         { level: 2, text: "Selected work" },
         { level: 2, text: "Experience" },
         { level: 2, text: "Capabilities" },
@@ -75,6 +75,11 @@ test("production homepage has the planned semantic structure", () => {
         /<meta name="twitter:card" content="summary_large_image"/,
     );
     assert.match(indexHtml, /"@type":"Person"/);
+    assert.match(indexHtml, /"jobTitle":"Senior Full-Stack Engineer"/);
+    assert.match(
+        indexHtml,
+        /<meta property="og:image:alt" content="Victor Follet, Senior Full-Stack Engineer"/,
+    );
     assert.match(indexHtml, /"@type":"WebSite"/);
     assert.equal(existsSync(cvPath), true);
 

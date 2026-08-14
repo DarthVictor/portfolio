@@ -1,15 +1,15 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title description">
-  <title id="title">Victor Follet — Senior Frontend Engineer</title>
-  <desc id="description">Portfolio of Victor Follet, a senior frontend engineer specializing in product systems.</desc>
+  <title id="title">Victor Follet — Senior Full-Stack Engineer</title>
+  <desc id="description">Portfolio of Victor Follet, a senior full-stack engineer specializing in product systems.</desc>
   <rect width="1200" height="630" fill="#0d1424"/>
   <rect x="58" y="56" width="1084" height="518" rx="28" fill="#141d30" stroke="#2d3950" stroke-width="2"/>
   <circle cx="102" cy="100" r="8" fill="#ff9a78"/>
-  <text x="124" y="107" fill="#aab3c4" font-family="ui-monospace, SFMono-Regular, Consolas, monospace" font-size="20" font-weight="700" letter-spacing="2.8">PRODUCT SYSTEMS · REACT · TYPESCRIPT</text>
+  <text x="124" y="107" fill="#aab3c4" font-family="ui-monospace, SFMono-Regular, Consolas, monospace" font-size="20" font-weight="700" letter-spacing="2.8">REACT · TYPESCRIPT · PRODUCT SYSTEMS</text>
   <text x="102" y="252" fill="#f2f4f8" font-family="Arial, Helvetica, sans-serif" font-size="78" font-weight="700" letter-spacing="-3">Victor Follet</text>
-  <text x="102" y="332" fill="#ff9a78" font-family="Arial, Helvetica, sans-serif" font-size="56" font-weight="600" letter-spacing="-2">Senior Frontend Engineer</text>
+  <text x="102" y="332" fill="#ff9a78" font-family="Arial, Helvetica, sans-serif" font-size="56" font-weight="600" letter-spacing="-2">Senior Full-Stack Engineer</text>
   <line x1="102" y1="391" x2="1098" y2="391" stroke="#2d3950" stroke-width="2"/>
-  <text x="102" y="455" fill="#f2f4f8" font-family="Arial, Helvetica, sans-serif" font-size="30" font-weight="600">Dependable product interfaces and frontend systems</text>
-  <text x="102" y="496" fill="#aab3c4" font-family="Arial, Helvetica, sans-serif" font-size="28">that scale with the product.</text>
+  <text x="102" y="455" fill="#f2f4f8" font-family="Arial, Helvetica, sans-serif" font-size="30" font-weight="600">Dependable product systems, from</text>
+  <text x="102" y="496" fill="#aab3c4" font-family="Arial, Helvetica, sans-serif" font-size="28">interface to infrastructure.</text>
   <text x="102" y="542" fill="#aab3c4" font-family="ui-monospace, SFMono-Regular, Consolas, monospace" font-size="20">darthvictor.xyz</text>
   <rect x="984" y="477" width="114" height="50" rx="25" fill="#3b241d"/>
   <text x="1011" y="509" fill="#ffb49a" font-family="ui-monospace, SFMono-Regular, Consolas, monospace" font-size="18" font-weight="700">VF.</text>

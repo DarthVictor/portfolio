@@ -1,11 +1,11 @@
 ---
-import { profileLinks } from "../../data/homepage";
+import { profileLinks, siteIdentity } from "../../data/site";
 ---
 
 <section class="hero" aria-labelledby="introduction-heading">
     <div class="hero-topline">
         <p class="eyebrow type-label">
-            Senior full-stack engineer · product systems
+            {siteIdentity.role} · product systems
         </p>
         <p class="current-role type-label">
             <span aria-hidden="true"></span>
@@ -14,7 +14,7 @@ import { profileLinks } from "../../data/homepage";
     </div>
 
     <h1 id="introduction-heading">
-        Victor Follet, <span class="role-line">senior full-stack engineer</span>
+        {siteIdentity.name}, <span class="role-line">{siteIdentity.roleLowercase}</span>
     </h1>
 
     <div class="hero-details">
@@ -33,7 +33,7 @@ import { profileLinks } from "../../data/homepage";
                     class="button button-primary"
                     href={`mailto:${profileLinks.email}`}
                 >
-                    Start a conversation
+                    Discuss an engineering role
                     <span aria-hidden="true">↗</span>
                 </a>
                 <a class="button button-secondary" href={profileLinks.cv}>
