@@ -10,7 +10,7 @@ export const cvPath = join(distDirectory, "cv.pdf");
 export const caseStudies = [
     {
         slug: "tolstoy-ai-integrations",
-        title: "What Building 30+ Integrations Taught Me About AI Product Engineering",
+        title: "What Building 30+ Integrations Taught Me",
         homepage: true,
         cover: "/images/work/tolstoy_connectors.png",
         coverAspectRatio: "1758 / 1881",
