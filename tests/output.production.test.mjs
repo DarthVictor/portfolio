@@ -93,7 +93,10 @@ test("production homepage has the planned semantic structure", () => {
 
 test("production publishes a sitemap containing only public portfolio routes", () => {
     const sitemap = readOutput(join(distDirectory, "sitemap.xml"));
+    const googleSitemap = readOutput(join(distDirectory, "sitemap-google.xml"));
     const robots = readOutput(join(distDirectory, "robots.txt"));
+
+    assert.equal(googleSitemap, sitemap);
 
     assert.match(
         sitemap,
