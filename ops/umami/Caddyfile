@@ -1,0 +1,4 @@
+analytics.darthvictor.xyz {
+    encode gzip zstd
+    reverse_proxy umami:3000
+}

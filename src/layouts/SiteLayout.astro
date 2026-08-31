@@ -30,6 +30,8 @@ const {
     socialImage,
     structuredData: pageStructuredData,
 } = Astro.props;
+const umamiWebsiteId = import.meta.env.PUBLIC_UMAMI_WEBSITE_ID;
+const enableUmami = import.meta.env.PROD && Boolean(umamiWebsiteId);
 const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
 const defaultSocialImage = {
     url: new URL("/images/social-preview.jpg", Astro.site).href,
@@ -136,6 +138,18 @@ const jsonLd = JSON.stringify(structuredData).replaceAll("<", "\\u003c");
         {
             structuredData.length > 0 && (
                 <script type="application/ld+json" set:html={jsonLd} />
+            )
+        }
+        {
+            enableUmami && (
+                <script
+                    is:inline
+                    defer
+                    src="https://analytics.darthvictor.xyz/script.js"
+                    data-website-id={umamiWebsiteId}
+                    data-domains="darthvictor.xyz,www.darthvictor.xyz"
+                    data-do-not-track="true"
+                />
             )
         }
         <title>{title}</title>

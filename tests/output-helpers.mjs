@@ -52,11 +52,15 @@ export function assertNoClientJavaScript(html, label) {
     const scripts = [...html.matchAll(/<script\b([^>]*)>/g)];
 
     assert.equal(
-        scripts.every(([, attributes]) =>
-            /\btype=["']application\/ld\+json["']/.test(attributes),
+        scripts.every(
+            ([, attributes]) =>
+                /\btype=["']application\/ld\+json["']/.test(attributes) ||
+                /\bsrc=["']https:\/\/analytics\.darthvictor\.xyz\/script\.js["']/.test(
+                    attributes,
+                ),
         ),
         true,
-        `${label} must not contain executable script elements`,
+        `${label} must not contain unapproved executable script elements`,
     );
 }
 

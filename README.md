@@ -22,3 +22,11 @@ pnpm verify
 ```
 
 Run `pnpm dev` to start the local site. Run `pnpm verify` before deploying the generated `dist` directory.
+
+## Analytics
+
+The production site can use the self-hosted Umami instance at
+`https://analytics.darthvictor.xyz`. Create a website for `darthvictor.xyz` in
+Umami, then set `PUBLIC_UMAMI_WEBSITE_ID` in the deployment environment before
+building. The tracker is disabled when the variable is empty and is limited to
+the production portfolio domains.
