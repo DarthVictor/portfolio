@@ -26,6 +26,12 @@ services:
       APP_SECRET: ${APP_SECRET:?APP_SECRET is required}
       DISABLE_TELEMETRY: "1"
       FORCE_SSL: "1"
+      # Sites that proxy the tracker through their own origin forward the visitor IP here;
+      # requests without it keep using CF-Connecting-IP.
+      CLIENT_IP_HEADER: X-Visitor-IP
+      # Geo from the visitor IP (bundled GeoLite2), not Cloudflare's country headers, which
+      # describe the proxying server for proxied sites.
+      SKIP_LOCATION_HEADERS: "1"
     depends_on:
       db:
         condition: service_healthy

@@ -48,6 +48,14 @@ docker compose up -d
 
 The PostgreSQL data is stored in the `umami-db-data` Docker volume. Back up this volume or the database before making major upgrades.
 
+## Proxied sites
+
+A site may serve the tracker from its own origin to avoid analytics blocklists, as ShortlistFox
+does for `/_a/script.js` and `/_a/api/send`. It must forward the visitor IP as `X-Visitor-IP`
+(`CLIENT_IP_HEADER`); otherwise every visit counts as the proxying server's IP. Location comes
+from the IP (`SKIP_LOCATION_HEADERS`) because Cloudflare's country headers would describe that
+server too. Apply changes with `docker compose up -d umami`.
+
 ## Important security notes
 
 - The real `/opt/umami/.env` must never be committed.
