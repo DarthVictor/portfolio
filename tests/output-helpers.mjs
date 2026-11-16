@@ -41,6 +41,7 @@ export const writingPieces = [
         title: "Don't start with a complex pipeline",
         socialImage: "/images/writing/dont-start-with-a-complex-pipeline.png",
         links: ["https://shortlistfox.com/"],
+        optimizedImageCount: 2,
     },
 ];
 

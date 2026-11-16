@@ -39,6 +39,14 @@ const writing = defineCollection({
         publishedAt: z.coerce.date(),
         updatedAt: z.coerce.date().optional(),
         tags: z.array(z.string()).min(1),
+        cover: z
+            .object({
+                src: z.string(),
+                alt: z.string(),
+                width: z.number().int().positive(),
+                height: z.number().int().positive(),
+            })
+            .optional(),
         socialImage: z
             .object({
                 src: z.string(),

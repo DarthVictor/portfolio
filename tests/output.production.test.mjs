@@ -303,8 +303,24 @@ test("production writing archive lists published articles", () => {
     assertNoDates(writingHtml, "writing archive");
     assertNoClientJavaScript(writingHtml, "production writing archive");
 
-    for (const { slug, title, socialImage, links = [] } of writingPieces) {
+    for (const {
+        slug,
+        title,
+        socialImage,
+        links = [],
+        optimizedImageCount = 0,
+    } of writingPieces) {
         const articleHtml = readOutput(writingPagePath(slug));
+
+        assert.equal(
+            (articleHtml.match(/<picture\b/g) ?? []).length,
+            optimizedImageCount,
+        );
+
+        if (optimizedImageCount > 0) {
+            assert.match(articleHtml, /<source[^>]*type="image\/avif"/);
+            assert.match(articleHtml, /<source[^>]*type="image\/webp"/);
+        }
 
         for (const href of links) {
             assert.match(

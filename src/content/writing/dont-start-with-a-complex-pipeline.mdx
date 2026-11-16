@@ -3,6 +3,11 @@ title: "Don't start with a complex pipeline"
 description: "Why a new product can start on one 30-euro VPS: cheap, fast experiments while everything is uncertain, and a simple stack that is easy to move later."
 publishedAt: 2026-11-16
 tags: ["Architecture", "Infrastructure", "PostgreSQL", "Startups"]
+cover:
+    src: "/images/writing/dont-start-with-a-complex-pipeline.png"
+    alt: "Don't start with a complex pipeline. One VPS, about 30 euros a month, about 1.9 million jobs."
+    width: 1280
+    height: 720
 socialImage:
     src: "/images/writing/dont-start-with-a-complex-pipeline.png"
     alt: "Don't start with a complex pipeline. One VPS, about 30 euros a month, about 1.9 million jobs."
@@ -10,6 +15,8 @@ socialImage:
     height: 720
 draft: false
 ---
+
+import WorkImage from "../../components/work/WorkImage.astro";
 
 [ShortlistFox](https://shortlistfox.com/) reads jobs from thousands of employer hiring systems and searches across about 1.9 million of them. All of it runs on one VPS: 6 cores, 16 GB of RAM, about 30 euros a month.
 
@@ -46,6 +53,18 @@ About ten containers, started with Docker Compose:
 - **Caddy** for TLS and routing, **outbound mail** for sign-in links and job alerts, and **self-hosted analytics**.
 
 Around the server, not on it: Cloudflare in front, backups streamed straight to object storage, a monthly drill that restores one, and CI that tests every push and deploys it when it's green.
+
+<figure class="case-image">
+    <WorkImage
+        src="/images/writing/dont-start-with-a-complex-pipeline-one-box.png"
+        alt="Diagram of one server: Postgres with ParadeDB as database, full-text search and job queue; API, worker and website containers with memory caps; Caddy, mail and analytics. Cloudflare in front; backups to object storage and CI outside the box."
+        sizes="(min-width: 768px) 768px, 100vw"
+    />
+    <figcaption>
+        Everything on one box: Postgres does the database, search and queue,
+        and the rest sits around it.
+    </figcaption>
+</figure>
 
 No Kubernetes, no search cluster, no message broker, no managed database. Not because they're bad. I just didn't know yet whether I'd need any of them.
 
