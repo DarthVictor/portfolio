@@ -16,6 +16,15 @@ const formatDate = (date: Date): string =>
         year: "numeric",
         timeZone: "UTC",
     });
+const socialImage =
+    data.socialImage === undefined
+        ? undefined
+        : {
+              url: new URL(data.socialImage.src, Astro.site).href,
+              alt: data.socialImage.alt,
+              width: data.socialImage.width,
+              height: data.socialImage.height,
+          };
 const articleStructuredData = data.draft
     ? undefined
     : [
@@ -33,6 +42,7 @@ const articleStructuredData = data.draft
                   ? {}
                   : { dateModified: data.updatedAt.toISOString() }),
               keywords: data.tags.join(", "),
+              ...(socialImage === undefined ? {} : { image: socialImage.url }),
               author: {
                   "@id": new URL("/#victor-follet", Astro.site).href,
               },
@@ -71,6 +81,7 @@ const articleStructuredData = data.draft
     openGraphType="article"
     publishedTime={data.publishedAt}
     modifiedTime={data.updatedAt}
+    socialImage={socialImage}
     structuredData={articleStructuredData}
 >
     <article class="article">

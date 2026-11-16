@@ -300,8 +300,19 @@ test("production writing archive lists published articles", () => {
     assert.doesNotMatch(writingHtml, /class="[^"]*draft-label/);
     assertNoClientJavaScript(writingHtml, "production writing archive");
 
-    for (const { slug, title } of writingPieces) {
+    for (const { slug, title, socialImage } of writingPieces) {
         const articleHtml = readOutput(writingPagePath(slug));
+
+        if (socialImage !== undefined) {
+            assert.equal(existsSync(join(distDirectory, socialImage)), true);
+            assert.match(
+                articleHtml,
+                new RegExp(
+                    `<meta property="og:image" content="https://darthvictor\\.xyz${escapeRegExp(socialImage)}"`,
+                ),
+            );
+            assert.doesNotMatch(articleHtml, /images\/social-preview\.jpg/);
+        }
 
         assert.match(writingHtml, new RegExp(`href="/writing/${slug}/"`));
         assert.match(
