@@ -9,6 +9,9 @@ import {
     readOutput,
     workIndexPath,
     workPagePath,
+    writingIndexPath,
+    writingPagePath,
+    writingPieces,
 } from "./output-helpers.mjs";
 
 test("preview work archive contains the published case studies", () => {
@@ -94,6 +97,8 @@ test("preview root-relative links resolve", () => {
         indexPath,
         workIndexPath,
         ...caseStudies.map(({ slug }) => workPagePath(slug)),
+        writingIndexPath,
+        ...writingPieces.map(({ slug }) => writingPagePath(slug)),
     ]);
 });
 

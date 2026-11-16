@@ -15,6 +15,9 @@ import {
     readPageStyles,
     workIndexPath,
     workPagePath,
+    writingIndexPath,
+    writingPagePath,
+    writingPieces,
 } from "./output-helpers.mjs";
 
 const removedThemePaths = ["theme-a", "theme-b", "theme-c", "theme-d"].map(
@@ -123,8 +126,17 @@ test("production publishes a sitemap containing only public portfolio routes", (
         ...sitemap.matchAll(/<lastmod>(\d{4}-\d{2}-\d{2})<\/lastmod>/g),
     ].map(([, date]) => date);
 
-    assert.equal(urlCount, caseStudies.length + 2);
-    assert.equal(lastmodCount, caseStudies.length);
+    assert.match(sitemap, /<loc>https:\/\/darthvictor\.xyz\/writing\/<\/loc>/);
+
+    for (const { slug } of writingPieces) {
+        assert.match(
+            sitemap,
+            new RegExp(`<loc>https://darthvictor\\.xyz/writing/${slug}/</loc>`),
+        );
+    }
+
+    assert.equal(urlCount, caseStudies.length + writingPieces.length + 3);
+    assert.equal(lastmodCount, caseStudies.length + writingPieces.length);
     assert.equal(new Set(sitemapLocations).size, sitemapLocations.length);
     assert.equal(
         sitemapLocations.every((location) =>
@@ -277,13 +289,62 @@ test("production uses only the system-aware Paper Terracotta palette", () => {
     assert.match(styles, /outline-color:\s*var\(--color-panel-accent\)/);
 });
 
+test("production writing archive lists published articles", () => {
+    const writingHtml = readOutput(writingIndexPath);
+    const cardCount = (writingHtml.match(/class="writing-card"/g) ?? []).length;
+
+    assert.match(writingHtml, /<h1[^>]*>Writing<\/h1>/);
+    assert.match(writingHtml, /"@type":"BreadcrumbList"/);
+    assert.equal(cardCount, writingPieces.length);
+    assert.match(writingHtml, /href="\/writing\/"[^>]*aria-current="page"/);
+    assert.doesNotMatch(writingHtml, /class="[^"]*draft-label/);
+    assertNoClientJavaScript(writingHtml, "production writing archive");
+
+    for (const { slug, title } of writingPieces) {
+        const articleHtml = readOutput(writingPagePath(slug));
+
+        assert.match(writingHtml, new RegExp(`href="/writing/${slug}/"`));
+        assert.match(
+            articleHtml,
+            new RegExp(
+                `<link rel="canonical" href="https://darthvictor\\.xyz/writing/${slug}/"`,
+            ),
+        );
+        assert.match(
+            articleHtml,
+            new RegExp(`<h1[^>]*>${escapeRegExp(escapeHtml(title))}</h1>`),
+        );
+        assert.doesNotMatch(
+            articleHtml,
+            /<meta name="robots" content="noindex, nofollow"/,
+        );
+        assert.doesNotMatch(articleHtml, /class="[^"]*draft-label/);
+        assert.match(articleHtml, /<meta property="og:type" content="article"/);
+        assert.match(
+            articleHtml,
+            /<meta property="article:published_time" content="[^"']+"/,
+        );
+        assert.match(articleHtml, /"@type":"Article"/);
+        assert.match(articleHtml, /"@type":"BreadcrumbList"/);
+        assert.match(articleHtml, /Written by Victor Follet/);
+        assert.match(articleHtml, /href="\/writing\/"[^>]*aria-current="page"/);
+        assertNoClientJavaScript(articleHtml, `production writing ${slug}`);
+    }
+});
+
 test("production root-relative links resolve", () => {
     assertRootRelativeLinksResolve([
         indexPath,
         workIndexPath,
         ...caseStudies.map(({ slug }) => workPagePath(slug)),
+        writingIndexPath,
+        ...writingPieces.map(({ slug }) => writingPagePath(slug)),
     ]);
 });
+
+function escapeHtml(value) {
+    return value.replace(/'/g, "&#39;");
+}
 
 function escapeRegExp(value) {
     return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");

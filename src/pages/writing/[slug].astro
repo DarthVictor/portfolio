@@ -1,0 +1,21 @@
+---
+import { render, type CollectionEntry } from "astro:content";
+
+import ArticleLayout from "../../layouts/ArticleLayout.astro";
+import { getWritingStaticPaths } from "../../lib/writing-content";
+
+export async function getStaticPaths() {
+    return getWritingStaticPaths();
+}
+
+interface Props {
+    entry: CollectionEntry<"writing">;
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+---
+
+<ArticleLayout entry={entry}>
+    <Content />
+</ArticleLayout>

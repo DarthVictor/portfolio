@@ -1,0 +1,242 @@
+---
+import SiteLayout from "./SiteLayout.astro";
+import type { WritingEntry } from "../lib/writing-content";
+
+interface Props {
+    entry: WritingEntry;
+}
+
+const { entry } = Astro.props;
+const { data } = entry;
+const canonicalUrl = new URL(`/writing/${entry.id}/`, Astro.site);
+const formatDate = (date: Date): string =>
+    date.toLocaleDateString("en-US", {
+        day: "numeric",
+        month: "long",
+        year: "numeric",
+        timeZone: "UTC",
+    });
+const articleStructuredData = data.draft
+    ? undefined
+    : [
+          {
+              "@context": "https://schema.org",
+              "@type": "Article",
+              mainEntityOfPage: {
+                  "@type": "WebPage",
+                  "@id": canonicalUrl.href,
+              },
+              headline: data.title,
+              description: data.description,
+              datePublished: data.publishedAt.toISOString(),
+              ...(data.updatedAt === undefined
+                  ? {}
+                  : { dateModified: data.updatedAt.toISOString() }),
+              keywords: data.tags.join(", "),
+              author: {
+                  "@id": new URL("/#victor-follet", Astro.site).href,
+              },
+          },
+          {
+              "@context": "https://schema.org",
+              "@type": "BreadcrumbList",
+              itemListElement: [
+                  {
+                      "@type": "ListItem",
+                      position: 1,
+                      name: "Home",
+                      item: new URL("/", Astro.site).href,
+                  },
+                  {
+                      "@type": "ListItem",
+                      position: 2,
+                      name: "Writing",
+                      item: new URL("/writing/", Astro.site).href,
+                  },
+                  {
+                      "@type": "ListItem",
+                      position: 3,
+                      name: data.title,
+                      item: canonicalUrl.href,
+                  },
+              ],
+          },
+      ];
+---
+
+<SiteLayout
+    title={`${data.title} — Victor Follet`}
+    description={data.description}
+    noindex={data.draft}
+    openGraphType="article"
+    publishedTime={data.publishedAt}
+    modifiedTime={data.updatedAt}
+    structuredData={articleStructuredData}
+>
+    <article class="article">
+        <header class="article-header">
+            <a class="back-link" href="/writing/">← All writing</a>
+            <div class="title-row">
+                <p class="type-label">Article</p>
+                {data.draft && <span class="draft-label type-label">Draft</span>}
+            </div>
+            <h1>{data.title}</h1>
+            <p class="summary">{data.description}</p>
+            <p class="byline">
+                Written by Victor Follet ·{" "}
+                <time datetime={data.publishedAt.toISOString()}>
+                    Published {formatDate(data.publishedAt)}
+                </time>
+            </p>
+            <ul class="tag-list" aria-label="Topics">
+                {data.tags.map((tag) => <li>{tag}</li>)}
+            </ul>
+        </header>
+
+        <div class="article-body">
+            <slot />
+        </div>
+
+        <footer class="article-footer">
+            <a href="/writing/">← Back to all writing</a>
+        </footer>
+    </article>
+</SiteLayout>
+
+<style>
+    .article {
+        padding-block: clamp(var(--space-7), 8vw, var(--space-9));
+    }
+
+    .article-header,
+    .article-body,
+    .article-footer {
+        inline-size: min(100%, 48rem);
+        margin-inline: auto;
+    }
+
+    .back-link {
+        display: inline-flex;
+        align-items: center;
+        min-block-size: 2.75rem;
+        color: var(--color-text-muted);
+        font-family: var(--font-mono);
+        font-size: var(--font-size-small);
+    }
+
+    .title-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: var(--space-4);
+        margin-block-start: var(--space-7);
+        color: var(--color-accent);
+    }
+
+    .draft-label {
+        border: 1px solid currentcolor;
+        border-radius: var(--radius-pill);
+        padding: var(--space-1) var(--space-3);
+    }
+
+    h1 {
+        margin-block-start: var(--space-4);
+        font-size: clamp(2.5rem, 5vw, 4.5rem);
+        letter-spacing: var(--letter-spacing-display);
+        line-height: var(--line-height-display);
+        text-wrap: balance;
+    }
+
+    .summary {
+        max-inline-size: 60ch;
+        margin-block-start: var(--space-6);
+        color: var(--color-text-muted);
+        font-size: clamp(1.125rem, 2vw, 1.35rem);
+    }
+
+    .byline {
+        margin-block-start: var(--space-4);
+        color: var(--color-text-muted);
+        font-family: var(--font-mono);
+        font-size: var(--font-size-small);
+    }
+
+    .tag-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-2);
+        margin-block-start: var(--space-5);
+        list-style: none;
+    }
+
+    .tag-list li {
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-pill);
+        padding: var(--space-1) var(--space-3);
+        color: var(--color-text-muted);
+        font-family: var(--font-mono);
+        font-size: var(--font-size-micro);
+    }
+
+    .article-body {
+        margin-block-start: var(--space-8);
+    }
+
+    .article-body :global(h2),
+    .article-body :global(h3) {
+        margin-block: var(--space-8) var(--space-4);
+        letter-spacing: var(--letter-spacing-heading);
+        line-height: var(--line-height-heading);
+    }
+
+    .article-body :global(h2) {
+        font-size: var(--font-size-heading);
+    }
+
+    .article-body :global(h3) {
+        font-size: 1.35rem;
+    }
+
+    .article-body :global(p),
+    .article-body :global(ul),
+    .article-body :global(ol),
+    .article-body :global(blockquote) {
+        margin-block-start: var(--space-5);
+    }
+
+    .article-body :global(ul),
+    .article-body :global(ol) {
+        padding-inline-start: var(--space-6);
+    }
+
+    .article-body :global(li + li) {
+        margin-block-start: var(--space-2);
+    }
+
+    .article-body :global(blockquote) {
+        border-inline-start: 0.25rem solid var(--color-accent);
+        padding-inline-start: var(--space-5);
+        color: var(--color-text-muted);
+    }
+
+    .article-body :global(code) {
+        border-radius: var(--radius-small);
+        background: var(--color-surface);
+        padding: 0.15em 0.35em;
+        font-family: var(--font-mono);
+        font-size: 0.9em;
+    }
+
+    .article-footer {
+        margin-block-start: var(--space-9);
+        border-block-start: 1px solid var(--color-border);
+        padding-block-start: var(--space-6);
+        font-weight: var(--font-weight-semibold);
+    }
+
+    .article-footer a {
+        display: inline-flex;
+        align-items: center;
+        min-block-size: 2.75rem;
+    }
+</style>

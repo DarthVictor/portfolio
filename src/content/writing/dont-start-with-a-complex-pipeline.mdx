@@ -1,0 +1,59 @@
+---
+title: "Don't start with a complex pipeline"
+description: "Why a new product can start on one 30-euro VPS: cheap, fast experiments while everything is uncertain, and a simple stack that is easy to move later."
+publishedAt: 2026-11-16
+tags: ["Architecture", "Infrastructure", "PostgreSQL", "Startups"]
+draft: false
+---
+
+ShortlistFox reads jobs from thousands of employer hiring systems and searches across about 1.9 million of them. All of it runs on one VPS: 6 cores, 16 GB of RAM, about 30 euros a month.
+
+That's not a flex. It's an honest recommendation for how to start something new when you don't know what it's going to become.
+
+## At the start, you mostly have questions
+
+When I started, I didn't know which job sources would matter, how people would search, or which features would survive contact with real data.
+
+Here's what changed in ten weeks:
+
+- There's no list of sources to start from. First came iCIMS, a few days later Breezy HR, Oracle and Jobvite, then US school districts turned out to be needed before we could publish. The next check turned up Amazon and Apple. Now we have about two dozen kinds of source.
+- I replaced the whole search read path in two days.
+- A few days later I rewrote the pipeline that reads the sources.
+- I moved all of production to a different hosting provider.
+- I deleted an entire backlog of "operational reliability" work, because none of it was needed yet, and by the time it is, the architecture will have changed ten times.
+
+That's the normal state of a new project. Plans are guesses. Most of the work is finding out which guesses were wrong.
+
+## So watch what your experiments cost
+
+When almost everything you do is an experiment, the cost of running each one, and above all how fast you can start it, matters more than its elegance.
+
+Our server costs about 30 euros a month, flat. I added a source with more than a hundred thousand jobs: the bill stayed at 30. I ran a one-off backfill over a million rows: still 30. I threw a design away and rebuilt it: same 30. The only thing an experiment cost was the agent's time.
+
+A setup built from managed services bills every experiment separately: more search nodes, more queue throughput, more database IOPS, more egress. That's fine when you know what you need. When you don't, it puts a meter on curiosity.
+
+## What actually runs on the server
+
+About ten containers, started with Docker Compose:
+
+- **Postgres** with the **ParadeDB** extension. It's the database, *and* the full-text search engine (BM25 ranking inside Postgres), *and* the job queue (pg-boss keeps it in Postgres tables). One system to back up, tune and understand, instead of three.
+- **An API, a background worker and the website**, each in its own container with a hard memory cap, so a leaking process gets restarted instead of starving the database. On a normal day the API uses about 270 MB, the website 200 MB, the worker about 1 GB and Postgres 1.8 GB.
+- **Caddy** for TLS and routing, **outbound mail** for sign-in links and job alerts, and **self-hosted analytics**.
+
+Around the server, not on it: Cloudflare in front, backups streamed straight to object storage, a monthly drill that restores one, and CI that tests every push and deploys it when it's green.
+
+No Kubernetes, no search cluster, no message broker, no managed database. Not because they're bad. I just didn't know yet whether I'd need any of them.
+
+## Simple is also easier to leave
+
+This is the part people underrate. A small, boring stack isn't only cheaper now. It keeps your options open later.
+
+Postgres runs anywhere. Containers run anywhere. Backups that already live in object storage restore anywhere. When I switched hosting providers, the same scripts set up the new server and the database came back from the off-site backup within a day. There was no web of managed services to untangle.
+
+When the product knows what it needs, it can move from here to any architecture. Going the other way, from a dozen managed services back to something simple, is much harder.
+
+## If you're starting something new
+
+- At the start you mostly have questions. Pick infrastructure that makes asking them cheap.
+- Know what one experiment costs you, in money and in time.
+- Pick a stack you can leave. You'll know more later than you do now.

@@ -1,6 +1,9 @@
 ---
 const isWorkRoute =
     Astro.url.pathname === "/work" || Astro.url.pathname.startsWith("/work/");
+const isWritingRoute =
+    Astro.url.pathname === "/writing" ||
+    Astro.url.pathname.startsWith("/writing/");
 ---
 
 <header class="site-header">
@@ -11,6 +14,10 @@ const isWorkRoute =
         <nav aria-label="Primary navigation">
             <a href="/work/" aria-current={isWorkRoute ? "page" : undefined}
                 >Work</a
+            >
+            <a
+                href="/writing/"
+                aria-current={isWritingRoute ? "page" : undefined}>Writing</a
             >
             <a class="nav-experience" href="/#experience-heading"
                 >Experience</a
@@ -94,8 +101,9 @@ const isWorkRoute =
             gap: var(--space-4);
         }
 
-        .nav-about,
-        .nav-experience {
+        /* Scoped `nav a` outranks a bare class, so qualify with `nav`. */
+        nav .nav-about,
+        nav .nav-experience {
             display: none;
         }
     }

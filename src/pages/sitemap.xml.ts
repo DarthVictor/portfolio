@@ -1,6 +1,7 @@
 import type { APIRoute } from "astro";
 
 import { getVisibleWorkEntries } from "../lib/work-content";
+import { getVisibleWritingEntries } from "../lib/writing-content";
 
 const escapeXml = (value: string): string =>
     value.replace(/[<>&'"]/g, (character) => {
@@ -23,11 +24,17 @@ export const GET: APIRoute = async ({ site }) => {
     }
 
     const workEntries = await getVisibleWorkEntries();
+    const writingEntries = await getVisibleWritingEntries();
     const entries: { url: URL; lastmod: Date | undefined }[] = [
         { url: new URL("/", site), lastmod: undefined },
         { url: new URL("/work/", site), lastmod: undefined },
         ...workEntries.map((entry) => ({
             url: new URL(`/work/${entry.id}/`, site),
+            lastmod: entry.data.updatedAt ?? entry.data.publishedAt,
+        })),
+        { url: new URL("/writing/", site), lastmod: undefined },
+        ...writingEntries.map((entry) => ({
+            url: new URL(`/writing/${entry.id}/`, site),
             lastmod: entry.data.updatedAt ?? entry.data.publishedAt,
         })),
     ];

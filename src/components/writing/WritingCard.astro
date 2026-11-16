@@ -1,0 +1,105 @@
+---
+import type { WritingEntry } from "../../lib/writing-content";
+import { getWritingHref } from "../../lib/writing-entries";
+
+interface Props {
+    entry: WritingEntry;
+}
+
+const { entry } = Astro.props;
+const { data } = entry;
+---
+
+<li class="writing-card">
+    <article>
+        <div class="card-topline">
+            <time class="writing-date" datetime={data.publishedAt.toISOString()}>
+                {
+                    data.publishedAt.toLocaleDateString("en-US", {
+                        day: "numeric",
+                        month: "long",
+                        year: "numeric",
+                        timeZone: "UTC",
+                    })
+                }
+            </time>
+            {data.draft && <span class="draft-label type-label">Draft</span>}
+        </div>
+        <h2 class="type-card-title">
+            <a href={getWritingHref(entry.id)}>{data.title}</a>
+        </h2>
+        <p class="description">{data.description}</p>
+        <ul class="tag-list" aria-label="Topics">
+            {data.tags.map((tag) => <li>{tag}</li>)}
+        </ul>
+    </article>
+</li>
+
+<style>
+    .writing-card {
+        min-inline-size: 0;
+        border: var(--card-border);
+        border-radius: var(--card-radius);
+        background: var(--color-surface);
+        padding: var(--card-padding);
+        box-shadow: var(--shadow-card);
+        list-style: none;
+    }
+
+    .card-topline {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: var(--space-4);
+    }
+
+    .writing-date {
+        color: var(--color-text-muted);
+        font-family: var(--font-mono);
+        font-size: var(--font-size-small);
+    }
+
+    .draft-label {
+        border: 1px solid currentcolor;
+        border-radius: var(--radius-pill);
+        padding: var(--space-1) var(--space-3);
+        color: var(--color-accent);
+    }
+
+    h2 {
+        max-inline-size: 28ch;
+        margin-block-start: var(--space-4);
+    }
+
+    h2 a {
+        text-decoration-color: transparent;
+        transition: color var(--motion-fast) var(--easing-standard);
+    }
+
+    h2 a:hover {
+        color: var(--color-accent);
+    }
+
+    .description {
+        max-inline-size: 62ch;
+        margin-block-start: var(--space-4);
+        color: var(--color-text-muted);
+    }
+
+    .tag-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-2);
+        margin-block-start: var(--space-5);
+        list-style: none;
+    }
+
+    .tag-list li {
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-pill);
+        padding: var(--space-1) var(--space-3);
+        color: var(--color-text-muted);
+        font-family: var(--font-mono);
+        font-size: var(--font-size-micro);
+    }
+</style>

@@ -5,6 +5,7 @@ import { extname, join } from "node:path";
 export const distDirectory = join(process.cwd(), "dist");
 export const indexPath = join(distDirectory, "index.html");
 export const workIndexPath = join(distDirectory, "work", "index.html");
+export const writingIndexPath = join(distDirectory, "writing", "index.html");
 export const cvPath = join(distDirectory, "cv.pdf");
 
 export const caseStudies = [
@@ -34,8 +35,19 @@ export const caseStudies = [
     },
 ];
 
+export const writingPieces = [
+    {
+        slug: "dont-start-with-a-complex-pipeline",
+        title: "Don't start with a complex pipeline",
+    },
+];
+
 export function workPagePath(slug) {
     return join(distDirectory, "work", slug, "index.html");
+}
+
+export function writingPagePath(slug) {
+    return join(distDirectory, "writing", slug, "index.html");
 }
 
 export function readOutput(path) {

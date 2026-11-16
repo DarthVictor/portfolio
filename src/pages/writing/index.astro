@@ -1,0 +1,94 @@
+---
+import WritingCard from "../../components/writing/WritingCard.astro";
+import SiteLayout from "../../layouts/SiteLayout.astro";
+import { getVisibleWritingEntries } from "../../lib/writing-content";
+
+const entries = await getVisibleWritingEntries();
+const writingStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+        {
+            "@type": "ListItem",
+            position: 1,
+            name: "Home",
+            item: new URL("/", Astro.site).href,
+        },
+        {
+            "@type": "ListItem",
+            position: 2,
+            name: "Writing",
+            item: new URL("/writing/", Astro.site).href,
+        },
+    ],
+};
+---
+
+<SiteLayout
+    title="Writing — Victor Follet"
+    description="Articles by Victor Follet on product and engineering decisions: architecture, infrastructure, and building new products."
+    structuredData={writingStructuredData}
+>
+    <section class="writing-archive" aria-labelledby="writing-heading">
+        <header class="archive-header">
+            <p class="type-label">Articles</p>
+            <h1 id="writing-heading">Writing</h1>
+            <p class="introduction">
+                Notes on product and engineering decisions: what I chose,
+                what it cost, and what I would tell someone starting out.
+            </p>
+        </header>
+
+        {
+            entries.length > 0 ? (
+                <ol class="writing-list">
+                    {entries.map((entry) => (
+                        <WritingCard entry={entry} />
+                    ))}
+                </ol>
+            ) : (
+                <p class="empty-state">The first articles are on their way.</p>
+            )
+        }
+    </section>
+</SiteLayout>
+
+<style>
+    .writing-archive {
+        padding-block: clamp(var(--space-7), 8vw, var(--space-9));
+    }
+
+    .archive-header {
+        max-inline-size: 52rem;
+    }
+
+    .archive-header .type-label {
+        color: var(--color-accent);
+    }
+
+    h1 {
+        margin-block-start: var(--space-4);
+        font-size: var(--font-size-display);
+        letter-spacing: var(--letter-spacing-display);
+        line-height: var(--line-height-display);
+    }
+
+    .introduction {
+        max-inline-size: 56ch;
+        margin-block-start: var(--space-6);
+        color: var(--color-text-muted);
+        font-size: clamp(1.125rem, 2vw, 1.35rem);
+    }
+
+    .writing-list {
+        display: grid;
+        gap: var(--space-5);
+        margin-block-start: var(--space-8);
+        list-style: none;
+    }
+
+    .empty-state {
+        margin-block-start: var(--space-8);
+        color: var(--color-text-muted);
+    }
+</style>
