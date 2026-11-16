@@ -40,6 +40,7 @@ export const writingPieces = [
         slug: "dont-start-with-a-complex-pipeline",
         title: "Don't start with a complex pipeline",
         socialImage: "/images/writing/dont-start-with-a-complex-pipeline.png",
+        links: ["https://shortlistfox.com/"],
     },
 ];
 
