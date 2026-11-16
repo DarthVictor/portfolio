@@ -9,13 +9,8 @@ interface Props {
 const { entry } = Astro.props;
 const { data } = entry;
 const canonicalUrl = new URL(`/writing/${entry.id}/`, Astro.site);
-const formatDate = (date: Date): string =>
-    date.toLocaleDateString("en-US", {
-        day: "numeric",
-        month: "long",
-        year: "numeric",
-        timeZone: "UTC",
-    });
+// Writing pages show no dates anywhere (text, meta, JSON-LD, sitemap): the author does not want
+// readers to be able to date the projects. `publishedAt` only orders the archive.
 const socialImage =
     data.socialImage === undefined
         ? undefined
@@ -37,10 +32,6 @@ const articleStructuredData = data.draft
               },
               headline: data.title,
               description: data.description,
-              datePublished: data.publishedAt.toISOString(),
-              ...(data.updatedAt === undefined
-                  ? {}
-                  : { dateModified: data.updatedAt.toISOString() }),
               keywords: data.tags.join(", "),
               ...(socialImage === undefined ? {} : { image: socialImage.url }),
               author: {
@@ -79,8 +70,6 @@ const articleStructuredData = data.draft
     description={data.description}
     noindex={data.draft}
     openGraphType="article"
-    publishedTime={data.publishedAt}
-    modifiedTime={data.updatedAt}
     socialImage={socialImage}
     structuredData={articleStructuredData}
 >
@@ -93,12 +82,7 @@ const articleStructuredData = data.draft
             </div>
             <h1>{data.title}</h1>
             <p class="summary">{data.description}</p>
-            <p class="byline">
-                Written by Victor Follet ·{" "}
-                <time datetime={data.publishedAt.toISOString()}>
-                    Published {formatDate(data.publishedAt)}
-                </time>
-            </p>
+            <p class="byline">Written by Victor Follet</p>
             <ul class="tag-list" aria-label="Topics">
                 {data.tags.map((tag) => <li>{tag}</li>)}
             </ul>

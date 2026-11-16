@@ -131,12 +131,14 @@ test("production publishes a sitemap containing only public portfolio routes", (
     for (const { slug } of writingPieces) {
         assert.match(
             sitemap,
-            new RegExp(`<loc>https://darthvictor\\.xyz/writing/${slug}/</loc>`),
+            new RegExp(
+                `<url><loc>https://darthvictor\\.xyz/writing/${slug}/</loc></url>`,
+            ),
         );
     }
 
     assert.equal(urlCount, caseStudies.length + writingPieces.length + 3);
-    assert.equal(lastmodCount, caseStudies.length + writingPieces.length);
+    assert.equal(lastmodCount, caseStudies.length);
     assert.equal(new Set(sitemapLocations).size, sitemapLocations.length);
     assert.equal(
         sitemapLocations.every((location) =>
@@ -298,6 +300,7 @@ test("production writing archive lists published articles", () => {
     assert.equal(cardCount, writingPieces.length);
     assert.match(writingHtml, /href="\/writing\/"[^>]*aria-current="page"/);
     assert.doesNotMatch(writingHtml, /class="[^"]*draft-label/);
+    assertNoDates(writingHtml, "writing archive");
     assertNoClientJavaScript(writingHtml, "production writing archive");
 
     for (const { slug, title, socialImage, links = [] } of writingPieces) {
@@ -338,13 +341,10 @@ test("production writing archive lists published articles", () => {
         );
         assert.doesNotMatch(articleHtml, /class="[^"]*draft-label/);
         assert.match(articleHtml, /<meta property="og:type" content="article"/);
-        assert.match(
-            articleHtml,
-            /<meta property="article:published_time" content="[^"']+"/,
-        );
         assert.match(articleHtml, /"@type":"Article"/);
         assert.match(articleHtml, /"@type":"BreadcrumbList"/);
         assert.match(articleHtml, /Written by Victor Follet/);
+        assertNoDates(articleHtml, `writing ${slug}`);
         assert.match(articleHtml, /href="\/writing\/"[^>]*aria-current="page"/);
         assertNoClientJavaScript(articleHtml, `production writing ${slug}`);
     }
@@ -359,6 +359,23 @@ test("production root-relative links resolve", () => {
         ...writingPieces.map(({ slug }) => writingPagePath(slug)),
     ]);
 });
+
+// Writing pages must not let readers date the projects: no dates in text, meta or JSON-LD.
+function assertNoDates(html, label) {
+    const text = html.replace(/<[^>]+>/g, " ");
+
+    assert.doesNotMatch(html, /article:(published|modified)_time/, label);
+    assert.doesNotMatch(html, /"date(Published|Modified)"/, label);
+    assert.doesNotMatch(html, /<time\b/, label);
+    assert.doesNotMatch(
+        text,
+        /\b(January|February|March|April|May|June|July|August|September|October|November|December)\b/,
+        label,
+    );
+    assert.doesNotMatch(text, /\b(19|20)\d{2}\b/, label);
+    assert.doesNotMatch(text, /\b\d+\s+(weeks?|months?|years?)\b/i, label);
+    assert.doesNotMatch(text, /\bten weeks\b/i, label);
+}
 
 function escapeHtml(value) {
     return value.replace(/'/g, "&#39;");

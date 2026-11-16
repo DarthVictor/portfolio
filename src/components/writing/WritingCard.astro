@@ -12,19 +12,13 @@ const { data } = entry;
 
 <li class="writing-card">
     <article>
-        <div class="card-topline">
-            <time class="writing-date" datetime={data.publishedAt.toISOString()}>
-                {
-                    data.publishedAt.toLocaleDateString("en-US", {
-                        day: "numeric",
-                        month: "long",
-                        year: "numeric",
-                        timeZone: "UTC",
-                    })
-                }
-            </time>
-            {data.draft && <span class="draft-label type-label">Draft</span>}
-        </div>
+        {
+            data.draft && (
+                <div class="card-topline">
+                    <span class="draft-label type-label">Draft</span>
+                </div>
+            )
+        }
         <h2 class="type-card-title">
             <a href={getWritingHref(entry.id)}>{data.title}</a>
         </h2>
@@ -51,12 +45,6 @@ const { data } = entry;
         align-items: center;
         justify-content: space-between;
         gap: var(--space-4);
-    }
-
-    .writing-date {
-        color: var(--color-text-muted);
-        font-family: var(--font-mono);
-        font-size: var(--font-size-small);
     }
 
     .draft-label {

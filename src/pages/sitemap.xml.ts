@@ -33,9 +33,10 @@ export const GET: APIRoute = async ({ site }) => {
             lastmod: entry.data.updatedAt ?? entry.data.publishedAt,
         })),
         { url: new URL("/writing/", site), lastmod: undefined },
+        // Writing pages carry no dates anywhere, including lastmod.
         ...writingEntries.map((entry) => ({
             url: new URL(`/writing/${entry.id}/`, site),
-            lastmod: entry.data.updatedAt ?? entry.data.publishedAt,
+            lastmod: undefined,
         })),
     ];
     const body = [
